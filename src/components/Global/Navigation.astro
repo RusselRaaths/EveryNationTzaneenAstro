@@ -7,10 +7,8 @@ const navItems = [
   { text: "Ministries", href: "/ministries" },
   { text: "Sermons", href: "/sermons" },
   { text: "Events", href: "/events" },
-  { text: "Blog", href: "/blog" },
   { text: "I'm New", href: "/im-new" },
   { text: "Contact", href: "/contact" },
-  { text: "Giving", href: "/giving" },
 ];
 
 // Get the current URL path to highlight the active link
@@ -178,7 +176,7 @@ const currentPath = Astro.url.pathname;
     
     // Close menu when clicking outside
     document.addEventListener('click', (e) => {
-      if (isMenuOpen && !mobileMenu.contains(e.target) && !mobileMenuButton.contains(e.target)) {
+      if (isMenuOpen && !mobileMenu.contains(e.target as Node) && !mobileMenuButton.contains(e.target as Node)) {
         toggleMobileMenu();
       }
     });
