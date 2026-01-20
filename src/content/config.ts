@@ -92,6 +92,5 @@ export const collections = {
   events: eventsCollection,
   sermons: sermonsCollection,
   ministries: ministriesCollection,
-  blog: blogCollection,
   siteInfo: siteInfoCollection,
 };
