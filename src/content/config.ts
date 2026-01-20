@@ -63,22 +63,6 @@ const ministriesCollection = defineCollection({
   }),
 });
 
-const blogCollection = defineCollection({
-  type: 'content',
-  schema: z.object({
-    title: z.string(),
-    slug: z.string().optional(),
-    pubDate: z.date(),
-    description: z.string(), // Short description for previews
-    author: z.string().default("Church Staff"),
-    image: z.object({
-      url: z.string().startsWith('/uploads/blog/'),
-      alt: z.string()
-    }).optional(),
-    tags: z.array(z.string()).default(["general"]),
-    draft: z.boolean().default(false),
-  }),
-});
 
 const siteInfoCollection = defineCollection({
   type: 'content', // Could be 'data' if only frontmatter is needed
