@@ -14,7 +14,7 @@ const {
 
 <section 
   class="relative py-20 bg-cover bg-center"
-  style={`background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(${backgroundImage})`}
+  style={`background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('${encodeURI(backgroundImage)}')`}
 >
   <div class="container">
     <div class="max-w-3xl mx-auto text-center text-white">
