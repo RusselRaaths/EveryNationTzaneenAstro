@@ -5,6 +5,7 @@ export interface Props {
   title?: string;
   subtitle?: string;
   backgroundImage?: string;
+  backgroundImages?: string[];
   ctaText?: string;
   ctaLink?: string;
   secondaryCtaText?: string;
@@ -12,19 +13,43 @@ export interface Props {
 }
 
 const {
-  title = "Welcome to Our Church",
-  subtitle = "A place of worship, community, and spiritual growth",
-  backgroundImage = "/uploads/hero-bg.jpg",
+  title = "Welcome to Every Nation Tzaneen",
+  subtitle = "A Disciple Making Family",
+  backgroundImage = "",
+  backgroundImages = [],
   ctaText = "Plan Your Visit",
   ctaLink = "/im-new",
   secondaryCtaText = "Watch Sermons",
   secondaryCtaLink = "/sermons",
 } = Astro.props;
+
+// default set of images from public/uploads — adjust or extend as needed
+const defaultImages = [
+  "/uploads/home-1.webp",
+  "/uploads/home-2.webp",
+  "/uploads/home-3.webp",
+  "/uploads/home-4.webp",
+  "/uploads/home-5.webp",
+  "/uploads/home-6.webp",
+  "/uploads/home-7.webp",
+  "/uploads/home-8.webp",
+  "/uploads/home-9.webp",
+  "/uploads/home-10.webp",
+  "/uploads/home-11.webp",
+];
+// Build the array we will cycle through. If a single backgroundImage is provided, use it.
+const imagesToUse = (() => {
+  if (backgroundImage && backgroundImage.length > 0) return [backgroundImage];
+  if (Array.isArray(backgroundImages) && backgroundImages.length > 0) return backgroundImages;
+  return defaultImages;
+})();
 ---
 
 <section
+  id="hero-section"
   class="relative min-h-[70vh] flex items-center bg-cover pt-30"
-  style={`background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url(${backgroundImage}); background-position: center 20%;`}
+  data-bg-images={JSON.stringify(imagesToUse)}
+  style={`background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('${encodeURI(imagesToUse[0])}'); background-position: center 20%;`}
 >
 
   <div class="container">
@@ -44,3 +69,34 @@ const {
     </div>
   </div>
 </section>
+
+<script type="module">
+  // Simple background slideshow for the hero section. Runs client-side.
+  (function () {
+    const section = document.getElementById('hero-section');
+    if (!section) return;
+    let images = [];
+    try {
+      images = JSON.parse(section.dataset.bgImages || '[]');
+    } catch (e) {
+      images = [];
+    }
+    if (!images || images.length === 0) return;
+
+    // Preload images with logging so we can see load failures for debug
+    console.log('Hero images to use:', images);
+    images.forEach((src) => {
+      const img = new Image();
+      img.onload = () => console.log('Hero preload OK:', src);
+      img.onerror = (e) => console.warn('Hero preload ERROR:', src, e && e.message);
+      img.src = src;
+    });
+
+    let idx = 0;
+    const interval = 5000; // ms
+    setInterval(() => {
+      idx = (idx + 1) % images.length;
+  section.style.backgroundImage = `linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('${encodeURI(images[idx])}')`;
+    }, interval);
+  })();
+</script>

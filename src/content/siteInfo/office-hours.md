@@ -15,11 +15,10 @@ For urgent matters outside of office hours, please use the emergency contact num
 ### Main Services & Activities
 
 *   **Sunday Worship Service:**
-    *   1st Service: 8:00 AM
-    *   2nd Service: 10:30 AM (with Children's Ministry)
-*   **Youth Group:** Fridays, 7:00 PM
-*   **Mid-week Prayer Meeting:** Wednesdays, 7:00 PM
-*   **Women's Fellowship:** Every 2nd Tuesday, 10:00 AM
-*   **Men's Breakfast:** Every 1st Saturday, 8:00 AM
+    *   Pre Service Prayer: 8:15 AM - 08:45 Am
+    *   Service: 09:15 AM (with Children's Ministry)
+*   **Youth Group:** Wednesdays, 18:30 PM - 20:00 PM (Merensky Agricultural Acadamy)
+*   **Friday Morning Prayer Meeting:** Friday, 05:30 AM (Zoom Meeting)
+*   
 
 _Please note: Schedules are subject to change. Always check the weekly bulletin or events page for the latest information._
