@@ -200,45 +200,43 @@ import Button from "../components/UI/Button.astro";
         </p>
       </div>
       
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div>
-          <div class="bg-gray-200 rounded-lg overflow-hidden h-96">
-            <!-- Placeholder for Google Maps iframe -->
-            <div class="w-full h-full flex items-center justify-center bg-gray-300">
-              <p class="text-gray-600 text-center p-4">
-                Google Maps embed would go here<br>
-                <span class="text-sm">(For privacy reasons, not included in the template)</span>
-              </p>
-            </div>
-          </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+        <div class="bg-gray-200 rounded-lg overflow-hidden h-96">
+          <!-- Google Maps embed centered on the provided coordinates -->
+          <iframe
+            class="w-full h-full border-0"
+            loading="lazy"
+            allowfullscreen
+            referrerpolicy="no-referrer-when-downgrade"
+            src="https://www.google.com/maps?q=-23.837301716885072,30.152549625359356&z=17&output=embed"
+            title="Every Nation Tzaneen location"
+          ></iframe>
         </div>
-        
+
         <div>
-          <div class="bg-white p-8 rounded-lg shadow-sm h-full">
+          <div class="bg-white p-8 rounded-lg shadow-sm">
             <h3 class="text-xl font-bold mb-4">Church Address</h3>
             <address class="not-italic mb-6 text-gray-700">
-              <p class="text-lg">123 Main Street</p>
-              <p class="text-lg">Anytown, ST 12345</p>
-              <p class="mt-2">
-                <a href="tel:+15551234567" class="text-primary-600 hover:text-primary-700">
-                  (555) 123-4567
-                </a>
-              </p>
+              <p><a href="https://www.google.com/maps/search/?api=1&query=-23.837301716885072,30.152549625359356" target="_blank" rel="noopener noreferrer" class="hover:text-primary-600">Highschool Ben Vorster Hall</a></p>
+              <p><a href="https://www.google.com/maps/search/?api=1&query=-23.837301716885072,30.152549625359356" target="_blank" rel="noopener noreferrer" class="hover:text-primary-600">1 Boundary Street</a></p>
+              <p><a href="https://www.google.com/maps/search/?api=1&query=-23.837301716885072,30.152549625359356" target="_blank" rel="noopener noreferrer" class="hover:text-primary-600">Premierpark, Tzaneen</a></p>
             </address>
-            
+
             <h4 class="text-lg font-bold mb-2">Parking Information</h4>
             <p class="text-gray-700 mb-6">
-              We have a large parking lot on the north side of the building with designated visitor parking near the main entrance. Handicap parking is available near both the north and south entrances.
+              We have a large parking lot with plenty of free parking spaces, including accessible parking near the main entrance.
             </p>
-            
-            <h4 class="text-lg font-bold mb-2">Public Transportation</h4>
+
+            <h4 class="text-lg font-bold mb-2">Accessibility</h4>
             <p class="text-gray-700 mb-6">
-              Bus lines 10 and 14 stop directly in front of our building. The nearest subway station is Central Station, a 10-minute walk from our church.
+              Our building is fully accessible with ramp access at the main entrance.
             </p>
-            
-            <Button href="https://maps.google.com/?q=123+Main+Street,+Anytown,+ST+12345" target="_blank" variant="primary">
-              Get Directions
-            </Button>
+
+            <div class="mt-6">
+              <Button href="https://www.google.com/maps/dir/?api=1&destination=-23.837301716885072,30.152549625359356" target="_blank" variant="primary">
+                Get Directions
+              </Button>
+            </div>
           </div>
         </div>
       </div>
@@ -337,7 +335,7 @@ import Button from "../components/UI/Button.astro";
             Contact Us
           </Button>
           
-          <Button href="https://maps.google.com/?q=123+Main+Street,+Anytown,+ST+12345" target="_blank" variant="outline" size="lg" class="bg-white/10 text-white border-white hover:bg-white hover:text-gray-900 backdrop-blur-sm">
+          <Button href="https://www.google.com/maps/dir/?api=1&destination=-23.837301716885072,30.152549625359356" target="_blank" variant="outline" size="lg" class="bg-white/10 text-white border-white hover:bg-white hover:text-gray-900 backdrop-blur-sm">
             Get Directions
           </Button>
         </div>
