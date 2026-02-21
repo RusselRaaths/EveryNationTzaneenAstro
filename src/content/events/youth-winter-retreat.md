@@ -1,5 +1,5 @@
 ---
-title: "Youth Winter Retreat 2025: Unshakeable Faith"
+title: "Victory Training"
 date: 2025-02-14
 endDate: 2025-02-16
 time: "Departure: 4:00 PM Friday | Return: 2:00 PM Sunday"

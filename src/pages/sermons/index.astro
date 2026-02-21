@@ -190,12 +190,12 @@ const speakers = [...new Set(sermons.map(sermon => sermon.data.speaker))];
   <script>
     // Filter functionality
     document.addEventListener('DOMContentLoaded', () => {
-      const searchInput = document.getElementById('search');
-      const seriesSelect = document.getElementById('series');
-      const speakerSelect = document.getElementById('speaker');
-      const fromDateInput = document.getElementById('from-date');
-      const toDateInput = document.getElementById('to-date');
-      const resetButton = document.getElementById('reset-filters');
+  const searchInput = document.getElementById('search') as HTMLInputElement | null;
+  const seriesSelect = document.getElementById('series') as HTMLSelectElement | null;
+  const speakerSelect = document.getElementById('speaker') as HTMLSelectElement | null;
+  const fromDateInput = document.getElementById('from-date') as HTMLInputElement | null;
+  const toDateInput = document.getElementById('to-date') as HTMLInputElement | null;
+  const resetButton = document.getElementById('reset-filters') as HTMLButtonElement | null;
       const sermonsGrid = document.getElementById('sermons-grid');
       const noResults = document.getElementById('no-results');
       const sermonCards = document.querySelectorAll('.sermon-card');
