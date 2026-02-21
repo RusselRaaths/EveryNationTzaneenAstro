@@ -7,11 +7,14 @@ import { getCollection } from "astro:content";
 const all = await getCollection("ministries", ({ data }) =>
   import.meta.env.PROD ? !data.draft : true
 );
-// Sort by order or name
-const ministries = all.sort((a, b) =>
-  (a.data.order ?? 0) - (b.data.order ?? 0) ||
-  a.data.name.localeCompare(b.data.name)
-);
+// Filter out specific ministries we want to hide, then sort by order or name
+const excludedSlugs = new Set(["mens-ministry", "womens-ministry", "community-outreach"]);
+const ministries = all
+  .filter(m => !excludedSlugs.has(m.slug))
+  .sort((a, b) =>
+    (a.data.order ?? 0) - (b.data.order ?? 0) ||
+    a.data.name.localeCompare(b.data.name)
+  );
 ---
 
 <BaseLayout title="Our Ministries" description="Discover our ministries.">

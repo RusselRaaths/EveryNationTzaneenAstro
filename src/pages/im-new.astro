@@ -95,7 +95,7 @@ import Button from "../components/UI/Button.astro";
       <div class="text-center mb-12">
         <h2 class="text-3xl md:text-4xl font-bold mb-4">Service Times</h2>
         <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-          Join us for worship at any of our weekly services
+          Join us for worship at Sunday services
         </p>
       </div>
       
@@ -103,28 +103,28 @@ import Button from "../components/UI/Button.astro";
         <div class="bg-white p-8 rounded-lg shadow-sm">
           <h3 class="text-xl font-bold mb-3">Sunday Morning</h3>
           <div class="mb-4">
-            <p class="text-2xl font-bold text-primary-600 mb-2">8:00 AM</p>
+            <p class="text-2xl font-bold text-primary-600 mb-2">9:00 AM</p>
             <p class="text-gray-600">Traditional Service</p>
-            <p class="italic text-gray-500 mt-2">In-person & Livestream</p>
+            <p class="italic text-gray-500 mt-2">In-person</p>
           </div>
           
           <div>
-            <p class="text-2xl font-bold text-primary-600 mb-2">10:30 AM</p>
-            <p class="text-gray-600">Contemporary Service with Children's Ministry</p>
-            <p class="italic text-gray-500 mt-2">In-person only</p>
+            <p class="text-2xl font-bold text-primary-600 mb-2">05:30 AM</p>
+            <p class="text-gray-600">Friday morning prayer</p>
+            <p class="italic text-gray-500 mt-2">Google Meet</p>
           </div>
         </div>
         
         <div class="bg-white p-8 rounded-lg shadow-sm">
-          <h3 class="text-xl font-bold mb-3">Wednesday Evening</h3>
+          <h3 class="text-xl font-bold mb-3">Sunday pre service prayer</h3>
           <div class="mb-4">
-            <p class="text-2xl font-bold text-primary-600 mb-2">7:00 PM</p>
-            <p class="text-gray-600">Mid-week Prayer & Bible Study</p>
-            <p class="italic text-gray-500 mt-2">In-person & Livestream</p>
+            <p class="text-2xl font-bold text-primary-600 mb-2">8:15 AM</p>
+            <p class="text-gray-600">Prayer for service and community</p>
+            <p class="italic text-gray-500 mt-2">In-person</p>
           </div>
           
           <div>
-            <p class="text-2xl font-bold text-primary-600 mb-2">7:00 PM</p>
+            <p class="text-2xl font-bold text-primary-600 mb-2">During Service</p>
             <p class="text-gray-600">Youth Group (Grades 6-12)</p>
             <p class="italic text-gray-500 mt-2">In-person only</p>
           </div>
@@ -149,7 +149,7 @@ import Button from "../components/UI/Button.astro";
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
               </svg>
               <span class="text-gray-700">
-                <strong>Nursery (0-2 years):</strong> Safe, loving care for our littlest ones during all services.
+                <strong>Todlers (0-2 years):</strong> Safe, loving care for our littlest ones during services.
               </span>
             </li>
             <li class="flex items-start">
@@ -157,7 +157,7 @@ import Button from "../components/UI/Button.astro";
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
               </svg>
               <span class="text-gray-700">
-                <strong>Preschool (3-5 years):</strong> Age-appropriate activities, Bible stories, and fun during the 10:30 AM service.
+                <strong>Preschool (3-5 years):</strong> Age-appropriate activities, Bible stories, and fun during the 9:15 AM service.
               </span>
             </li>
             <li class="flex items-start">
@@ -165,13 +165,13 @@ import Button from "../components/UI/Button.astro";
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
               </svg>
               <span class="text-gray-700">
-                <strong>Elementary (K-5th grade):</strong> Interactive lessons, games, and worship during the 10:30 AM service.
+                <strong>Elementary (K-5th grade):</strong> Interactive lessons, games, and worship during the 09:15 AM service.
               </span>
             </li>
           </ul>
           
           <p class="text-gray-700 mb-6 text-lg">
-            All our children's ministry volunteers undergo background checks and are trained to provide a safe, nurturing environment.
+            All our children's staff are trained to provide a safe, nurturing environment.
           </p>
           
           <Button href="/ministries/childrens-ministry">
@@ -193,6 +193,10 @@ import Button from "../components/UI/Button.astro";
   <!-- Location & Directions -->
   <section id="location" class="py-16">
     <div class="container">
+  <!-- DEBUG: ensure this page source is used in build -->
+  <p id="debug-imnew" class="sr-only">DEBUG-IMNEW-IFRAME-INCLUDED</p>
+  <!-- VISIBLE SENTINEL FOR BUILD TEST -->
+  <div id="imnew-sentinel" class="bg-yellow-200 text-black p-2 rounded mb-4">IMNEW-SENTINEL-VISIBLE</div>
       <div class="text-center mb-12">
         <h2 class="text-3xl md:text-4xl font-bold mb-4">Location & Directions</h2>
         <p class="text-xl text-gray-600 max-w-3xl mx-auto">
@@ -263,7 +267,7 @@ import Button from "../components/UI/Button.astro";
             </svg>
           </summary>
           <p class="mt-4 text-gray-700">
-            When you arrive, look for our welcome team members wearing blue name tags. They'll greet you, help you check in your children if needed, and direct you to the sanctuary or any other areas you'd like to visit.
+            When you arrive, look for our information table or hospitality team. They will help you feel at home.
           </p>
         </details>
 
@@ -275,8 +279,7 @@ import Button from "../components/UI/Button.astro";
             </svg>
           </summary>
           <p class="mt-4 text-gray-700">
-            No, we won't single you out or ask you to stand up. We want you to feel comfortable, not put on the spot. We do have a welcome card in the service bulletin if you'd like to share your information with us.
-          </p>
+            No, we won't single you out or ask you to stand up. We want you to feel comfortable, not put on the spot. We do have a welcome pack and chocolate in the service that you can get to know us better and if you want to get connected.          </p>
         </details>
 
         <details class="group bg-white p-6 rounded-lg shadow-sm">
@@ -287,7 +290,7 @@ import Button from "../components/UI/Button.astro";
             </svg>
           </summary>
           <p class="mt-4 text-gray-700">
-            Yes! We have coffee, tea, and light refreshments available before and after each service in our fellowship hall. It's a great opportunity to meet people and ask any questions you might have.
+            Yes! We have coffee, tea, and light refreshments available before service. It's a great opportunity to meet people and ask any questions you might have.
           </p>
         </details>
 
@@ -299,7 +302,7 @@ import Button from "../components/UI/Button.astro";
             </svg>
           </summary>
           <p class="mt-4 text-gray-700">
-            Yes, we have a comfortable, private nursing mothers' room adjacent to the nursery. It's equipped with changing facilities, comfortable seating, and a live audio feed of the service.
+            Unfortunately not, the lady's bathroom is equipped with a changing station.
           </p>
         </details>
 
@@ -311,7 +314,7 @@ import Button from "../components/UI/Button.astro";
             </svg>
           </summary>
           <p class="mt-4 text-gray-700">
-            The best way to get connected is through our small groups and ministry teams. Visit our welcome center after the service, and we'll help you find the right fit. You can also attend our "New to Church Name" class, offered monthly.
+            The best way to get connected is through our connect groups. Visit our information table before or after the service, and they will help you get connected with the right people.
           </p>
         </details>
       </div>

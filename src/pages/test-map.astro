@@ -1,0 +1,21 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="Test Map">
+  <section class="py-16">
+    <div class="container">
+      <h1 class="text-3xl font-bold mb-6">Test Map Page</h1>
+      <div class="bg-gray-200 rounded-lg overflow-hidden h-96">
+        <iframe
+          class="w-full h-full border-0"
+          loading="lazy"
+          allowfullscreen
+          referrerpolicy="no-referrer-when-downgrade"
+          src="https://www.google.com/maps?q=-23.837301716885072,30.152549625359356&z=17&output=embed"
+          title="Test map"
+        ></iframe>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
