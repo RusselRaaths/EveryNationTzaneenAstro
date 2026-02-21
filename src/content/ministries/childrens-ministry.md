@@ -5,7 +5,7 @@ logo: "/uploads/ministries/childrens-ministry-logo.webp"
 summary: "Nurturing children ages 0-12 in their faith journey through engaging, age-appropriate programs that teach God's love."
 coordinator: "Mrs. Lorraine Van Zyl"
 contact: "children@churchname.org"
-schedule: "Children's Church: 09:15 AM
+schedule: "Children's Church: 09:15 AM"
 order: 1
 draft: false
 ---
