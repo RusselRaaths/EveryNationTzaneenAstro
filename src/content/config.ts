@@ -5,7 +5,7 @@ const staffCollection = defineCollection({
   schema: z.object({
     name: z.string(),
     title: z.string(), // e.g., "Senior Pastor", "Deaconess"
-    image: z.string().startsWith('/uploads/staff/'),
+  image: z.string().startsWith('/uploads/staff/'),
     email: z.string().email().optional(),
     phone: z.string().optional(),
     bio: z.string().optional(), // Short bio in frontmatter
