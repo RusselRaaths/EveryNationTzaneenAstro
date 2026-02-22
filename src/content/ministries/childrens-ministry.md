@@ -1,11 +1,11 @@
 ---
-name: 'Children''s Ministry'
-slug: 'childrens-ministry'
-logo: '/uploads/ministries/childrens-ministry-logo.webp'
-summary: 'Nurturing children ages 0-12 in their faith journey through engaging, age-appropriate programs that teach God''s love.'
-coordinator: 'Mrs. Lorraine Van Zyl'
-contact: 'children@churchname.org'
-schedule: 'Children''s Church: 09:15 AM'
+name: "Children's Ministry"
+slug: "childrens-ministry"
+logo: "/uploads/ministries/childrens-ministry-logo.webp"
+summary: "Nurturing children ages 3-12 in their faith journey through engaging, age-appropriate programs that teach God's love."
+coordinator: "Mrs. Lorraine Van Zyl"
+contact: "Lorraine.vanzyl@entzaneen.co.za"
+schedule: "Children's Church: 09:15 AM"
 order: 1
 draft: false
 ---
@@ -21,7 +21,7 @@ To partner with parents in raising children who know, love, and follow Jesus Chr
 - Trained volunteers and security procedures
 - Age-appropriate toys and activities
 
-### Preschool (3-5 years)
+### Preschool (2-5 years)
 - Interactive Bible stories
 - Songs and movement activities
 - Simple crafts and games

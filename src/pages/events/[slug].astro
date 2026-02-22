@@ -32,6 +32,18 @@ const formattedEndDate = entry.data.endDate ? formatDate(entry.data.endDate) : n
 
 // Determine if event is in the future
 const isFutureEvent = new Date(entry.data.date) > new Date();
+
+// Determine whether to show the embedded map. Prefer explicit frontmatter `showMap`,
+// otherwise show when the event matches known slugs/titles or the MDT location.
+const showMap = typeof entry.data.showMap !== 'undefined'
+  ? entry.data.showMap
+  : (
+    entry.slug === 'youth-winter-retreat' ||
+    entry.data.title === 'Victory Training' ||
+    entry.slug === 'mdt' ||
+    entry.data.title === 'MDT' ||
+    entry.data.location === '3 Saligna Road Arbor Park'
+  );
 ---
 
 <BaseLayout
@@ -79,9 +91,9 @@ const isFutureEvent = new Date(entry.data.date) > new Date();
             </svg>
             <p>{entry.data.location}</p>
           </div>
-          {/* Embed Google Maps for Victory Training event */}
+          {/* Embed Google Maps when showMap is true */}
           {
-            (entry.slug === 'youth-winter-retreat' || entry.data.title === 'Victory Training' || entry.slug === 'mdt' || entry.data.title === 'MDT') && (
+            showMap && (
               <div class="mt-4">
                 <iframe
                   src="https://maps.google.com/maps?q=-23.832243285109612,30.15133983267246&z=15&output=embed"
@@ -132,7 +144,7 @@ const isFutureEvent = new Date(entry.data.date) > new Date();
         )
       }
       {
-        (entry.slug === 'youth-winter-retreat' || entry.data.title === 'Victory Training' || entry.slug === 'mdt' || entry.data.title === 'MDT') && (
+        showMap && (
           <Button href="https://www.google.com/maps/dir/?api=1&destination=-23.832243285109612,30.15133983267246" target="_blank" variant="outline">
             Get Directions
           </Button>
