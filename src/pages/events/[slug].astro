@@ -79,6 +79,21 @@ const isFutureEvent = new Date(entry.data.date) > new Date();
             </svg>
             <p>{entry.data.location}</p>
           </div>
+          {/* Embed Google Maps for Victory Training event */}
+          {
+            (entry.slug === 'youth-winter-retreat' || entry.data.title === 'Victory Training' || entry.slug === 'mdt' || entry.data.title === 'MDT') && (
+              <div class="mt-4">
+                <iframe
+                  src="https://maps.google.com/maps?q=-23.832243285109612,30.15133983267246&z=15&output=embed"
+                  class="w-full h-64 rounded-lg"
+                  style="border:0;"
+                  loading="lazy"
+                  referrerpolicy="no-referrer-when-downgrade"
+                ></iframe>
+              </div>
+            )
+          }
+          </div>
         </div>
       </div>
       
@@ -89,11 +104,11 @@ const isFutureEvent = new Date(entry.data.date) > new Date();
             <p class="mb-4">Registration is required for this event.</p>
             
             {entry.data.registrationLink ? (
-              <Button href={entry.data.registrationLink} target="_blank" variant="primary">
+              <Button href={entry.data.registrationLink} target="_blank" variant="outline">
                 Register Now
               </Button>
             ) : (
-              <Button href="/contact?subject=Event+Registration" variant="primary">
+              <Button href="/contact?subject=Event+Registration" variant="outline">
                 Contact Us to Register
               </Button>
             )}
@@ -111,8 +126,15 @@ const isFutureEvent = new Date(entry.data.date) > new Date();
     <div class="mt-12 flex flex-wrap gap-4">
       {
         isFutureEvent && entry.data.registrationLink && (
-          <Button href={entry.data.registrationLink} target="_blank" variant="primary">
+          <Button href={entry.data.registrationLink} target="_blank" variant="outline">
             Register for This Event
+          </Button>
+        )
+      }
+      {
+        (entry.slug === 'youth-winter-retreat' || entry.data.title === 'Victory Training' || entry.slug === 'mdt' || entry.data.title === 'MDT') && (
+          <Button href="https://www.google.com/maps/dir/?api=1&destination=-23.832243285109612,30.15133983267246" target="_blank" variant="outline">
+            Get Directions
           </Button>
         )
       }

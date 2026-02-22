@@ -9,7 +9,7 @@ summary: "Join us for a day of service as we reach out to our community with pra
 tags: ["outreach", "service", "community"]
 registrationRequired: true
 registrationLink: "https://example.com/outreach-day-2025"
-draft: false
+draft: true
 ---
 
 ## Serving Our Community Together

@@ -1,43 +1,37 @@
 ---
 title: "Victory Training"
-date: 2025-02-14
-endDate: 2025-02-16
-time: "Departure: 4:00 PM Friday | Return: 2:00 PM Sunday"
-location: "Mountain View Retreat Center"
-image: "/uploads/events/winter-retreat-2025.webp"
-summary: "A transformative weekend of worship, fellowship, and winter fun for students grades 6-12."
-tags: ["youth", "retreat", "winter"]
+date: 2026-02-13
+endDate: 2026-02-15
+time: "Start: 17:30 - 21:00 PM Friday | Start: 07:30 - 15:00 PM Saturday"
+location: "3 Saligna Road Arbor Park"
+image: "/uploads/events/vt.webp"
+summary: "A transformative weekend to discover victory in Christ"
+tags: ["VT"]
 registrationRequired: true
-registrationLink: "https://example.com/winter-retreat-2025"
+registrationLink: "https://bit.ly/ENTVictoryTraining"
 draft: false
 ---
 
-## About the Retreat
+## About Victory Training
 
-Join us for an unforgettable weekend as we explore what it means to have an unshakeable faith in Jesus Christ. Through dynamic worship, engaging messages, small group discussions, and winter activities, students will be challenged and encouraged in their faith journey.
+Join us for an unforgettable weekend to discover victory in your life through Christ
 
 ### Schedule Highlights
 
-- **Friday Evening**: Arrival, dinner, opening session
-- **Saturday**: Morning worship, workshops, winter activities, evening worship
-- **Sunday**: Closing session, lunch, departure
+- **Friday Evening**: Arrival, Snacks, Session
+- **Saturday**: Arrival, Snacks, Sessions, Lunch, Departure
 
 ### What to Bring
 
-- Bible and journal
-- Warm winter clothing
-- Sleeping bag and pillow
-- Personal toiletries
-- Spending money for snack shop
+- Bible and notepad
+- Warm clothing for the evening
 
 ### Cost
 
-- Early Bird (before Jan 15): $175
-- Regular Registration: $195
-- Scholarships available - contact Pastor Michael
+Registration: R350
+
 
 ### Registration Details
 
-Space is limited to 100 students. Register early to secure your spot!
+Space is limited. Register early to secure your spot!
 
-*Parent/guardian permission form required for all participants.*

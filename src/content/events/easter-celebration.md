@@ -8,7 +8,7 @@ image: "/uploads/events/easter-celebration.webp"
 summary: "Join us for a joyful celebration of Christ's resurrection with special music, inspiring messages, and fellowship."
 tags: ["easter", "celebration", "special service"]
 registrationRequired: false
-draft: false
+draft: true
 ---
 
 ## Celebrate the Resurrection!

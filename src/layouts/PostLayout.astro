@@ -49,14 +49,14 @@ const formattedDate = date ? formatDate(date) : null;
   <div class="mx-auto max-w-3xl">
 
     {image && (
-      <div class="mb-8 overflow-hidden rounded-lg">
-        <img
-          src={image.url}
-          alt={image.alt}
-          class="object-cover w-full h-64 md:h-96"
-          widths={[320, 640, 1024]}
-          format="webp"
-          loading="lazy" />
+      <div class="mb-8 overflow-hidden rounded-lg relative w-full pb-[56.25%]">
+        <div class="absolute inset-0 flex items-center justify-center bg-gray-50">
+          <img
+            src={image.url}
+            alt={image.alt}
+            class="max-w-full max-h-full"
+            loading="lazy" />
+        </div>
       </div>
     )}
 
