@@ -1,0 +1,5 @@
+AuthType Basic
+AuthName "Restricted Area"
+# Adjust the path below to the actual .htpasswd file you create on the server
+AuthUserFile /home/youruser/.htpasswd
+Require valid-user

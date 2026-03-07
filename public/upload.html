@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Upload Media</title>
+    <style>
+      body { font-family: system-ui, sans-serif; padding: 2rem; }
+      label { display:block; margin-top:1rem }
+    </style>
+  </head>
+  <body>
+    <h1>Upload Media</h1>
+
+    <section>
+      <h2>Upload Sermon</h2>
+      <form id="sermonForm">
+        <label>Secret<input name="secret" type="password" required /></label>
+        <label>File<input name="file" type="file" accept="audio/*" required /></label>
+        <button type="submit">Upload Sermon</button>
+      </form>
+      <div id="sermonResult"></div>
+    </section>
+
+    <section>
+      <h2>Upload Event Media</h2>
+      <form id="eventForm">
+        <label>Secret<input name="secret" type="password" required /></label>
+        <label>File<input name="file" type="file" accept="image/*,video/*" required /></label>
+        <button type="submit">Upload Event Media</button>
+      </form>
+      <div id="eventResult"></div>
+    </section>
+
+    <script>
+      async function upload(form, url, resultEl) {
+        const fd = new FormData(form);
+        resultEl.textContent = 'Uploading...';
+        try {
+          const resp = await fetch(url, { method: 'POST', body: fd });
+          const json = await resp.json();
+          if (!resp.ok) throw new Error(json.error || 'Upload failed');
+          resultEl.innerHTML = 'Uploaded: <a href="'+json.url+'" target="_blank">'+json.url+'</a>';
+        } catch (err) {
+          resultEl.textContent = 'Error: '+err.message;
+        }
+      }
+
+      document.getElementById('sermonForm').addEventListener('submit', e => {
+        e.preventDefault();
+        upload(e.currentTarget, '/upload-sermon.php', document.getElementById('sermonResult'));
+      });
+
+      document.getElementById('eventForm').addEventListener('submit', e => {
+        e.preventDefault();
+        upload(e.currentTarget, '/upload-event.php', document.getElementById('eventResult'));
+      });
+    </script>
+  </body>
+ </html>

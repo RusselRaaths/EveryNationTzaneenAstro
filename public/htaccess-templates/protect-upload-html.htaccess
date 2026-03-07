@@ -1,0 +1,6 @@
+<Files "upload.html">
+  AuthType Basic
+  AuthName "Restricted Uploads"
+  AuthUserFile /home/youruser/.htpasswd
+  Require valid-user
+</Files>

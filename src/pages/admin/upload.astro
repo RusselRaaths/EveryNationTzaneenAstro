@@ -1,0 +1,57 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Admin Uploads" description="Upload sermons and event media"> 
+  <div class="container py-12">
+    <h1 class="text-2xl font-bold mb-6">Admin Uploads</h1>
+
+    <section class="mb-8">
+      <h2 class="text-xl font-semibold mb-2">Upload Sermon</h2>
+      <form id="sermonForm" class="space-y-2 max-w-lg">
+        <input name="secret" placeholder="Secret" required class="w-full p-2 border" />
+        <input name="title" placeholder="Title" class="w-full p-2 border" />
+        <input name="speaker" placeholder="Speaker" class="w-full p-2 border" />
+        <input name="date" type="date" class="w-full p-2 border" />
+        <textarea name="summary" placeholder="Summary" class="w-full p-2 border"></textarea>
+        <input name="file" type="file" accept="audio/*" required />
+        <button type="submit" class="px-4 py-2 bg-primary-600 text-white rounded">Upload Sermon</button>
+      </form>
+      <div id="sermonResult" class="mt-2 text-sm"></div>
+    </section>
+
+    <section>
+      <h2 class="text-xl font-semibold mb-2">Upload Event Media</h2>
+      <form id="eventForm" class="space-y-2 max-w-lg">
+        <input name="secret" placeholder="Secret" required class="w-full p-2 border" />
+        <input name="title" placeholder="Title" class="w-full p-2 border" />
+        <input name="date" type="date" class="w-full p-2 border" />
+        <input name="time" placeholder="Time" class="w-full p-2 border" />
+        <input name="location" placeholder="Location" class="w-full p-2 border" />
+        <textarea name="summary" placeholder="Summary" class="w-full p-2 border"></textarea>
+        <input name="file" type="file" accept="image/*,video/*" required />
+        <button type="submit" class="px-4 py-2 bg-primary-600 text-white rounded">Upload Event Media</button>
+      </form>
+      <div id="eventResult" class="mt-2 text-sm"></div>
+    </section>
+  </div>
+
+  <script type="module">
+    async function postForm(form, url, resultId) {
+      const fd = new FormData(form);
+      const resEl = document.getElementById(resultId);
+      resEl.textContent = 'Uploading...';
+      try {
+        const resp = await fetch(url, { method: 'POST', body: fd });
+        const json = await resp.json();
+        if (!resp.ok) throw new Error(json.error || 'Upload failed');
+        resEl.innerHTML = 'Uploaded: <a href="' + json.url + '" target="_blank">' + json.url + '</a>' + (json.markdown ? ' — Markdown: ' + json.markdown : '');
+      } catch (err) {
+        resEl.textContent = 'Error: ' + err.message;
+      }
+    }
+
+    document.getElementById('sermonForm').addEventListener('submit', e => { e.preventDefault(); postForm(e.currentTarget, '/upload-sermon.php', 'sermonResult'); });
+    document.getElementById('eventForm').addEventListener('submit', e => { e.preventDefault(); postForm(e.currentTarget, '/upload-event.php', 'eventResult'); });
+  </script>
+</BaseLayout>
