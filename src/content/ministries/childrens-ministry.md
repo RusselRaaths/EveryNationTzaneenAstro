@@ -1,7 +1,7 @@
 ---
 name: "Children's Ministry"
 slug: "childrens-ministry"
-logo: "/uploads/Every%20Nation%20Tzaneen%20Kids.webp"
+logo: "/uploads/ministries/every-nation-kids.webp"
 summary: "Nurturing children ages 3-12 in their faith journey through engaging, age-appropriate programs that teach God's love."
 coordinator: "Mrs. Lorraine Van Zyl"
 contact: "Lorraine.vanzyl@entzaneen.co.za"
