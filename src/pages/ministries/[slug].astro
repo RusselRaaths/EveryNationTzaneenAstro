@@ -35,9 +35,10 @@ const logoUrl = entry.data.logo || (entry.slug === 'childrens-ministry' ? '/uplo
   description={entry.data.summary}
   image={logoUrl ? { url: logoUrl, alt: entry.data.name } : undefined}
 >
-  <PageHeader 
-    title={entry.data.name} 
-  backgroundImage="/uploads/1.webp"
+  <PageHeader
+    title={entry.data.name}
+    backgroundImage="/uploads/1.webp"
+    imageFit="contain"
   />
   
   <section class="py-16">
