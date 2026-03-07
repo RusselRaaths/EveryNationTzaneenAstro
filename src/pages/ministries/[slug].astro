@@ -28,6 +28,8 @@ const { Content } = await entry.render();
 // Prefer a canonical logo URL; fallback for children's ministry to the provided uploads image
 const logoUrl = entry.data.logo || (entry.slug === 'childrens-ministry' ? '/uploads/Every%20Nation%20Tzaneen%20Kids.webp' : undefined);
 
+---
+
 <BaseLayout
   title={`${entry.data.name} - Church Name`}
   description={entry.data.summary}
