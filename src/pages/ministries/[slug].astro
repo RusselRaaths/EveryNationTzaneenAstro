@@ -38,7 +38,8 @@ const logoUrl = entry.data.logo || (entry.slug === 'childrens-ministry' ? '/uplo
   <PageHeader
     title={entry.data.name}
   backgroundImage={entry.slug === 'childrens-ministry' ? '/uploads/1.webp' : '/uploads/ministry-detail-bg.webp'}
-  imageFit={entry.slug === 'childrens-ministry' ? 'stretch' : 'cover'}
+  imageFit={entry.slug === 'childrens-ministry' ? 'contain' : 'cover'}
+  imagePosition={entry.slug === 'childrens-ministry' ? 'top center' : 'center'}
   />
   
   <section class="py-16">
