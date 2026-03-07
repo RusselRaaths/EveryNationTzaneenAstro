@@ -3,7 +3,7 @@ export interface Props {
   title: string;
   subtitle?: string;
   backgroundImage?: string;
-  imageFit?: 'cover' | 'contain';
+  imageFit?: 'cover' | 'contain' | 'stretch';
 }
 
 const { 
@@ -13,11 +13,13 @@ const {
   imageFit = 'cover',
 } = Astro.props;
 
+const backgroundSize = imageFit === 'stretch' ? '100% 100%' : imageFit;
+
 ---
 
 <section 
   class="relative py-20 bg-center"
-  style={`background-size: ${imageFit}; background-repeat: no-repeat; background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('${encodeURI(backgroundImage)}')`}
+  style={`background-size: ${backgroundSize}; background-repeat: no-repeat; background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('${encodeURI(backgroundImage)}')`}
 >
   <div class="container">
     <div class="max-w-3xl mx-auto text-center text-white">
