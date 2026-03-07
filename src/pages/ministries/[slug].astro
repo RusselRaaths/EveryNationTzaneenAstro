@@ -24,12 +24,14 @@ export async function getStaticPaths() {
 // Get the ministry data
 const { entry } = Astro.props;
 const { Content } = await entry.render();
----
+
+// Prefer a canonical logo URL; fallback for children's ministry to the provided uploads image
+const logoUrl = entry.data.logo || (entry.slug === 'childrens-ministry' ? '/uploads/Every%20Nation%20Tzaneen%20Kids.webp' : undefined);
 
 <BaseLayout
   title={`${entry.data.name} - Church Name`}
   description={entry.data.summary}
-  image={entry.data.logo ? { url: entry.data.logo, alt: entry.data.name } : undefined}
+  image={logoUrl ? { url: logoUrl, alt: entry.data.name } : undefined}
 >
   <PageHeader 
     title={entry.data.name} 
@@ -50,10 +52,10 @@ const { Content } = await entry.render();
         <div>
           <div class="bg-gray-50 p-6 rounded-lg shadow-sm sticky top-24">
             {
-              entry.data.logo && (
+              logoUrl && (
                 <div class="mb-6 flex justify-center">
                   <img 
-                    src={entry.data.logo} 
+                    src={logoUrl} 
                     alt={entry.data.name} 
                     class="max-h-48 w-auto"
                   />
