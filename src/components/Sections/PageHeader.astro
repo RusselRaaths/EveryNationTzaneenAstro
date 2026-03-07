@@ -5,6 +5,7 @@ export interface Props {
   backgroundImage?: string;
   imageFit?: 'cover' | 'contain' | 'stretch';
   imagePosition?: string;
+  tile?: number; // number of tiled copies to show (e.g., 4 -> 2x2)
 }
 
 const { 
@@ -15,13 +16,25 @@ const {
   imagePosition = 'center',
 } = Astro.props;
 
-const backgroundSize = imageFit === 'stretch' ? '100% 100%' : imageFit;
+// If `tile` is provided, compute a grid (cols x rows) that fits the tile count and
+// set background-size so the image repeats to form the grid.
+let backgroundSize: string;
+let backgroundRepeat = 'no-repeat';
+if (typeof Astro.props.tile === 'number' && Astro.props.tile > 1) {
+  const tile = Astro.props.tile;
+  const cols = Math.ceil(Math.sqrt(tile));
+  const rows = Math.ceil(tile / cols);
+  backgroundSize = `${100 / cols}% ${100 / rows}%`;
+  backgroundRepeat = 'repeat';
+} else {
+  backgroundSize = imageFit === 'stretch' ? '100% 100%' : imageFit;
+}
 
 ---
 
 <section 
   class="relative py-20 bg-center"
-  style={`background-size: ${backgroundSize}; background-position: ${imagePosition}; background-repeat: no-repeat; background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('${encodeURI(backgroundImage)}')`}
+  style={`background-size: ${backgroundSize}; background-position: ${imagePosition}; background-repeat: ${backgroundRepeat}; background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('${encodeURI(backgroundImage)}')`}
 >
   <div class="container">
     <div class="max-w-3xl mx-auto text-center text-white">
