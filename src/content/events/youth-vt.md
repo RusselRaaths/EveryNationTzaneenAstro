@@ -6,7 +6,6 @@ time: "Start: 17:40 - 21:00 PM Friday | Start: 07:40 - 15:00 PM Saturday"
 location: "3 Saligna Road Arbor Park"
 image: "/uploads/events/yth%20VT.webp"
 summary: "Details coming soon for our Youth VT event."
-tags: ["youth","VT"]
 registrationRequired: true
 registrationLink: "https://bit.ly/ENT-YouthVT"
 draft: false

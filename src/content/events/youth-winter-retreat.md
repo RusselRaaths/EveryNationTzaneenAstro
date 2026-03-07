@@ -6,7 +6,6 @@ time: "Start: 17:30 - 21:00 PM Friday | Start: 07:30 - 15:00 PM Saturday"
 location: "3 Saligna Road Arbor Park"
 image: "/uploads/events/vt.webp"
 summary: "A transformative weekend to discover victory in Christ"
-tags: ["VT"]
 registrationRequired: true
 registrationLink: "https://bit.ly/ENTVictoryTraining"
 draft: false

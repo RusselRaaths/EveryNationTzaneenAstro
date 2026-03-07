@@ -6,7 +6,6 @@ time: "Start: 18:00 - 21:00 PM Friday | Start: 07:40 - 13:00 PM Saturday"
 location: "3 Saligna Road Arbor Park"
 image: "/uploads/events/MDT.webp"
 summary: "A transformative weekend to learn how to make disciples"
-tags: ["MDT"]
 registrationRequired: true
 registrationLink: "https://bit.ly/MakingDisciplesTraining"
 draft: false
