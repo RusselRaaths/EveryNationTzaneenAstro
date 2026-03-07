@@ -24,7 +24,6 @@ const eventsCollection = defineCollection({
     location: z.string(),
     image: z.string().startsWith('/uploads/events/'),
     summary: z.string(),
-    tags: z.array(z.string()).optional(),
     registrationLink: z.string().url().optional(),
     registrationRequired: z.boolean().default(false),
     draft: z.boolean().default(false),
@@ -44,7 +43,6 @@ const sermonsCollection = defineCollection({
     videoUrl: z.string().url().optional(),
     image: z.string().startsWith('/uploads/sermons/').optional(), // Thumbnail
     summary: z.string().optional(),
-    tags: z.array(z.string()).optional(),
     draft: z.boolean().default(false),
   }),
 });
