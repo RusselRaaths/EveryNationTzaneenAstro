@@ -2,7 +2,7 @@
 name: "Ludwig Eksteen"
 title: "Associate Pastor"
 image: "/uploads/staff/Ludwig.webp"
-email: "ludwig@example.com"
+email: "Ludwig.eksteen@entzaneen.co.za"
 phone: ""
 bio: "Associate Pastor focusing on youth and community discipleship."
 order: 10
