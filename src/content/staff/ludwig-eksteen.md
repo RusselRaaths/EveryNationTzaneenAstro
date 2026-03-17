@@ -1,6 +1,6 @@
 ---
 name: "Ludwig Eksteen"
-title: "Associate Pastor"
+title: "Youth Pastor"
 image: "/uploads/staff/Ludwig.webp"
 email: "Ludwig.eksteen@entzaneen.co.za"
 phone: ""
