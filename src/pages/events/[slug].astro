@@ -60,6 +60,14 @@ const showMap = typeof entry.data.showMap !== 'undefined'
     tags={entry.data.tags}
     type="event"
   >
+    <PageHeader
+      title={entry.data.title}
+      subtitle={entry.data.summary}
+      backgroundImages={Array.isArray(entry.data.headerImages) ? entry.data.headerImages.map(encodeURI) : undefined}
+      backgroundImage={entry.data.image}
+      imageFit="cover"
+      imagePosition="center"
+    />
     <!-- Event Details -->
     <div class="bg-gray-50 rounded-lg p-6 mb-8">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">

@@ -38,9 +38,15 @@ const logoUrl = entry.data.logo || (entry.slug === 'childrens-ministry' ? '/uplo
   <PageHeader
     title={entry.data.name}
   backgroundImage={entry.slug === 'childrens-ministry' ? '/uploads/1.webp' : '/uploads/ministry-detail-bg.webp'}
+  backgroundImages={entry.slug === 'worship-ministry' ? [
+  '/uploads/2025-10-05-worship-evening-00000001.webp',
+  '/uploads/whatsapp-2026-02-22-17-36-11.webp',
+  '/uploads/2025-01-24-fast-break-worship-00000002.webp'
+  ] : undefined}
   imageFit={entry.slug === 'childrens-ministry' ? 'contain' : 'cover'}
   imagePosition={entry.slug === 'childrens-ministry' ? 'top center' : 'center'}
   tile={entry.slug === 'childrens-ministry' ? 4 : 1}
+  repeatX={entry.slug === 'childrens-ministry'}
   />
   
   <section class="py-16">

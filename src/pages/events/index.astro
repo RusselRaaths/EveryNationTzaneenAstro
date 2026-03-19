@@ -20,9 +20,9 @@ const pastEvents = allEvents.filter(event => isPastDate(event.data.date))
 // Header slideshow images: include the existing Events.webp plus the WhatsApp images
 const headerImages = [
   '/uploads/Events.webp',
-  '/uploads/events/WhatsApp Image 2026-02-22 at 22.09.35.webp',
-  '/uploads/events/WhatsApp Image 2026-02-22 at 22.09.36.webp',
-  '/uploads/events/WhatsApp Image 2026-02-22 at 22.09.360.webp'
+  '/uploads/events/whatsapp-2026-02-22-22-09-35.webp',
+  '/uploads/events/whatsapp-2026-02-22-22-09-36.webp',
+  '/uploads/events/whatsapp-2026-02-22-22-09-360.webp'
 ].map(encodeURI);
 ---
 
@@ -30,21 +30,13 @@ const headerImages = [
   title="Events - Every Nation Tzaneen"
   description="Stay updated with upcoming events and activities at our church. Find information on special services, community gatherings, and more."
 >
-  <section class="py-6 bg-gray-50">
-    <div class="container">
-      <div class="text-center mb-6">
-        <h1 class="text-4xl md:text-5xl font-bold mb-2">Events</h1>
-        <p class="text-lg text-gray-700">Join us for these upcoming activities</p>
-      </div>
-
-      <!-- Static image row: stacks on small screens, 4 across on md+ -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-2">
-        {headerImages.map((img) => (
-          <div class="w-full h-44 md:h-56 bg-center bg-cover rounded-lg overflow-hidden shadow-sm" style={`background-image: url('${img}')`} />
-        ))}
-      </div>
-    </div>
-  </section>
+  <PageHeader
+    title="Events"
+    subtitle="Join us for these upcoming activities"
+    backgroundImages={headerImages}
+    imageFit="cover"
+    imagePosition="center"
+  />
   
   <!-- Upcoming Events -->
   <section class="py-16">
