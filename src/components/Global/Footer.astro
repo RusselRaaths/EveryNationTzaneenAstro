@@ -1,5 +1,7 @@
 ---
 import { getCollection } from "astro:content";
+import fs from 'fs';
+import path from 'path';
 
 // Get the office hours from the siteInfo collection
 let officeHours;
@@ -75,104 +77,120 @@ if (officeHours) {
   const { Content } = await officeHours.render();
   OfficeHoursContent = Content;
 }
+
+// Prefer an uploaded site logo at /uploads/site-logo.webp or /uploads/site-logo.png; fall back to inline SVG
+// Look for several common logo filenames and use the first one found
+const logoCandidates = [
+  'site-logo.webp',
+  'site-logo.png',
+  'Tzaneen_Logo_Blue.png',
+  'Tzaneen_Tagline_Black.png',
+  'church-default.webp'
+];
+let siteLogoExists = false;
+let siteLogoWebPath = '';
+try {
+  for (const name of logoCandidates) {
+    const abs = path.join(process.cwd(), 'public', 'uploads', name);
+    if (fs.existsSync(abs)) {
+      siteLogoExists = true;
+      siteLogoWebPath = '/uploads/' + name;
+      break;
+    }
+  }
+} catch (e) {
+  siteLogoExists = false;
+}
 ---
 
-<footer class="bg-gray-900 text-white pt-16 pb-8">
+<footer class="bg-gradient-to-b from-gray-900 via-gray-900/95 to-gray-800 text-white pt-12 pb-8">
   <div class="container">
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
-      <!-- Church Info -->
-      <div>
-        <div class="mb-4">
-          <a href="/" class="text-2xl font-bold text-white font-serif inline-flex items-center">
-            <span class="sr-only">Every Nation Tzaneen</span>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" class="h-12 w-auto text-white mr-2">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-start mb-8">
+      <!-- Left: Logo & contact -->
+      <div class="space-y-4">
+        <a href="/" class="inline-flex items-center">
+          <span class="sr-only">Every Nation Tzaneen</span>
+          {siteLogoExists ? (
+            <img src={siteLogoWebPath} alt="Every Nation Tzaneen" class="h-14 w-auto mr-3 object-contain" />
+          ) : (
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" class="h-14 w-auto text-white mr-3">
               <path fill="currentColor" d="M344 24c0-13.3-10.7-24-24-24s-24 10.7-24 24l0 24-32 0c-13.3 0-24 10.7-24 24s10.7 24 24 24l32 0 0 46.4L183.3 210c-14.5 8.7-23.3 24.3-23.3 41.2L160 512l96 0 0-96c0-35.3 28.7-64 64-64s64 28.7 64 64l0 96 96 0 0-260.8c0-16.9-8.8-32.5-23.3-41.2L344 142.4 344 96l32 0c13.3 0 24-10.7 24-24s-10.7-24-24-24l-32 0 0-24zM24.9 330.3C9.5 338.8 0 354.9 0 372.4L0 464c0 26.5 21.5 48 48 48l80 0 0-238.4L24.9 330.3zM592 512c26.5 0 48-21.5 48-48l0-91.6c0-17.5-9.5-33.6-24.9-42.1L512 273.6 512 512l80 0z"/>
             </svg>
-            <span>Every Nation Tzaneen</span>
-          </a>
-        </div>
-        
-        <address class="not-italic mb-4 text-gray-300">
+          )}
+          <span class="text-xl font-bold font-serif">Every Nation Tzaneen</span>
+        </a>
+
+        <address class="not-italic text-gray-300 text-sm">
           <p>Highschool Ben Vorster Hall</p>
-          <p>1 Boundary Street</p>
-          <p>1 Premierpark, Tzaneen</p>
+          <p>1 Boundary Street, Premierpark, Tzaneen</p>
           <p class="mt-2">
-            <a href="tel:(+27) 72 762 7339" class="hover:text-primary-300">
-              
-            </a>
+            <a href="tel:(+27) 72 762 7339" class="hover:text-primary-300">(+27) 72 762 7339</a>
           </p>
           <p>
-            <a href="mailto:info@entzn.org" class="hover:text-primary-300">
-              info@entzn.org
-            </a>
+            <a href="mailto:info@entzn.org" class="hover:text-primary-300">info@entzn.org</a>
           </p>
         </address>
-        
-        <!-- Office Hours -->
-        <div class="mt-4 text-gray-300">
-          <h4 class="text-sm font-bold mb-2 text-white">Office Hours</h4>
-          {
-            OfficeHoursContent ? (
-              <div class="text-sm prose prose-sm prose-invert max-w-none [&_h3]:text-white [&_h3]:text-sm [&_h3]:font-bold [&_h3]:mb-2 [&_ul]:list-none [&_ul]:p-0 [&_li]:mb-1 [&_strong]:text-white">
-                <OfficeHoursContent />
-              </div>
-            ) : (
-              <div class="text-sm">
-                <p><strong class="text-white">Mon-Fri:</strong> 9:00 AM - 5:00 PM</p>
-                <p><strong class="text-white">Saturday:</strong> 9:00 AM - 1:00 PM</p>
-                <p><strong class="text-white">Sunday:</strong> Closed (except services)</p>
-              </div>
-            )
-          }
-        </div>
-        
-        <!-- Social Links -->
-        <div class="flex space-x-4 mt-6">
-          {
-            socialLinks.map((link) => (
-              <a
-                href={link.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                class="text-gray-400 hover:text-white transition-colors"
-                aria-label={link.name}
-              >
-                <Fragment set:html={link.icon} />
-              </a>
-            ))
-          }
+
+        <div class="flex space-x-3 mt-3">
+          {socialLinks.map((link) => (
+            <a href={link.href} target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white transition-colors" aria-label={link.name}>
+              <Fragment set:html={link.icon} />
+            </a>
+          ))}
         </div>
       </div>
-      
-      <!-- Navigation Links -->
-      {
-        footerNavs.map((group) => (
+
+      <!-- Middle: Quick links -->
+      <div class="grid grid-cols-2 gap-6">
+        {footerNavs.map((group) => (
           <div>
-            <h4 class="text-lg font-bold mb-4 text-white">{group.title}</h4>
-            <ul class="space-y-2">
+            <h4 class="text-lg font-bold mb-3 text-white">{group.title}</h4>
+            <ul class="space-y-2 text-gray-300 text-sm">
               {group.items.map((item) => (
                 <li>
-                  <a 
-                    href={item.href} 
-                    class="text-gray-300 hover:text-primary-300 transition-colors"
-                  >
-                    {item.text}
-                  </a>
+                  <a href={item.href} class="hover:text-primary-300 transition-colors">{item.text}</a>
                 </li>
               ))}
             </ul>
           </div>
-        ))
-      }
+        ))}
+      </div>
+
+      <!-- Right: Newsletter / office hours -->
+      <div class="space-y-4">
+        <h4 class="text-lg font-bold mb-2 text-white">Stay in the Loop</h4>
+        <p class="text-sm text-gray-300">Sign up for news and event updates. No spam — unsubscribe anytime.</p>
+
+        <form onsubmit="(function(){ var email = document.getElementById('subs-email').value; if (!email) { alert('Please enter your email'); return false; } window.location.href = 'mailto:info@entzn.org?subject=Subscribe&body=' + encodeURIComponent('Please subscribe me to the newsletter. Email: ' + email); return false; })()" class="flex gap-2">
+          <input id="subs-email" type="email" placeholder="you@domain.com" aria-label="Email" class="w-full rounded px-3 py-2 text-gray-900" />
+          <button type="submit" class="bg-primary-600 hover:bg-primary-500 text-white rounded px-4 py-2">Subscribe</button>
+        </form>
+
+        <div class="mt-2 text-sm text-gray-300">
+          <h5 class="font-semibold text-white">Office Hours</h5>
+          {
+            OfficeHoursContent ? (
+              <div class="prose prose-sm prose-invert max-w-none">
+                <OfficeHoursContent />
+              </div>
+            ) : (
+              <div>
+                <p><strong>Mon-Fri:</strong> 9:00 AM - 5:00 PM</p>
+                <p><strong>Sat:</strong> 9:00 AM - 1:00 PM</p>
+              </div>
+            )
+          }
+        </div>
+      </div>
     </div>
-    
-    <!-- Copyright -->
-    <div class="pt-8 mt-8 border-t border-gray-800 text-center text-gray-400 text-sm">
-      <p>&copy; {currentYear} Every Nation Tzaneen. All rights reserved.</p>
-      <p class="mt-2">
-        <a href="/privacy-policy" class="hover:text-primary-300 mr-4">Privacy Policy</a>
+
+    <div class="pt-6 mt-6 border-t border-gray-800 flex flex-col md:flex-row items-center justify-between gap-4 text-gray-400 text-sm">
+      <div>&copy; {currentYear} Every Nation Tzaneen. All rights reserved.</div>
+      <div class="flex items-center gap-4">
+        <a href="/privacy-policy" class="hover:text-primary-300">Privacy Policy</a>
         <a href="/terms-of-service" class="hover:text-primary-300">Terms of Service</a>
-      </p>
+        <a href="#top" class="hover:text-primary-300">Back to top</a>
+      </div>
     </div>
   </div>
 </footer>
