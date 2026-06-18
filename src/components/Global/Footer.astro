@@ -1,44 +1,30 @@
----
-import { getCollection } from "astro:content";
-import fs from 'fs';
-import path from 'path';
-
-// Get the office hours from the siteInfo collection
-let officeHours;
-try {
-  const siteInfoEntries = await getCollection("siteInfo");
-  officeHours = siteInfoEntries.find(entry => entry.id === "office-hours");
-} catch (error) {
-  // Collection might not exist yet when first setting up the project
-  console.log("Office hours not found or collections not yet available");
-}
+const base = import.meta.env.BASE_URL;
 
 // Footer navigation groups
 const footerNavs = [
   {
     title: "About",
     items: [
-      { text: "About Us", href: "/about-us" },
-      { text: "I'm New", href: "/im-new" },
-      { text: "Staff", href: "/staff" },
-      { text: "Contact", href: "/contact" },
+      { text: "About Us", href: `${base}about-us` },
+      { text: "I'm New", href: `${base}im-new` },
+      { text: "Staff", href: `${base}staff` },
+      { text: "Contact", href: `${base}contact` },
     ],
   },
   {
     title: "Resources",
     items: [
-      { text: "Sermons", href: "/sermons" },
-      { text: "Events", href: "/events" },
-      { text: "Ministries", href: "/ministries" },
+      { text: "Sermons", href: `${base}sermons` },
+      { text: "Events", href: `${base}events` },
+      { text: "Ministries", href: `${base}ministries` },
     ],
   },
   {
     title: "Connect",
     items: [
-  // Giving removed per site update
-      { text: "Prayer Request", href: "/contact#prayer" },
-      { text: "Newsletter", href: "/contact#newsletter" },
-      { text: "Volunteer", href: "/im-new#volunteer" },
+      { text: "Prayer Request", href: `${base}contact#prayer` },
+      { text: "Newsletter", href: `${base}contact#newsletter` },
+      { text: "Volunteer", href: `${base}im-new#volunteer` },
     ],
   },
 ];
