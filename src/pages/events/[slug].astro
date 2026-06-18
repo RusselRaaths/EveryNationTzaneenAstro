@@ -6,7 +6,7 @@ import PageHeader from "../../components/Sections/PageHeader.astro";
 import { getCollection } from "astro:content";
 import { formatDate } from "../../utils/dateUtils";
 
-const base = import.meta.env.BASE_URL;
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 
 // Generate static paths for all events
 export async function getStaticPaths() {
@@ -71,7 +71,6 @@ const showMap =
       imagePosition="center"
     />
 
-    <!-- Event Details -->
     <div class="bg-gray-50 rounded-lg p-6 mb-8">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
@@ -130,7 +129,7 @@ const showMap =
                 Register Now
               </Button>
             ) : (
-              <Button href={`${base}contact?subject=Event+Registration`} variant="outline">
+              <Button href={`${base}/contact?subject=Event+Registration`} variant="outline">
                 Contact Us to Register
               </Button>
             )}
@@ -139,12 +138,10 @@ const showMap =
       }
     </div>
     
-    <!-- Event Content -->
     <article class="prose prose-lg max-w-none prose-headings:text-gray-900 prose-h1:text-3xl prose-h2:text-2xl prose-h3:text-xl prose-h4:text-lg prose-p:text-gray-700 prose-li:text-gray-700 prose-strong:text-gray-900 prose-a:text-primary-600 hover:prose-a:text-primary-700">
       <Content />
     </article>
     
-    <!-- Action Buttons -->
     <div class="mt-12 flex flex-wrap gap-4">
       {
         isFutureEvent && entry.data.registrationLink && (
@@ -161,11 +158,11 @@ const showMap =
         )
       }
       
-      <Button href={`${base}events`} variant="outline">
+      <Button href={`${base}/events`} variant="outline">
         Back to All Events
       </Button>
       
-      <Button href={`${base}contact?subject=Event+Inquiry`} variant="outline">
+      <Button href={`${base}/contact?subject=Event+Inquiry`} variant="outline">
         Questions? Contact Us
       </Button>
     </div>

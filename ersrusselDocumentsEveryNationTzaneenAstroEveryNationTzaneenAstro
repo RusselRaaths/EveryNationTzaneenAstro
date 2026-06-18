@@ -1,0 +1,63 @@
+[35msrc/components/Global/Footer.astro[m[36m:[m      { text: "About Us", href: [1;31m`${base}[mabout-us` },
+[35msrc/components/Global/Footer.astro[m[36m:[m      { text: "I'm New", href: [1;31m`${base}[mim-new` },
+[35msrc/components/Global/Footer.astro[m[36m:[m      { text: "Staff", href: [1;31m`${base}[mstaff` },
+[35msrc/components/Global/Footer.astro[m[36m:[m      { text: "Contact", href: [1;31m`${base}[mcontact` },
+[35msrc/components/Global/Footer.astro[m[36m:[m      { text: "Sermons", href: [1;31m`${base}[msermons` },
+[35msrc/components/Global/Footer.astro[m[36m:[m      { text: "Events", href: [1;31m`${base}[mevents` },
+[35msrc/components/Global/Footer.astro[m[36m:[m      { text: "Ministries", href: [1;31m`${base}[mministries` },
+[35msrc/components/Global/Footer.astro[m[36m:[m      { text: "Prayer Request", href: [1;31m`${base}[mcontact#prayer` },
+[35msrc/components/Global/Footer.astro[m[36m:[m      { text: "Newsletter", href: [1;31m`${base}[mcontact#newsletter` },
+[35msrc/components/Global/Footer.astro[m[36m:[m      { text: "Volunteer", href: [1;31m`${base}[mim-new#volunteer` },
+[35msrc/components/Global/Footer.astro[m[36m:[m      siteLogoWebPath = [1;31m`${base}[muploads/${name}`;
+[35msrc/components/Global/Footer.astro[m[36m:[m        <a href={[1;31m`${base}[mprivacy-policy`} class="hover:text-primary-300">Privacy Policy</a>
+[35msrc/components/Global/Footer.astro[m[36m:[m        <a href={[1;31m`${base}[mterms-of-service`} class="hover:text-primary-300">Terms of Service</a>
+[35msrc/components/Global/Footer.astro[m[36m:[m        <a href={[1;31m`${base}[m#top`} class="hover:text-primary-300">Back to top</a>
+[35msrc/components/Global/Header.astro[m[36m:[mconst logoSrc = [1;31m`${base}[muploads/Tzaneen_Logo_Blue.png`;
+[35msrc/components/Global/Navigation.astro[m[36m:[m  { text: "About Us", href: [1;31m`${base}[mabout-us` },
+[35msrc/components/Global/Navigation.astro[m[36m:[m  { text: "Staff", href: [1;31m`${base}[mstaff` },
+[35msrc/components/Global/Navigation.astro[m[36m:[m  { text: "Ministries", href: [1;31m`${base}[mministries` },
+[35msrc/components/Global/Navigation.astro[m[36m:[m  { text: "Sermons", href: [1;31m`${base}[msermons` },
+[35msrc/components/Global/Navigation.astro[m[36m:[m  { text: "Events", href: [1;31m`${base}[mevents` },
+[35msrc/components/Global/Navigation.astro[m[36m:[m  { text: "I'm New", href: [1;31m`${base}[mim-new` },
+[35msrc/components/Global/Navigation.astro[m[36m:[m  { text: "Contact", href: [1;31m`${base}[mcontact` },
+[35msrc/components/Sections/EventList.astro[m[36m:[m          href={[1;31m`${base}[mevents/${event.slug}`}
+[35msrc/components/Sections/EventList.astro[m[36m:[m        <Button href={[1;31m`${base}[mevents`} variant="outline">
+[35msrc/layouts/BaseLayout.astro[m[36m:[m    url: [1;31m`${base}[muploads/church-default.webp`,
+[35msrc/layouts/BaseLayout.astro[m[36m:[m    <link rel="icon" type="image/svg+xml" href={[1;31m`${base}[mfavicon.svg`} />
+[35msrc/layouts/BaseLayout.astro[m[36m:[m    <link rel="sitemap" href={[1;31m`${base}[msitemap-index.xml`} />
+[35msrc/layouts/BaseLayout.astro[m[36m:[m    <link rel="apple-touch-icon" sizes="180x180" href={[1;31m`${base}[mapple-touch-icon.png`} />
+[35msrc/layouts/BaseLayout.astro[m[36m:[m    <link rel="icon" type="image/png" sizes="32x32" href={[1;31m`${base}[mfavicon-32x32.png`} />
+[35msrc/layouts/BaseLayout.astro[m[36m:[m    <link rel="icon" type="image/png" sizes="16x16" href={[1;31m`${base}[mfavicon-16x16.png`} />
+[35msrc/layouts/BaseLayout.astro[m[36m:[m    <link rel="manifest" href={[1;31m`${base}[msite.webmanifest`} />
+[35msrc/pages/about-us.astro[m[36m:[mconst coverImage = [1;31m`${base}[muploads/every_nation_churches_and_ministries_cover.webp`;
+[35msrc/pages/about-us.astro[m[36m:[mconst lordshipImage = [1;31m`${base}[muploads/Lordship.png`;
+[35msrc/pages/about-us.astro[m[36m:[mconst evangelismImage = [1;31m`${base}[muploads/evangelism.png`;
+[35msrc/pages/about-us.astro[m[36m:[mconst discipleshipImage = [1;31m`${base}[muploads/Discipleship.png`;
+[35msrc/pages/about-us.astro[m[36m:[mconst leadershipImage = [1;31m`${base}[muploads/Leadership.png`;
+[35msrc/pages/about-us.astro[m[36m:[mconst familyImage = [1;31m`${base}[muploads/Family.png`;
+[35msrc/pages/about-us.astro[m[36m:[m            <a href={[1;31m`${base}[mstaff`} class="text-primary-600 hover:underline">Meet All Our Staff</a>
+[35msrc/pages/events/[slug].astro[m[36m:[m              <Button href={[1;31m`${base}[mcontact?subject=Event+Registration`} variant="outline">
+[35msrc/pages/events/[slug].astro[m[36m:[m      <Button href={[1;31m`${base}[mevents`} variant="outline">
+[35msrc/pages/events/[slug].astro[m[36m:[m      <Button href={[1;31m`${base}[mcontact?subject=Event+Inquiry`} variant="outline">
+[35msrc/pages/im-new.astro[m[36m:[mconst wearImage = [1;31m`${base}[muploads/WhatsApp%20Image%202026-02-22%20at%2017.36.12.webp`;
+[35msrc/pages/im-new.astro[m[36m:[mconst familiesImage = [1;31m`${base}[muploads/Families.webp`;
+[35msrc/pages/im-new.astro[m[36m:[mconst readyBg = [1;31m`${base}[muploads/Ready.webp`;
+[35msrc/pages/im-new.astro[m[36m:[m          <Button href={[1;31m`${base}[mministries/childrens-ministry`}>
+[35msrc/pages/im-new.astro[m[36m:[m          <Button href={[1;31m`${base}[mcontact`} variant="primary" size="lg">
+[35msrc/pages/index.astro[m[36m:[mconst churchImage = [1;31m`${base}[muploads/church-default.webp`;
+[35msrc/pages/index.astro[m[36m:[mconst thankYouBg = [1;31m`${base}[muploads/thank-you-bg.webp`;
+[35msrc/pages/index.astro[m[36m:[m    ctaLink={[1;31m`${base}[mim-new`}
+[35msrc/pages/index.astro[m[36m:[m    secondaryCtaLink={[1;31m`${base}[msermons`}
+[35msrc/pages/index.astro[m[36m:[m        <Button href={[1;31m`${base}[mim-new`} variant="outline">
+[35msrc/pages/index.astro[m[36m:[m          <Button href={[1;31m`${base}[mabout-us`}>
+[35msrc/pages/index.astro[m[36m:[m          <a href={[1;31m`${base}[mministries/childrens-ministry`} class="text-primary-600 font-medium hover:text-primary-700">
+[35msrc/pages/index.astro[m[36m:[m          <a href={[1;31m`${base}[mministries/worship-ministry`} class="text-primary-600 font-medium hover:text-primary-700">
+[35msrc/pages/index.astro[m[36m:[m          <a href={[1;31m`${base}[mministries/community-outreach`} class="text-primary-600 font-medium hover:text-primary-700">
+[35msrc/pages/index.astro[m[36m:[m        <a href={[1;31m`${base}[mministries/community-outreach`} class="text-primary-600 font-medium hover:text-primary-700">
+[35msrc/pages/index.astro[m[36m:[m        <a href={[1;31m`${base}[mministries/community-outreach`} class="text-primary-600 font-medium hover:text-primary-700">
+[35msrc/pages/index.astro[m[36m:[m        <Button href={[1;31m`${base}[mministries`} variant="outline">
+[35msrc/pages/index.astro[m[36m:[m          <Button href={[1;31m`${base}[mim-new`} variant="primary" size="lg">
+[35msrc/pages/index.astro[m[36m:[m          <Button href={[1;31m`${base}[mcontact`} variant="outline" size="lg" class="bg-white/10 text-white border-white hover:bg-white hover:text-gray-900 backdrop-blur-sm">
+[35msrc/pages/staff.astro[m[36m:[mconst staffBanner = [1;31m`${base}[muploads/church+staff+banner.webp`;
+[35msrc/pages/staff.astro[m[36m:[m            href={[1;31m`${base}[mcontact`}
+[35msrc/pages/staff.astro[m[36m:[m            href={[1;31m`${base}[mabout-us`}

@@ -3,7 +3,7 @@ import { getCollection } from "astro:content";
 import fs from "fs";
 import path from "path";
 
-const base = import.meta.env.BASE_URL;
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 
 // Get the office hours from the siteInfo collection
 let officeHours;
@@ -19,26 +19,26 @@ const footerNavs = [
   {
     title: "About",
     items: [
-      { text: "About Us", href: `${base}about-us` },
-      { text: "I'm New", href: `${base}im-new` },
-      { text: "Staff", href: `${base}staff` },
-      { text: "Contact", href: `${base}contact` },
+      { text: "About Us", href: `${base}/about-us` },
+      { text: "I'm New", href: `${base}/im-new` },
+      { text: "Staff", href: `${base}/staff` },
+      { text: "Contact", href: `${base}/contact` },
     ],
   },
   {
     title: "Resources",
     items: [
-      { text: "Sermons", href: `${base}sermons` },
-      { text: "Events", href: `${base}events` },
-      { text: "Ministries", href: `${base}ministries` },
+      { text: "Sermons", href: `${base}/sermons` },
+      { text: "Events", href: `${base}/events` },
+      { text: "Ministries", href: `${base}/ministries` },
     ],
   },
   {
     title: "Connect",
     items: [
-      { text: "Prayer Request", href: `${base}contact#prayer` },
-      { text: "Newsletter", href: `${base}contact#newsletter` },
-      { text: "Volunteer", href: `${base}im-new#volunteer` },
+      { text: "Prayer Request", href: `${base}/contact#prayer` },
+      { text: "Newsletter", href: `${base}/contact#newsletter` },
+      { text: "Volunteer", href: `${base}/im-new#volunteer` },
     ],
   },
 ];
@@ -95,7 +95,7 @@ try {
     const abs = path.join(process.cwd(), "public", "uploads", name);
     if (fs.existsSync(abs)) {
       siteLogoExists = true;
-      siteLogoWebPath = `${base}uploads/${name}`;
+      siteLogoWebPath = `${base}/uploads/${name}`;
       break;
     }
   }
@@ -107,9 +107,8 @@ try {
 <footer class="bg-gradient-to-b from-gray-900 via-gray-900/95 to-gray-800 text-white pt-12 pb-8">
   <div class="container">
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-start mb-8">
-      <!-- Left: Logo & contact -->
       <div class="space-y-4">
-        <a href={base} class="inline-flex items-center">
+        <a href={`${base}/`} class="inline-flex items-center">
           <span class="sr-only">Every Nation Tzaneen</span>
           {siteLogoExists ? (
             <img src={siteLogoWebPath} alt="Every Nation Tzaneen" class="h-14 w-auto mr-3 object-contain" />
@@ -140,7 +139,6 @@ try {
         </div>
       </div>
 
-      <!-- Middle: Quick links -->
       <div class="grid grid-cols-2 gap-6">
         {footerNavs.map((group) => (
           <div>
@@ -156,7 +154,6 @@ try {
         ))}
       </div>
 
-      <!-- Right: Newsletter / office hours -->
       <div class="space-y-4">
         <h4 class="text-lg font-bold mb-2 text-white">Stay in the Loop</h4>
         <p class="text-sm text-gray-300">Sign up for news and event updates. No spam — unsubscribe anytime.</p>
@@ -190,9 +187,9 @@ try {
     <div class="pt-6 mt-6 border-t border-gray-800 flex flex-col md:flex-row items-center justify-between gap-4 text-gray-400 text-sm">
       <div>&copy; {currentYear} Every Nation Tzaneen. All rights reserved.</div>
       <div class="flex items-center gap-4">
-        <a href={`${base}privacy-policy`} class="hover:text-primary-300">Privacy Policy</a>
-        <a href={`${base}terms-of-service`} class="hover:text-primary-300">Terms of Service</a>
-        <a href={`${base}#top`} class="hover:text-primary-300">Back to top</a>
+        <a href={`${base}/privacy-policy`} class="hover:text-primary-300">Privacy Policy</a>
+        <a href={`${base}/terms-of-service`} class="hover:text-primary-300">Terms of Service</a>
+        <a href={`${base}/#top`} class="hover:text-primary-300">Back to top</a>
       </div>
     </div>
   </div>
