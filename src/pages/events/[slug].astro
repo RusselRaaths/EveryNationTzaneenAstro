@@ -2,8 +2,11 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import PostLayout from "../../layouts/PostLayout.astro";
 import Button from "../../components/UI/Button.astro";
+import PageHeader from "../../components/Sections/PageHeader.astro";
 import { getCollection } from "astro:content";
 import { formatDate } from "../../utils/dateUtils";
+
+const base = import.meta.env.BASE_URL;
 
 // Generate static paths for all events
 export async function getStaticPaths() {
@@ -12,12 +15,11 @@ export async function getStaticPaths() {
       return import.meta.env.PROD ? !data.draft : true;
     });
 
-    return eventEntries.map(entry => ({
+    return eventEntries.map((entry) => ({
       params: { slug: entry.slug },
       props: { entry },
     }));
   } catch (error) {
-    // If the collection doesn't exist yet, return an empty array
     return [];
   }
 }
@@ -33,17 +35,17 @@ const formattedEndDate = entry.data.endDate ? formatDate(entry.data.endDate) : n
 // Determine if event is in the future
 const isFutureEvent = new Date(entry.data.date) > new Date();
 
-// Determine whether to show the embedded map. Prefer explicit frontmatter `showMap`,
-// otherwise show when the event matches known slugs/titles or the MDT location.
-const showMap = typeof entry.data.showMap !== 'undefined'
-  ? entry.data.showMap
-  : (
-    entry.slug === 'youth-winter-retreat' ||
-    entry.data.title === 'Victory Training' ||
-    entry.slug === 'mdt' ||
-    entry.data.title === 'MDT' ||
-    entry.data.location === '3 Saligna Road Arbor Park'
-  );
+// Determine whether to show the embedded map
+const showMap =
+  typeof entry.data.showMap !== "undefined"
+    ? entry.data.showMap
+    : (
+        entry.slug === "youth-winter-retreat" ||
+        entry.data.title === "Victory Training" ||
+        entry.slug === "mdt" ||
+        entry.data.title === "MDT" ||
+        entry.data.location === "3 Saligna Road Arbor Park"
+      );
 ---
 
 <BaseLayout
@@ -68,6 +70,7 @@ const showMap = typeof entry.data.showMap !== 'undefined'
       imageFit="cover"
       imagePosition="center"
     />
+
     <!-- Event Details -->
     <div class="bg-gray-50 rounded-lg p-6 mb-8">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -99,7 +102,7 @@ const showMap = typeof entry.data.showMap !== 'undefined'
             </svg>
             <p>{entry.data.location}</p>
           </div>
-          {/* Embed Google Maps when showMap is true */}
+
           {
             showMap && (
               <div class="mt-4">
@@ -113,7 +116,6 @@ const showMap = typeof entry.data.showMap !== 'undefined'
               </div>
             )
           }
-          </div>
         </div>
       </div>
       
@@ -128,7 +130,7 @@ const showMap = typeof entry.data.showMap !== 'undefined'
                 Register Now
               </Button>
             ) : (
-              <Button href="/contact?subject=Event+Registration" variant="outline">
+              <Button href={`${base}contact?subject=Event+Registration`} variant="outline">
                 Contact Us to Register
               </Button>
             )}
@@ -159,11 +161,11 @@ const showMap = typeof entry.data.showMap !== 'undefined'
         )
       }
       
-      <Button href="/events" variant="outline">
+      <Button href={`${base}events`} variant="outline">
         Back to All Events
       </Button>
       
-      <Button href="/contact?subject=Event+Inquiry" variant="outline">
+      <Button href={`${base}contact?subject=Event+Inquiry`} variant="outline">
         Questions? Contact Us
       </Button>
     </div>
