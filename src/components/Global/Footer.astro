@@ -80,7 +80,7 @@ try {
     const abs = path.join(process.cwd(), 'public', 'uploads', name);
     if (fs.existsSync(abs)) {
       siteLogoExists = true;
-      siteLogoWebPath = '/uploads/' + name;
+      siteLogoWebPath = `${base}uploads/${name}`;
       break;
     }
   }
