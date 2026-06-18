@@ -2,6 +2,14 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import PageHeader from "../components/Sections/PageHeader.astro";
 import StaffList from "../components/Sections/StaffList.astro";
+
+const base = import.meta.env.BASE_URL;
+const coverImage = `${base}uploads/every_nation_churches_and_ministries_cover.webp`;
+const lordshipImage = `${base}uploads/Lordship.png`;
+const evangelismImage = `${base}uploads/evangelism.png`;
+const discipleshipImage = `${base}uploads/Discipleship.png`;
+const leadershipImage = `${base}uploads/Leadership.png`;
+const familyImage = `${base}uploads/Family.png`;
 ---
 
 <BaseLayout
@@ -11,7 +19,7 @@ import StaffList from "../components/Sections/StaffList.astro";
   <PageHeader 
     title="About Us" 
     subtitle="We exist to honour God by establishing Christ-centred, Spirit-empowered, socially responsible churches and campus ministries in every nation."
-  backgroundImage="/uploads/every_nation_churches_and_ministries_cover.webp"
+    backgroundImage={coverImage}
   />
   
   <!-- Three pillars (Christ-centred / Spirit-empowered / Socially responsible) -->
@@ -45,7 +53,7 @@ import StaffList from "../components/Sections/StaffList.astro";
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
         <div class="bg-white p-8 rounded-lg shadow-sm text-center">
           <div class="flex items-center justify-center mb-4">
-            <img src="/uploads/Lordship.png" alt="Lordship" class="w-14 h-14 object-contain" />
+            <img src={lordshipImage} alt="Lordship" class="w-14 h-14 object-contain" />
           </div>
           <h3 class="text-xl font-bold mb-2">LORDSHIP</h3>
           <p class="text-gray-700">Jesus is "King of kings and Lord of lords." Whole‑hearted submission to God's will and His Word is the foundation of all spiritual growth. (Colossians 2:6)</p>
@@ -53,7 +61,7 @@ import StaffList from "../components/Sections/StaffList.astro";
 
         <div class="bg-white p-8 rounded-lg shadow-sm text-center">
           <div class="flex items-center justify-center mb-4">
-            <img src="/uploads/evangelism.png" alt="Evangelism" class="w-14 h-14 object-contain" />
+            <img src={evangelismImage} alt="Evangelism" class="w-14 h-14 object-contain" />
           </div>
           <h3 class="text-xl font-bold mb-2">EVANGELISM</h3>
           <p class="text-gray-700">God's heart is to reach the lost. We're passionate about preaching the gospel and doing ministry in a way that engages people outside of the Christian faith. (John 3:16, Luke 19:10)</p>
@@ -61,7 +69,7 @@ import StaffList from "../components/Sections/StaffList.astro";
 
         <div class="bg-white p-8 rounded-lg shadow-sm text-center">
           <div class="flex items-center justify-center mb-4">
-            <img src="/uploads/Discipleship.png" alt="Discipleship" class="w-14 h-14 object-contain" />
+            <img src={discipleshipImage} alt="Discipleship" class="w-14 h-14 object-contain" />
           </div>
           <h3 class="text-xl font-bold mb-2">DISCIPLESHIP</h3>
           <p class="text-gray-700">We're called to make disciples by establishing biblical foundations and equipping believers to minister. (Matthew 28:19-20)</p>
@@ -69,7 +77,7 @@ import StaffList from "../components/Sections/StaffList.astro";
 
         <div class="bg-white p-8 rounded-lg shadow-sm text-center">
           <div class="flex items-center justify-center mb-4">
-            <img src="/uploads/Leadership.png" alt="Leadership" class="w-14 h-14 object-contain" />
+            <img src={leadershipImage} alt="Leadership" class="w-14 h-14 object-contain" />
           </div>
           <h3 class="text-xl font-bold mb-2">LEADERSHIP</h3>
           <p class="text-gray-700">We develop leaders intentionally, creating platforms to raise the next generation of ministry leaders. (2 Timothy 2:2)</p>
@@ -77,7 +85,7 @@ import StaffList from "../components/Sections/StaffList.astro";
 
         <div class="bg-white p-8 rounded-lg shadow-sm text-center">
           <div class="flex items-center justify-center mb-4">
-            <img src="/uploads/Family.png" alt="Family" class="w-14 h-14 object-contain" />
+            <img src={familyImage} alt="Family" class="w-14 h-14 object-contain" />
           </div>
           <h3 class="text-xl font-bold mb-2">FAMILY</h3>
           <p class="text-gray-700">Family is the foundation of ministry. We embrace community, reject disposable relationships and walk in love and unity. (Psalm 127:1,3)</p>
@@ -119,8 +127,6 @@ import StaffList from "../components/Sections/StaffList.astro";
   </section>
   
   <!-- Church History -->
-        
-  <!-- Church History -->
   <section class="py-16">
     <div class="container">
       <div class="text-center mb-12">
@@ -141,7 +147,6 @@ import StaffList from "../components/Sections/StaffList.astro";
               </p>
             </div>
           </div>
-          
         </div>
       </div>
     </div>
@@ -157,7 +162,7 @@ import StaffList from "../components/Sections/StaffList.astro";
           <h3 class="text-2xl font-bold mb-4">Meet Our Leadership</h3>
           <StaffList showAll={false} limit={4} compact={true} />
           <div class="mt-4">
-            <a href="/staff" class="text-primary-600 hover:underline">Meet All Our Staff</a>
+            <a href={`${base}staff`} class="text-primary-600 hover:underline">Meet All Our Staff</a>
           </div>
         </div>
 
