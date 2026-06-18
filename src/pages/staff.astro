@@ -1,48 +1,99 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro";
-import PageHeader from "../components/Sections/PageHeader.astro";
-import StaffList from "../components/Sections/StaffList.astro";
+import { getCollection } from "astro:content";
 
+const { showAll = true, limit = 6, compact = false } = Astro.props;
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
-const staffBanner = `${base}/uploads/church+staff+banner.webp`;
+
+const withBase = (url) => {
+  if (!url) return url;
+  if (url.startsWith("/uploads/")) return `${base}${url}`;
+  return url;
+};
+
+const allowedSlugs = new Set([
+  "willem-van-zyl",
+  "lorraine-van-zyl",
+  "ludwig-eksteen",
+  "angelique-eksteen",
+]);
+
+const allStaff = await getCollection("staff", ({ data }) =>
+  import.meta.env.PROD ? !data.draft : true
+);
+
+const filteredStaff = allStaff.filter((staff) => allowedSlugs.has(staff.slug));
+
+const staffMembers = filteredStaff
+  .sort((a, b) => (a.data.order ?? 999) - (b.data.order ?? 999))
+  .slice(0, showAll ? undefined : limit);
 ---
 
-<BaseLayout
-  title="Staff - Every Nation Tzaneen"
-  description="Meet our dedicated church staff and leadership team who serve our congregation with passion and commitment."
->
-  <PageHeader 
-    title="Our Staff" 
-    subtitle="Meet our dedicated leadership team"
-    backgroundImage={staffBanner}
-  />
-  
-  <StaffList />
-  
-  <section class="py-16 bg-gray-50">
-    <div class="container">
-      <div class="max-w-3xl mx-auto text-center">
-        <h2 class="text-3xl md:text-4xl font-bold mb-6">Need to Contact a Staff Member?</h2>
-        <p class="text-xl text-gray-600 mb-8">
-          Our staff is here to serve you and answer any questions you may have. Feel free to reach out to any of our team members directly or contact our main office.
-        </p>
-        
-        <div class="flex flex-wrap justify-center gap-4">
-          <a 
-            href={`${base}/contact`}
-            class="inline-flex items-center justify-center px-5 py-3 text-base font-medium text-white bg-primary-600 rounded-md shadow-sm hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
-          >
-            Contact Us
-          </a>
-          
-          <a 
-            href={`${base}/about-us`}
-            class="inline-flex items-center justify-center px-5 py-3 text-base font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
-          >
-            Learn More About Our Church
-          </a>
-        </div>
+{!compact ? (
+  <section id="staff" class="py-16 bg-white">
+    <div class="container mx-auto px-4">
+      <h2 class="text-3xl font-bold text-center mb-4">Our Leadership Team</h2>
+      <p class="text-center text-gray-600 mb-12">Meet the family</p>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-8">
+        {staffMembers.map((staff) => (
+          <div class="bg-white rounded-lg shadow overflow-hidden flex flex-col h-full">
+            <div class="relative w-full pb-[100%]">
+              <img
+                src={withBase(staff.data.image)}
+                alt={staff.data.name}
+                class="absolute inset-0 w-full h-full object-cover object-center"
+              />
+            </div>
+            <div class="p-4 flex flex-col flex-1 justify-between">
+              <div>
+                <h3 class="text-xl font-semibold mb-1">{staff.data.name}</h3>
+                <p class="text-primary-600 mb-2">{staff.data.title}</p>
+                <p class="text-gray-700 text-sm">{staff.data.bio}</p>
+              </div>
+              <div class="mt-4 space-y-1 text-sm">
+                {staff.data.email && (
+                  <a href={`mailto:${staff.data.email}`} class="text-primary-600 hover:underline block">
+                    {staff.data.email}
+                  </a>
+                )}
+                {staff.data.phone && (
+                  <a href={`tel:${staff.data.phone}`} class="text-primary-600 hover:underline block">
+                    {staff.data.phone}
+                  </a>
+                )}
+              </div>
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   </section>
-</BaseLayout>
+) : (
+  <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+    {staffMembers.map((staff) => (
+      <div class="bg-white rounded-lg shadow overflow-hidden flex flex-col h-full">
+        <div class="relative w-full pb-[100%]">
+          <img
+            src={withBase(staff.data.image)}
+            alt={staff.data.name}
+            class="absolute inset-0 w-full h-full object-cover object-center"
+          />
+        </div>
+        <div class="p-4 flex flex-col flex-1 justify-between">
+          <div>
+            <h3 class="text-lg font-semibold mb-1">{staff.data.name}</h3>
+            <p class="text-primary-600 mb-2">{staff.data.title}</p>
+            <p class="text-gray-700 text-sm">{staff.data.bio}</p>
+          </div>
+          <div class="mt-3 text-sm">
+            {staff.data.email && (
+              <a href={`mailto:${staff.data.email}`} class="text-primary-600 hover:underline block">
+                {staff.data.email}
+              </a>
+            )}
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+)}
