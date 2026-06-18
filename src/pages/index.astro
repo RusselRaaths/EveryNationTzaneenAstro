@@ -1,4 +1,4 @@
-﻿---
+---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import HeroSection from "../components/Sections/HeroSection.astro";
 import EventList from "../components/Sections/EventList.astro";
@@ -54,17 +54,10 @@ const thankYouBg = `${base}uploads/thank-you-bg.webp`;
     <div class="container">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
         <div>
-<<<<<<< HEAD
           <img 
             src={churchImage}
             alt="Our Church" 
             class="rounded-lg shadow-lg object-cover w-full h-full"
-=======
-          <img
-            src="/uploads/site-logo.png"
-            alt="Every Nation Tzaneen logo"
-            class="rounded-lg shadow-lg object-contain w-full h-full bg-white p-8"
->>>>>>> 9688831 (Fix Pages deployment and add lockfile)
           />
         </div>
         
@@ -103,58 +96,35 @@ const thankYouBg = `${base}uploads/thank-you-bg.webp`;
       
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         <div class="card text-center p-8">
-          <!-- Banner image at top for Children's Ministry -->
-          <div class="mx-auto mb-4 w-full h-44 flex items-center justify-center overflow-hidden rounded bg-white p-3">
-            <img src="/uploads/Every%20Nation%20Tzaneen%20Kids.webp" alt="Children Ministries" class="w-full h-full object-contain" />
+          <div class="w-20 h-20 mx-auto mb-4 rounded-full bg-primary-100 flex items-center justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+            </svg>
           </div>
           <h3 class="text-xl font-bold mb-3">Children's Ministry</h3>
-<<<<<<< HEAD
           <p class="text-gray-700 mb-4">
             Loraine
           </p>
           <a href={`${base}ministries/childrens-ministry`} class="text-primary-600 font-medium hover:text-primary-700">
-=======
-          <!-- removed staff name as requested -->
-          <a href="/ministries/childrens-ministry" class="text-primary-600 font-medium hover:text-primary-700">
->>>>>>> 9688831 (Fix Pages deployment and add lockfile)
             Learn More →
           </a>
         </div>
         
         <div class="card text-center p-8">
-          <!-- Banner image at top for Worship Ministry -->
-          <div class="mx-auto mb-4 w-full h-44 flex items-center justify-center overflow-hidden rounded bg-white p-3">
-            <img src="/uploads/2025-10-05-worship-evening-00000001.webp" alt="Worship Ministry" class="w-full h-full object-contain" />
+          <div class="w-20 h-20 mx-auto mb-4 rounded-full bg-secondary-100 flex items-center justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-secondary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
+            </svg>
           </div>
           <h3 class="text-xl font-bold mb-3">Worship Ministry</h3>
-<<<<<<< HEAD
           <p class="text-gray-700 mb-4">
             Willem
           </p>
           <a href={`${base}ministries/worship-ministry`} class="text-primary-600 font-medium hover:text-primary-700">
-=======
-          <!-- staff name removed per request -->
-          <a href="/ministries/worship-ministry" class="text-primary-600 font-medium hover:text-primary-700">
->>>>>>> 9688831 (Fix Pages deployment and add lockfile)
             Learn More →
           </a>
         </div>
         
-        <div class="card text-center p-8">
-          <div class="w-20 h-20 mx-auto mb-4 rounded-full bg-accent-100 flex items-center justify-center">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-accent-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
-            </svg>
-          </div>
-          <h3 class="text-xl font-bold mb-3">Evangelism Ministry</h3>
-          <p class="text-gray-700 mb-4">
-            Sharing the gospel and serving our neighbourhood through practical outreach.
-          </p>
-          <a href="/ministries/evangelism-ministry" class="text-primary-600 font-medium hover:text-primary-700">
-            Learn More →
-          </a>
-        </div>
-
         <div class="card text-center p-8">
           <div class="w-20 h-20 mx-auto mb-4 rounded-full bg-accent-100 flex items-center justify-center">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-accent-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -163,42 +133,19 @@ const thankYouBg = `${base}uploads/thank-you-bg.webp`;
           </div>
           <h3 class="text-xl font-bold mb-3">YTH Ministry</h3>
           <p class="text-gray-700 mb-4">
-            Equipping young people to follow Jesus through worship, community, and leadership.
+            Ludwid
           </p>
-<<<<<<< HEAD
           <a href={`${base}ministries/community-outreach`} class="text-primary-600 font-medium hover:text-primary-700">
-=======
-          <a href="/ministries/youth-ministry" class="text-primary-600 font-medium hover:text-primary-700">
->>>>>>> 9688831 (Fix Pages deployment and add lockfile)
             Learn More →
           </a>
         </div>
       </div>
 
-<<<<<<< HEAD
       <div class="card text-center p-8 mt-8">
         <div class="w-20 h-20 mx-auto mb-4 rounded-full bg-accent-100 flex items-center justify-center">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-accent-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
           </svg>
-=======
-
-      
-
-        <div class="card text-center p-8">
-          <div class="w-20 h-20 mx-auto mb-4 rounded-full bg-accent-100 flex items-center justify-center">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-accent-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
-            </svg>
-          </div>
-          <h3 class="text-xl font-bold mb-3">Prayer Ministry</h3>
-          <p class="text-gray-700 mb-4">
-            A community of intercessors praying for the church, city, and nations.
-          </p>
-          <a href="/ministries/prayer-ministry" class="text-primary-600 font-medium hover:text-primary-700">
-            Learn More →
-          </a>
->>>>>>> 9688831 (Fix Pages deployment and add lockfile)
         </div>
         <h3 class="text-xl font-bold mb-3">Prayer Ministry</h3>
         <p class="text-gray-700 mb-4">
@@ -209,27 +156,11 @@ const thankYouBg = `${base}uploads/thank-you-bg.webp`;
         </a>
       </div>
 
-<<<<<<< HEAD
       <div class="card text-center p-8 mt-8">
         <div class="w-20 h-20 mx-auto mb-4 rounded-full bg-accent-100 flex items-center justify-center">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-accent-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
           </svg>
-=======
-       <div class="card text-center p-8">
-          <div class="w-20 h-20 mx-auto mb-4 rounded-full bg-accent-100 flex items-center justify-center">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-accent-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
-            </svg>
-          </div>
-          <h3 class="text-xl font-bold mb-3">Prophetic Ministry</h3>
-          <p class="text-gray-700 mb-4">
-            Encouraging prophetic insight, prayer, and spiritual growth for the church.
-          </p>
-          <a href="/ministries/prophetic-ministry" class="text-primary-600 font-medium hover:text-primary-700">
-            Learn More →
-          </a>
->>>>>>> 9688831 (Fix Pages deployment and add lockfile)
         </div>
         <h3 class="text-xl font-bold mb-3">Profetic Ministry</h3>
         <p class="text-gray-700 mb-4">
