@@ -12,32 +12,34 @@ export interface Props {
   secondaryCtaLink?: string;
 }
 
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+
 const {
   title = "Welcome to Every Nation Tzaneen",
   subtitle = "A Disciple Making Family",
   backgroundImage = "",
   backgroundImages = [],
   ctaText = "Plan Your Visit",
-  ctaLink = "/im-new",
+  ctaLink = `${base}/im-new`,
   secondaryCtaText = "Watch Sermons",
-  secondaryCtaLink = "/sermons",
+  secondaryCtaLink = `${base}/sermons`,
 } = Astro.props;
 
-// default set of images from public/uploads — adjust or extend as needed
+// default set of images from public/uploads
 const defaultImages = [
-  "/uploads/home-1.webp",
-  "/uploads/home-2.webp",
-  "/uploads/home-3.webp",
-  "/uploads/home-4.webp",
-  "/uploads/home-5.webp",
-  "/uploads/home-6.webp",
-  "/uploads/home-7.webp",
-  "/uploads/home-8.webp",
-  "/uploads/home-9.webp",
-  "/uploads/home-10.webp",
-  "/uploads/home-11.webp",
+  `${base}/uploads/home-1.webp`,
+  `${base}/uploads/home-2.webp`,
+  `${base}/uploads/home-3.webp`,
+  `${base}/uploads/home-4.webp`,
+  `${base}/uploads/home-5.webp`,
+  `${base}/uploads/home-6.webp`,
+  `${base}/uploads/home-7.webp`,
+  `${base}/uploads/home-8.webp`,
+  `${base}/uploads/home-9.webp`,
+  `${base}/uploads/home-10.webp`,
+  `${base}/uploads/home-11.webp`,
 ];
-// Build the array we will cycle through. If a single backgroundImage is provided, use it.
+
 const imagesToUse = (() => {
   if (backgroundImage && backgroundImage.length > 0) return [backgroundImage];
   if (Array.isArray(backgroundImages) && backgroundImages.length > 0) return backgroundImages;
@@ -51,18 +53,22 @@ const imagesToUse = (() => {
   data-bg-images={JSON.stringify(imagesToUse)}
   style={`background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('${encodeURI(imagesToUse[0])}'); background-position: center 20%;`}
 >
-
   <div class="container">
     <div class="max-w-3xl text-white">
       <h1 class="text-4xl md:text-6xl font-bold mb-4 text-white">{title}</h1>
       <p class="text-xl md:text-2xl mb-8">{subtitle}</p>
-      
+
       <div class="flex flex-wrap gap-4">
         <Button href={ctaLink} variant="primary" size="lg">
           {ctaText}
         </Button>
-        
-        <Button href={secondaryCtaLink} variant="outline" size="lg" class="bg-white/10 text-white border-white hover:bg-white hover:text-gray-900 backdrop-blur-sm">
+
+        <Button
+          href={secondaryCtaLink}
+          variant="outline"
+          size="lg"
+          class="bg-white/10 text-white border-white hover:bg-white hover:text-gray-900 backdrop-blur-sm"
+        >
           {secondaryCtaText}
         </Button>
       </div>
@@ -71,10 +77,10 @@ const imagesToUse = (() => {
 </section>
 
 <script type="module">
-  // Simple background slideshow for the hero section. Runs client-side.
   (function () {
     const section = document.getElementById('hero-section');
     if (!section) return;
+
     let images = [];
     try {
       images = JSON.parse(section.dataset.bgImages || '[]');
@@ -83,20 +89,12 @@ const imagesToUse = (() => {
     }
     if (!images || images.length === 0) return;
 
-    // Preload images with logging so we can see load failures for debug
-    console.log('Hero images to use:', images);
-    images.forEach((src) => {
-      const img = new Image();
-      img.onload = () => console.log('Hero preload OK:', src);
-      img.onerror = (e) => console.warn('Hero preload ERROR:', src, e && e.message);
-      img.src = src;
-    });
-
     let idx = 0;
-    const interval = 5000; // ms
+    const interval = 5000;
+
     setInterval(() => {
       idx = (idx + 1) % images.length;
-  section.style.backgroundImage = `linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('${encodeURI(images[idx])}')`;
+      section.style.backgroundImage = `linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('${encodeURI(images[idx])}')`;
     }, interval);
   })();
 </script>

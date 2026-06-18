@@ -10,21 +10,12 @@ const withBase = (url) => {
   return url;
 };
 
-const allowedSlugs = new Set([
-  "willem-van-zyl",
-  "lorraine-van-zyl",
-  "ludwig-eksteen",
-  "angelique-eksteen",
-]);
-
 const allStaff = await getCollection("staff", ({ data }) =>
   import.meta.env.PROD ? !data.draft : true
 );
 
-const filteredStaff = allStaff.filter((staff) => allowedSlugs.has(staff.slug));
-
-const staffMembers = filteredStaff
-  .sort((a, b) => (a.data.order ?? 999) - (b.data.order ?? 999))
+const staffMembers = allStaff
+  .sort((a, b) => a.data.order - b.data.order)
   .slice(0, showAll ? undefined : limit);
 ---
 
@@ -34,7 +25,7 @@ const staffMembers = filteredStaff
       <h2 class="text-3xl font-bold text-center mb-4">Our Leadership Team</h2>
       <p class="text-center text-gray-600 mb-12">Meet the family</p>
 
-      <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-8">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 auto-rows-fr">
         {staffMembers.map((staff) => (
           <div class="bg-white rounded-lg shadow overflow-hidden flex flex-col h-full">
             <div class="relative w-full pb-[100%]">
@@ -69,7 +60,7 @@ const staffMembers = filteredStaff
     </div>
   </section>
 ) : (
-  <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6">
     {staffMembers.map((staff) => (
       <div class="bg-white rounded-lg shadow overflow-hidden flex flex-col h-full">
         <div class="relative w-full pb-[100%]">
