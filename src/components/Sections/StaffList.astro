@@ -1,10 +1,19 @@
 ---
 import { getCollection } from "astro:content";
+
 const { showAll = true, limit = 6, compact = false } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+
+const withBase = (url) => {
+  if (!url) return url;
+  if (url.startsWith("/uploads/")) return `${base}${url}`;
+  return url;
+};
 
 const allStaff = await getCollection("staff", ({ data }) =>
   import.meta.env.PROD ? !data.draft : true
 );
+
 const staffMembers = allStaff
   .sort((a, b) => a.data.order - b.data.order)
   .slice(0, showAll ? undefined : limit);
@@ -20,7 +29,11 @@ const staffMembers = allStaff
         {staffMembers.map((staff) => (
           <div class="bg-white rounded-lg shadow overflow-hidden flex flex-col h-full">
             <div class="relative w-full pb-[100%]">
-              <img src={staff.data.image} alt={staff.data.name} class="absolute inset-0 w-full h-full object-cover object-center" />
+              <img
+                src={withBase(staff.data.image)}
+                alt={staff.data.name}
+                class="absolute inset-0 w-full h-full object-cover object-center"
+              />
             </div>
             <div class="p-4 flex flex-col flex-1 justify-between">
               <div>
@@ -30,10 +43,14 @@ const staffMembers = allStaff
               </div>
               <div class="mt-4 space-y-1 text-sm">
                 {staff.data.email && (
-                  <a href={`mailto:${staff.data.email}`} class="text-primary-600 hover:underline block">{staff.data.email}</a>
+                  <a href={`mailto:${staff.data.email}`} class="text-primary-600 hover:underline block">
+                    {staff.data.email}
+                  </a>
                 )}
                 {staff.data.phone && (
-                  <a href={`tel:${staff.data.phone}`} class="text-primary-600 hover:underline block">{staff.data.phone}</a>
+                  <a href={`tel:${staff.data.phone}`} class="text-primary-600 hover:underline block">
+                    {staff.data.phone}
+                  </a>
                 )}
               </div>
             </div>
@@ -47,7 +64,11 @@ const staffMembers = allStaff
     {staffMembers.map((staff) => (
       <div class="bg-white rounded-lg shadow overflow-hidden flex flex-col h-full">
         <div class="relative w-full pb-[100%]">
-          <img src={staff.data.image} alt={staff.data.name} class="absolute inset-0 w-full h-full object-cover object-center" />
+          <img
+            src={withBase(staff.data.image)}
+            alt={staff.data.name}
+            class="absolute inset-0 w-full h-full object-cover object-center"
+          />
         </div>
         <div class="p-4 flex flex-col flex-1 justify-between">
           <div>
@@ -56,7 +77,11 @@ const staffMembers = allStaff
             <p class="text-gray-700 text-sm">{staff.data.bio}</p>
           </div>
           <div class="mt-3 text-sm">
-            {staff.data.email && <a href={`mailto:${staff.data.email}`} class="text-primary-600 hover:underline block">{staff.data.email}</a>}
+            {staff.data.email && (
+              <a href={`mailto:${staff.data.email}`} class="text-primary-600 hover:underline block">
+                {staff.data.email}
+              </a>
+            )}
           </div>
         </div>
       </div>
