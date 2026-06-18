@@ -1,4 +1,6 @@
+import { defineConfig } from 'astro/config';
+
 export default defineConfig({
-  site: 'https://RusselRaaths.github.io',
+  site: 'https://russelraaths.github.io',
   base: '/EveryNationTzaneenAstro',
 });
