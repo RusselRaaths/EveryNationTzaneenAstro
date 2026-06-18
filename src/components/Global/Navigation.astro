@@ -1,15 +1,17 @@
 ---
 // Define the navigation items
-const base = import.meta.env.BASE_URL;
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+const homeHref = `${base}/`;
+
 const navItems = [
-  { text: "About Us", href: `${base}about-us` },
-  { text: "Staff", href: `${base}staff` },
-  { text: "Ministries", href: `${base}ministries` },
-  { text: "Home", href: base },
-  { text: "Sermons", href: `${base}sermons` },
-  { text: "Events", href: `${base}events` },
-  { text: "I'm New", href: `${base}im-new` },
-  { text: "Contact", href: `${base}contact` },
+  { text: "About Us", href: `${base}/about-us` },
+  { text: "Staff", href: `${base}/staff` },
+  { text: "Ministries", href: `${base}/ministries` },
+  { text: "Home", href: homeHref },
+  { text: "Sermons", href: `${base}/sermons` },
+  { text: "Events", href: `${base}/events` },
+  { text: "I'm New", href: `${base}/im-new` },
+  { text: "Contact", href: `${base}/contact` },
 ];
 
 // Get the current URL path to highlight the active link
@@ -21,10 +23,10 @@ const currentPath = Astro.url.pathname;
   <ul class="flex items-center space-x-6">
     {
       navItems.map((item) => {
-        const isActive =
-          item.href === base
-            ? currentPath === base
-            : currentPath === item.href || currentPath.startsWith(item.href + "/");
+        const isHome = item.href === homeHref;
+        const isActive = isHome
+          ? currentPath === homeHref || currentPath === base
+          : currentPath === item.href || currentPath.startsWith(item.href + "/");
 
         return (
           <li>
@@ -67,10 +69,10 @@ const currentPath = Astro.url.pathname;
     <div class="grid grid-cols-2 gap-3">
       {
         navItems.map((item) => {
-          const isActive =
-            item.href === base
-              ? currentPath === base
-              : currentPath === item.href || currentPath.startsWith(item.href + "/");
+          const isHome = item.href === homeHref;
+          const isActive = isHome
+            ? currentPath === homeHref || currentPath === base
+            : currentPath === item.href || currentPath.startsWith(item.href + "/");
 
           return (
             <a
