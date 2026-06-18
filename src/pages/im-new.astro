@@ -3,10 +3,10 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import PageHeader from "../components/Sections/PageHeader.astro";
 import Button from "../components/UI/Button.astro";
 
-const base = import.meta.env.BASE_URL;
-const wearImage = `${base}uploads/WhatsApp%20Image%202026-02-22%20at%2017.36.12.webp`;
-const familiesImage = `${base}uploads/Families.webp`;
-const readyBg = `${base}uploads/Ready.webp`;
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+const wearImage = `${base}/uploads/WhatsApp%20Image%202026-02-22%20at%2017.36.12.webp`;
+const familiesImage = `${base}/uploads/Families.webp`;
+const readyBg = `${base}/uploads/Ready.webp`;
 ---
 
 <BaseLayout
@@ -19,7 +19,6 @@ const readyBg = `${base}uploads/Ready.webp`;
     backgroundImage="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=1920&h=600&fit=crop&crop=center"
   />
   
-  <!-- What to Expect -->
   <section class="py-16">
     <div class="container">
       <div class="text-center mb-12">
@@ -69,7 +68,6 @@ const readyBg = `${base}uploads/Ready.webp`;
     </div>
   </section>
   
-  <!-- What to Wear -->
   <section class="py-16 bg-gray-50">
     <div class="container">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
@@ -94,7 +92,6 @@ const readyBg = `${base}uploads/Ready.webp`;
     </div>
   </section>
   
-  <!-- Service Times -->
   <section class="py-16">
     <div class="container">
       <div class="text-center mb-12">
@@ -138,7 +135,6 @@ const readyBg = `${base}uploads/Ready.webp`;
     </div>
   </section>
   
-  <!-- For Kids -->
   <section id="kids" class="py-16 bg-gray-50">
     <div class="container">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
@@ -179,7 +175,7 @@ const readyBg = `${base}uploads/Ready.webp`;
             All our children's staff are trained to provide a safe, nurturing environment.
           </p>
           
-          <Button href={`${base}ministries/childrens-ministry`}>
+          <Button href={`${base}/ministries/childrens-ministry`}>
             Learn More About Children's Ministry
           </Button>
         </div>
@@ -195,7 +191,6 @@ const readyBg = `${base}uploads/Ready.webp`;
     </div>
   </section>
   
-  <!-- Location & Directions -->
   <section id="location" class="py-16">
     <div class="container">
       <p id="debug-imnew" class="sr-only">DEBUG-IMNEW-IFRAME-INCLUDED</p>
@@ -248,7 +243,6 @@ const readyBg = `${base}uploads/Ready.webp`;
     </div>
   </section>
   
-  <!-- FAQ Section -->
   <section id="faq" class="py-16 bg-gray-50">
     <div class="container">
       <div class="text-center mb-12">
@@ -324,7 +318,6 @@ const readyBg = `${base}uploads/Ready.webp`;
     </div>
   </section>
   
-  <!-- Plan Your Visit CTA -->
   <section
     id="volunteer"
     class="py-20 bg-cover bg-center text-white"
@@ -338,7 +331,7 @@ const readyBg = `${base}uploads/Ready.webp`;
         </p>
         
         <div class="flex flex-wrap justify-center gap-4">
-          <Button href={`${base}contact`} variant="primary" size="lg">
+          <Button href={`${base}/contact`} variant="primary" size="lg">
             Contact Us
           </Button>
           
