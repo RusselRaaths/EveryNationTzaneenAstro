@@ -3,13 +3,13 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import PageHeader from "../components/Sections/PageHeader.astro";
 import StaffList from "../components/Sections/StaffList.astro";
 
-const base = import.meta.env.BASE_URL;
-const coverImage = `${base}uploads/every_nation_churches_and_ministries_cover.webp`;
-const lordshipImage = `${base}uploads/Lordship.png`;
-const evangelismImage = `${base}uploads/evangelism.png`;
-const discipleshipImage = `${base}uploads/Discipleship.png`;
-const leadershipImage = `${base}uploads/Leadership.png`;
-const familyImage = `${base}uploads/Family.png`;
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+const coverImage = `${base}/uploads/every_nation_churches_and_ministries_cover.webp`;
+const lordshipImage = `${base}/uploads/Lordship.png`;
+const evangelismImage = `${base}/uploads/evangelism.png`;
+const discipleshipImage = `${base}/uploads/Discipleship.png`;
+const leadershipImage = `${base}/uploads/Leadership.png`;
+const familyImage = `${base}/uploads/Family.png`;
 ---
 
 <BaseLayout
@@ -22,7 +22,6 @@ const familyImage = `${base}uploads/Family.png`;
     backgroundImage={coverImage}
   />
   
-  <!-- Three pillars (Christ-centred / Spirit-empowered / Socially responsible) -->
   <section class="py-12 bg-white">
     <div class="container">
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -42,7 +41,6 @@ const familyImage = `${base}uploads/Family.png`;
     </div>
   </section>
 
-  <!-- Core Values -->
   <section class="py-16 bg-gray-50">
     <div class="container">
       <div class="text-center mb-10">
@@ -99,7 +97,6 @@ const familyImage = `${base}uploads/Family.png`;
     </div>
   </section>
 
-  <!-- Mission & Vision -->
   <section class="py-16">
     <div class="container">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
@@ -126,7 +123,6 @@ const familyImage = `${base}uploads/Family.png`;
     </div>
   </section>
   
-  <!-- Church History -->
   <section class="py-16">
     <div class="container">
       <div class="text-center mb-12">
@@ -152,21 +148,17 @@ const familyImage = `${base}uploads/Family.png`;
     </div>
   </section>
   
-  <!-- Three-column leadership / family / statement layout -->
   <section class="py-16 bg-gray-50">
     <div class="container">
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
-
-        <!-- Column 1: Leadership -->
         <div>
           <h3 class="text-2xl font-bold mb-4">Meet Our Leadership</h3>
           <StaffList showAll={false} limit={4} compact={true} />
           <div class="mt-4">
-            <a href={`${base}staff`} class="text-primary-600 hover:underline">Meet All Our Staff</a>
+            <a href={`${base}/staff`} class="text-primary-600 hover:underline">Meet All Our Staff</a>
           </div>
         </div>
 
-        <!-- Column 2: Family / Core Values -->
         <div>
           <h3 class="text-2xl font-bold mb-4">Family</h3>
           <div class="space-y-4">
@@ -185,7 +177,6 @@ const familyImage = `${base}uploads/Family.png`;
           </div>
         </div>
 
-        <!-- Column 3: Statement of Faith -->
         <div>
           <h3 class="text-2xl font-bold mb-4">What We Believe</h3>
           <div class="prose text-gray-700">
@@ -195,7 +186,6 @@ const familyImage = `${base}uploads/Family.png`;
             <p>In the salvation of lost and sinful man through the shed blood of the Lord Jesus Christ by faith apart from works, and regeneration by the Holy Spirit.</p>
           </div>
         </div>
-
       </div>
     </div>
   </section>
