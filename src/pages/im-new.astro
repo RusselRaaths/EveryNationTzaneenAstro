@@ -2,6 +2,11 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import PageHeader from "../components/Sections/PageHeader.astro";
 import Button from "../components/UI/Button.astro";
+
+const base = import.meta.env.BASE_URL;
+const wearImage = `${base}uploads/WhatsApp%20Image%202026-02-22%20at%2017.36.12.webp`;
+const familiesImage = `${base}uploads/Families.webp`;
+const readyBg = `${base}uploads/Ready.webp`;
 ---
 
 <BaseLayout
@@ -70,7 +75,7 @@ import Button from "../components/UI/Button.astro";
       <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
         <div>
           <img 
-            src="/uploads/WhatsApp%20Image%202026-02-22%20at%2017.36.12.webp" 
+            src={wearImage}
             alt="Casual church attire" 
             class="rounded-lg shadow-lg object-cover w-full h-full"
           />
@@ -174,14 +179,14 @@ import Button from "../components/UI/Button.astro";
             All our children's staff are trained to provide a safe, nurturing environment.
           </p>
           
-          <Button href="/ministries/childrens-ministry">
+          <Button href={`${base}ministries/childrens-ministry`}>
             Learn More About Children's Ministry
           </Button>
         </div>
         
         <div>
           <img 
-            src="/uploads/Families.webp" 
+            src={familiesImage}
             alt="Families at our church" 
             class="rounded-lg shadow-lg object-cover w-full h-full"
           />
@@ -193,8 +198,7 @@ import Button from "../components/UI/Button.astro";
   <!-- Location & Directions -->
   <section id="location" class="py-16">
     <div class="container">
-  <!-- DEBUG: ensure this page source is used in build -->
-  <p id="debug-imnew" class="sr-only">DEBUG-IMNEW-IFRAME-INCLUDED</p>
+      <p id="debug-imnew" class="sr-only">DEBUG-IMNEW-IFRAME-INCLUDED</p>
       <div class="text-center mb-12">
         <h2 class="text-3xl md:text-4xl font-bold mb-4">Location & Directions</h2>
         <p class="text-xl text-gray-600 max-w-3xl mx-auto">
@@ -204,7 +208,6 @@ import Button from "../components/UI/Button.astro";
       
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
         <div class="bg-gray-200 rounded-lg overflow-hidden h-96">
-          <!-- Google Maps embed centered on the provided coordinates -->
           <iframe
             class="w-full h-full border-0"
             loading="lazy"
@@ -247,82 +250,85 @@ import Button from "../components/UI/Button.astro";
   
   <!-- FAQ Section -->
   <section id="faq" class="py-16 bg-gray-50">
-  <div class="container">
-    <div class="text-center mb-12">
-      <h2 class="text-3xl md:text-4xl font-bold mb-4">Frequently Asked Questions</h2>
-      <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-        Answers to common questions from first-time visitors
-      </p>
-    </div>
+    <div class="container">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">Frequently Asked Questions</h2>
+        <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+          Answers to common questions from first-time visitors
+        </p>
+      </div>
 
-    <div class="max-w-4xl mx-auto">
-      <div class="space-y-4">
-        <details class="group bg-white p-6 rounded-lg shadow-sm">
-          <summary class="flex justify-between items-center cursor-pointer">
-            <h3 class="text-xl font-bold">Where do I go when I arrive?</h3>
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 transform transition-transform duration-200 group-open:rotate-45" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
-            </svg>
-          </summary>
-          <p class="mt-4 text-gray-700">
-            When you arrive, look for our information table or hospitality team. They will help you feel at home.
-          </p>
-        </details>
+      <div class="max-w-4xl mx-auto">
+        <div class="space-y-4">
+          <details class="group bg-white p-6 rounded-lg shadow-sm">
+            <summary class="flex justify-between items-center cursor-pointer">
+              <h3 class="text-xl font-bold">Where do I go when I arrive?</h3>
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 transform transition-transform duration-200 group-open:rotate-45" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+              </svg>
+            </summary>
+            <p class="mt-4 text-gray-700">
+              When you arrive, look for our information table or hospitality team. They will help you feel at home.
+            </p>
+          </details>
 
-        <details class="group bg-white p-6 rounded-lg shadow-sm">
-          <summary class="flex justify-between items-center cursor-pointer">
-            <h3 class="text-xl font-bold">Will I be asked to stand up or introduce myself?</h3>
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 transform transition-transform duration-200 group-open:rotate-45" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
-            </svg>
-          </summary>
-          <p class="mt-4 text-gray-700">
-            No, we won't single you out or ask you to stand up. We want you to feel comfortable, not put on the spot. We do have a welcome pack and chocolate in the service that you can get to know us better and if you want to get connected.          </p>
-        </details>
+          <details class="group bg-white p-6 rounded-lg shadow-sm">
+            <summary class="flex justify-between items-center cursor-pointer">
+              <h3 class="text-xl font-bold">Will I be asked to stand up or introduce myself?</h3>
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 transform transition-transform duration-200 group-open:rotate-45" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+              </svg>
+            </summary>
+            <p class="mt-4 text-gray-700">
+              No, we won't single you out or ask you to stand up. We want you to feel comfortable, not put on the spot. We do have a welcome pack and chocolate in the service that you can get to know us better and if you want to get connected.
+            </p>
+          </details>
 
-        <details class="group bg-white p-6 rounded-lg shadow-sm">
-          <summary class="flex justify-between items-center cursor-pointer">
-            <h3 class="text-xl font-bold">Is there a coffee hour or fellowship time?</h3>
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 transform transition-transform duration-200 group-open:rotate-45" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
-            </svg>
-          </summary>
-          <p class="mt-4 text-gray-700">
-            Yes! We have coffee, tea, and light refreshments available before service. It's a great opportunity to meet people and ask any questions you might have.
-          </p>
-        </details>
+          <details class="group bg-white p-6 rounded-lg shadow-sm">
+            <summary class="flex justify-between items-center cursor-pointer">
+              <h3 class="text-xl font-bold">Is there a coffee hour or fellowship time?</h3>
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 transform transition-transform duration-200 group-open:rotate-45" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+              </svg>
+            </summary>
+            <p class="mt-4 text-gray-700">
+              Yes! We have coffee, tea, and light refreshments available before service. It's a great opportunity to meet people and ask any questions you might have.
+            </p>
+          </details>
 
-        <details class="group bg-white p-6 rounded-lg shadow-sm">
-          <summary class="flex justify-between items-center cursor-pointer">
-            <h3 class="text-xl font-bold">Do you have facilities for nursing mothers?</h3>
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 transform transition-transform duration-200 group-open:rotate-45" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
-            </svg>
-          </summary>
-          <p class="mt-4 text-gray-700">
-            Unfortunately not, the lady's bathroom is equipped with a changing station.
-          </p>
-        </details>
+          <details class="group bg-white p-6 rounded-lg shadow-sm">
+            <summary class="flex justify-between items-center cursor-pointer">
+              <h3 class="text-xl font-bold">Do you have facilities for nursing mothers?</h3>
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 transform transition-transform duration-200 group-open:rotate-45" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+              </svg>
+            </summary>
+            <p class="mt-4 text-gray-700">
+              Unfortunately not, the lady's bathroom is equipped with a changing station.
+            </p>
+          </details>
 
-        <details class="group bg-white p-6 rounded-lg shadow-sm">
-          <summary class="flex justify-between items-center cursor-pointer">
-            <h3 class="text-xl font-bold">How do I get connected beyond Sunday services?</h3>
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 transform transition-transform duration-200 group-open:rotate-45" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
-            </svg>
-          </summary>
-          <p class="mt-4 text-gray-700">
-            The best way to get connected is through our connect groups. Visit our information table before or after the service, and they will help you get connected with the right people.
-          </p>
-        </details>
+          <details class="group bg-white p-6 rounded-lg shadow-sm">
+            <summary class="flex justify-between items-center cursor-pointer">
+              <h3 class="text-xl font-bold">How do I get connected beyond Sunday services?</h3>
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 transform transition-transform duration-200 group-open:rotate-45" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+              </svg>
+            </summary>
+            <p class="mt-4 text-gray-700">
+              The best way to get connected is through our connect groups. Visit our information table before or after the service, and they will help you get connected with the right people.
+            </p>
+          </details>
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
   
   <!-- Plan Your Visit CTA -->
-  <section id="volunteer" class="py-20 bg-cover bg-center text-white"
-    style="background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('/uploads/Ready.webp')"
+  <section
+    id="volunteer"
+    class="py-20 bg-cover bg-center text-white"
+    style={`background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(${readyBg})`}
   >
     <div class="container">
       <div class="max-w-3xl mx-auto text-center">
@@ -332,7 +338,7 @@ import Button from "../components/UI/Button.astro";
         </p>
         
         <div class="flex flex-wrap justify-center gap-4">
-          <Button href="/contact" variant="primary" size="lg">
+          <Button href={`${base}contact`} variant="primary" size="lg">
             Contact Us
           </Button>
           
