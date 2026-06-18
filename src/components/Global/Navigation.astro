@@ -18,7 +18,6 @@ const navItems = [
 const currentPath = Astro.url.pathname;
 ---
 
-<!-- Desktop Navigation -->
 <nav class="hidden lg:block">
   <ul class="flex items-center space-x-6">
     {
@@ -46,7 +45,6 @@ const currentPath = Astro.url.pathname;
   </ul>
 </nav>
 
-<!-- Mobile Menu Button -->
 <button
   id="mobile-menu-button"
   class="lg:hidden p-2 text-gray-700 hover:text-primary-600 focus:outline-none transition-colors relative"
@@ -58,7 +56,6 @@ const currentPath = Astro.url.pathname;
   </svg>
 </button>
 
-<!-- Mobile Menu Dropdown - Compact & Clean -->
 <div
   id="mobile-menu"
   class="absolute top-full left-0 right-0 bg-white shadow-lg border-t border-gray-100 transform scale-y-0 origin-top transition-transform duration-200 ease-out lg:hidden z-50"
