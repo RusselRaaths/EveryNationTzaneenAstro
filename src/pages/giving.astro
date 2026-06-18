@@ -1,11 +1,9 @@
 ---
-import { Astro } from 'astro';
+const base = import.meta.env.BASE_URL;
 ---
 
----
-
-<script set:html>
-  window.location.href = '/';
+<script>
+  window.location.href = base;
 </script>
 
-<p>If you are not redirected, <a href="/">go home</a>.</p>
+<p>If you are not redirected, <a href={base}>go home</a>.</p>
