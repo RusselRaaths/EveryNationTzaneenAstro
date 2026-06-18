@@ -1,15 +1,15 @@
 ---
 // Define the navigation items
+const base = import.meta.env.BASE_URL;
 const navItems = [
-  
-  { text: "About Us", href: "/about-us" },
-  { text: "Staff", href: "/staff" },
-  { text: "Ministries", href: "/ministries" },
-  { text: "Home", href: "/" },
-  { text: "Sermons", href: "/sermons" },
-  { text: "Events", href: "/events" },
-  { text: "I'm New", href: "/im-new" },
-  { text: "Contact", href: "/contact" },
+  { text: "About Us", href: `${base}about-us` },
+  { text: "Staff", href: `${base}staff` },
+  { text: "Ministries", href: `${base}ministries` },
+  { text: "Home", href: base },
+  { text: "Sermons", href: `${base}sermons` },
+  { text: "Events", href: `${base}events` },
+  { text: "I'm New", href: `${base}im-new` },
+  { text: "Contact", href: `${base}contact` },
 ];
 
 // Get the current URL path to highlight the active link
@@ -21,9 +21,11 @@ const currentPath = Astro.url.pathname;
   <ul class="flex items-center space-x-6">
     {
       navItems.map((item) => {
-        const isActive = currentPath === item.href || 
-                         (item.href !== "/" && currentPath.startsWith(item.href));
-        
+        const isActive =
+          item.href === base
+            ? currentPath === base
+            : currentPath === item.href || currentPath.startsWith(item.href + "/");
+
         return (
           <li>
             <a
@@ -39,8 +41,6 @@ const currentPath = Astro.url.pathname;
         );
       })
     }
-    
-    
   </ul>
 </nav>
 
@@ -63,20 +63,21 @@ const currentPath = Astro.url.pathname;
   role="menu"
   aria-labelledby="mobile-menu-button"
 >
-  <!-- Navigation Links in Grid -->
   <div class="px-4 py-6">
     <div class="grid grid-cols-2 gap-3">
       {
         navItems.map((item) => {
-          const isActive = currentPath === item.href || 
-                           (item.href !== "/" && currentPath.startsWith(item.href));
-          
+          const isActive =
+            item.href === base
+              ? currentPath === base
+              : currentPath === item.href || currentPath.startsWith(item.href + "/");
+
           return (
             <a
               href={item.href}
               class={`block px-4 py-3 text-sm font-medium rounded-lg transition-colors text-center ${
-                isActive 
-                  ? "bg-primary-50 text-primary-600 border border-primary-200" 
+                isActive
+                  ? "bg-primary-50 text-primary-600 border border-primary-200"
                   : "text-gray-700 hover:bg-gray-50 hover:text-primary-600 border border-transparent"
               }`}
               role="menuitem"
@@ -88,95 +89,15 @@ const currentPath = Astro.url.pathname;
         })
       }
     </div>
-    
-    
   </div>
 </div>
 
 <style>
-  /* Mobile menu button animation */
   #mobile-menu-button:hover svg {
     transform: scale(1.1);
   }
-  
+
   #mobile-menu-button svg {
     transition: transform 0.2s ease;
   }
-  
-  /* Mobile menu show/hide states */
-  #mobile-menu.show {
-    transform: scaleY(1);
-  }
-  
-  /* Smooth hover effects */
-  #mobile-menu a {
-    transition: all 0.15s ease;
-  }
-  
-  /* Active state styling */
-  #mobile-menu a[aria-current="page"] {
-    font-weight: 600;
-  }
 </style>
-
-<script>
-  // Mobile menu functionality
-  document.addEventListener('DOMContentLoaded', () => {
-    const mobileMenuButton = document.getElementById('mobile-menu-button');
-    const mobileMenu = document.getElementById('mobile-menu');
-    
-  let isMenuOpen = false;
-    
-    // Function to toggle mobile menu
-    const toggleMobileMenu = () => {
-      isMenuOpen = !isMenuOpen;
-      
-      if (isMenuOpen) {
-        // Show menu
-        mobileMenu?.classList.add('show');
-        mobileMenuButton?.setAttribute('aria-expanded', 'true');
-      } else {
-        // Hide menu
-        mobileMenu?.classList.remove('show');
-        mobileMenuButton?.setAttribute('aria-expanded', 'false');
-      }
-    };
-    
-    // Event listeners
-    mobileMenuButton?.addEventListener('click', (e) => {
-      e.stopPropagation();
-      toggleMobileMenu();
-    });
-    
-    // Close menu when clicking outside
-    document.addEventListener('click', (e) => {
-      if (isMenuOpen && !mobileMenu?.contains(e.target as Node) && !mobileMenuButton?.contains(e.target as Node)) {
-        toggleMobileMenu();
-      }
-    });
-    
-    // Close menu when clicking a navigation link
-    const navLinks = mobileMenu?.querySelectorAll('a[href^="/"]');
-    navLinks?.forEach(link => {
-      link.addEventListener('click', () => {
-        if (isMenuOpen) {
-          setTimeout(() => toggleMobileMenu(), 100);
-        }
-      });
-    });
-    
-    // Keyboard navigation
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && isMenuOpen) {
-        toggleMobileMenu();
-      }
-    });
-    
-    // Handle window resize
-    window.addEventListener('resize', () => {
-      if (window.innerWidth >= 1024 && isMenuOpen) {
-        toggleMobileMenu();
-      }
-    });
-  });
-</script>
