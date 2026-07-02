@@ -1,5 +1,5 @@
 ---
-name: "Ludwig Eksteen "
+name: "YTH Ministry"
 slug: "youth-ministry"
 logo: "/uploads/ministries/youth-ministry-logo.webp"
 summary: "Equipping young people (13-25) to follow Jesus, grow in community, and engage the world with their gifts."

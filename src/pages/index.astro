@@ -4,27 +4,25 @@ import HeroSection from "../components/Sections/HeroSection.astro";
 import EventList from "../components/Sections/EventList.astro";
 import SermonList from "../components/Sections/SermonList.astro";
 import Button from "../components/UI/Button.astro";
-
-const base = import.meta.env.BASE_URL.replace(/\/$/, "");
-const churchImage = `${base}/uploads/church-default.webp`;
-const thankYouBg = `${base}/uploads/thank-you-bg.webp`;
 ---
 
 <BaseLayout>
-  <HeroSection
+  <!-- forced-commit: 2026-01-25T22:50:00Z - small change to trigger CI/deploy -->
+  <HeroSection 
     title="Welcome to Every Nation Tzaneen"
     subtitle="A Disciple Making Family"
     ctaText="Plan Your Visit"
-    ctaLink={`${base}/im-new`}
+    ctaLink="/im-new"
     secondaryCtaText="Watch Sermons"
-    secondaryCtaLink={`${base}/sermons`}
+    secondaryCtaLink="/sermons"
   />
-
+  
+  <!-- Service Times -->
   <section class="py-16 bg-white">
     <div class="container">
       <div class="max-w-4xl mx-auto text-center">
         <h2 class="text-3xl md:text-4xl font-bold mb-6">Join Us This Sunday</h2>
-
+        
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
           <div class="bg-gray-50 p-8 rounded-lg shadow-sm">
             <h3 class="text-xl font-bold mb-3">Morning Service</h3>
@@ -32,7 +30,7 @@ const thankYouBg = `${base}/uploads/thank-you-bg.webp`;
             <p class="text-gray-600 mb-4">Traditional service with Praise And Worship</p>
             <p class="italic text-gray-500">In-person</p>
           </div>
-
+          
           <div class="bg-gray-50 p-8 rounded-lg shadow-sm">
             <h3 class="text-xl font-bold mb-3">Pre Service Prayer</h3>
             <p class="text-2xl font-bold text-primary-600 mb-2">08:15 AM - 08:45 AM</p>
@@ -40,48 +38,50 @@ const thankYouBg = `${base}/uploads/thank-you-bg.webp`;
             <p class="italic text-gray-500">In-person only</p>
           </div>
         </div>
-
-        <Button href={`${base}/im-new`} variant="outline">
+        
+        <Button href="/im-new" variant="outline">
           Plan Your Visit
         </Button>
       </div>
     </div>
   </section>
-
+  
+  <!-- About Section -->
   <section class="py-16 bg-gray-50">
     <div class="container">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
         <div>
           <img
-            src={churchImage}
-            alt="Our Church"
-            class="rounded-lg shadow-lg object-cover w-full h-full"
+            src="/uploads/site-logo.png"
+            alt="Every Nation Tzaneen logo"
+            class="rounded-lg shadow-lg object-contain w-full h-full bg-white p-8"
           />
         </div>
-
+        
         <div>
           <h2 class="text-3xl md:text-4xl font-bold mb-6">About Our Church</h2>
           <p class="text-gray-700 mb-6 text-lg">
-            We exist to honour God by establishing Christ-centred, Spirit-empowered, socially
-            responsible churches and campus ministries in every nation.
+            We exist to honour God by establishing Christ-centred, Spirit-empowered, socially responsible churches and campus ministries in every nation.
           </p>
           <p class="text-gray-700 mb-8 text-lg">
-            Whether you're exploring faith for the first time or looking for a church home, we
-            invite you to join us. Our diverse congregation welcomes people of all ages,
-            backgrounds, and walks of life.
+            Whether you're exploring faith for the first time or looking for a church home, we invite you to join us. Our diverse congregation welcomes people of all ages, backgrounds, and walks of life.
           </p>
-
-          <Button href={`${base}/about-us`}>
+          
+          <Button href="/about-us">
             Learn More About Us
           </Button>
         </div>
       </div>
     </div>
   </section>
-
+  
+  <!-- Events Section -->
   <EventList />
+  
+  <!-- Sermons Section -->
   <SermonList />
-
+  
+  <!-- Ministries Preview -->
   <section class="py-16 bg-gray-50">
     <div class="container">
       <div class="text-center mb-12">
@@ -90,30 +90,43 @@ const thankYouBg = `${base}/uploads/thank-you-bg.webp`;
           Discover how you can connect, serve, and grow through our various ministries
         </p>
       </div>
-
+      
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         <div class="card text-center p-8">
-          <div class="w-20 h-20 mx-auto mb-4 rounded-full bg-primary-100 flex items-center justify-center">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
-            </svg>
+          <!-- Banner image at top for Children's Ministry -->
+          <div class="mx-auto mb-4 w-full h-44 flex items-center justify-center overflow-hidden rounded bg-white p-3">
+            <img src="/uploads/Every%20Nation%20Tzaneen%20Kids.webp" alt="Children Ministries" class="w-full h-full object-contain" />
           </div>
           <h3 class="text-xl font-bold mb-3">Children's Ministry</h3>
-          <p class="text-gray-700 mb-4">Loraine</p>
-          <a href={`${base}/ministries/childrens-ministry`} class="text-primary-600 font-medium hover:text-primary-700">
+          <!-- removed staff name as requested -->
+          <a href="/ministries/childrens-ministry" class="text-primary-600 font-medium hover:text-primary-700">
             Learn More →
           </a>
         </div>
-
+        
         <div class="card text-center p-8">
-          <div class="w-20 h-20 mx-auto mb-4 rounded-full bg-secondary-100 flex items-center justify-center">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-secondary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
-            </svg>
+          <!-- Banner image at top for Worship Ministry -->
+          <div class="mx-auto mb-4 w-full h-44 flex items-center justify-center overflow-hidden rounded bg-white p-3">
+            <img src="/uploads/2025-10-05-worship-evening-00000001.webp" alt="Worship Ministry" class="w-full h-full object-contain" />
           </div>
           <h3 class="text-xl font-bold mb-3">Worship Ministry</h3>
-          <p class="text-gray-700 mb-4">Willem</p>
-          <a href={`${base}/ministries/worship-ministry`} class="text-primary-600 font-medium hover:text-primary-700">
+          <!-- staff name removed per request -->
+          <a href="/ministries/worship-ministry" class="text-primary-600 font-medium hover:text-primary-700">
+            Learn More →
+          </a>
+        </div>
+        
+        <div class="card text-center p-8">
+          <div class="w-20 h-20 mx-auto mb-4 rounded-full bg-accent-100 flex items-center justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-accent-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold mb-3">Evangelism Ministry</h3>
+          <p class="text-gray-700 mb-4">
+            Sharing the gospel and serving our neighbourhood through practical outreach.
+          </p>
+          <a href="/ministries/evangelism-ministry" class="text-primary-600 font-medium hover:text-primary-700">
             Learn More →
           </a>
         </div>
@@ -125,11 +138,17 @@ const thankYouBg = `${base}/uploads/thank-you-bg.webp`;
             </svg>
           </div>
           <h3 class="text-xl font-bold mb-3">YTH Ministry</h3>
-          <p class="text-gray-700 mb-4">Ludwid</p>
-          <a href={`${base}/ministries/community-outreach`} class="text-primary-600 font-medium hover:text-primary-700">
+          <p class="text-gray-700 mb-4">
+            Equipping young people to follow Jesus through worship, community, and leadership.
+          </p>
+          <a href="/ministries/youth-ministry" class="text-primary-600 font-medium hover:text-primary-700">
             Learn More →
           </a>
         </div>
+      </div>
+
+
+      
 
         <div class="card text-center p-8">
           <div class="w-20 h-20 mx-auto mb-4 rounded-full bg-accent-100 flex items-center justify-center">
@@ -138,37 +157,43 @@ const thankYouBg = `${base}/uploads/thank-you-bg.webp`;
             </svg>
           </div>
           <h3 class="text-xl font-bold mb-3">Prayer Ministry</h3>
-          <p class="text-gray-700 mb-4">Michelle</p>
-          <a href={`${base}/ministries/community-outreach`} class="text-primary-600 font-medium hover:text-primary-700">
+          <p class="text-gray-700 mb-4">
+            A community of intercessors praying for the church, city, and nations.
+          </p>
+          <a href="/ministries/prayer-ministry" class="text-primary-600 font-medium hover:text-primary-700">
             Learn More →
           </a>
         </div>
+      </div>
 
-        <div class="card text-center p-8">
+       <div class="card text-center p-8">
           <div class="w-20 h-20 mx-auto mb-4 rounded-full bg-accent-100 flex items-center justify-center">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-accent-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
             </svg>
           </div>
-          <h3 class="text-xl font-bold mb-3">Profetic Ministry</h3>
-          <p class="text-gray-700 mb-4">Ludwid</p>
-          <a href={`${base}/ministries/community-outreach`} class="text-primary-600 font-medium hover:text-primary-700">
+          <h3 class="text-xl font-bold mb-3">Prophetic Ministry</h3>
+          <p class="text-gray-700 mb-4">
+            Encouraging prophetic insight, prayer, and spiritual growth for the church.
+          </p>
+          <a href="/ministries/prophetic-ministry" class="text-primary-600 font-medium hover:text-primary-700">
             Learn More →
           </a>
         </div>
       </div>
-
+      
       <div class="mt-12 text-center">
-        <Button href={`${base}/ministries`} variant="outline">
+        <Button href="/ministries" variant="outline">
           View All Ministries
         </Button>
       </div>
     </div>
   </section>
-
-  <section
+  
+  <!-- Call to Action -->
+  <section 
     class="py-20 bg-cover bg-center text-white"
-    style={`background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(${thankYouBg})`}
+    style="background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(/uploads/thank-you-bg.webp)"
   >
     <div class="container">
       <div class="max-w-3xl mx-auto text-center">
@@ -176,13 +201,13 @@ const thankYouBg = `${base}/uploads/thank-you-bg.webp`;
         <p class="text-xl mb-8">
           We'd love to welcome you to our church family. Come visit us this Sunday or reach out with any questions.
         </p>
-
+        
         <div class="flex flex-wrap justify-center gap-4">
-          <Button href={`${base}/im-new`} variant="primary" size="lg">
+          <Button href="/im-new" variant="primary" size="lg">
             I'm New Here
           </Button>
-
-          <Button href={`${base}/contact`} variant="outline" size="lg" class="bg-white/10 text-white border-white hover:bg-white hover:text-gray-900 backdrop-blur-sm">
+          
+          <Button href="/contact" variant="outline" size="lg" class="bg-white/10 text-white border-white hover:bg-white hover:text-gray-900 backdrop-blur-sm">
             Contact Us
           </Button>
         </div>
