@@ -1,0 +1,4 @@
+AuthType Basic
+AuthName "Private Progress Preview"
+AuthUserFile /usr/home/entzaerzxg/public_html/ChurchWebsite/.htpasswd
+Require valid-user
