@@ -2,18 +2,19 @@ name: Deploy to xneelo
 
 on:
   push:
-    branches: [ main ]
+    branches:
+      - main
 
 jobs:
   web-deploy:
     name: Deploy
     runs-on: ubuntu-latest
     steps:
-      - name: Get latest code
-        uses: actions/checkout@v4
+    - name: Get latest code
+      uses: actions/checkout@v4
 
-        - name: Sync files to xneelo
-      uses: SamKirschner/FTP-Deploy-Action@v4.3.5
+    - name: Sync files to xneelo
+      uses: SamKirkland/FTP-Deploy-Action@v4.3.5
       with:
         server: ${{ secrets.FTP_SERVER }}
         username: ${{ secrets.FTP_USERNAME }}
