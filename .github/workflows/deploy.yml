@@ -21,6 +21,9 @@ jobs:
         lftp -c "
         set ftp:ssl-allow no;
         set ftp:passive-mode true;
+        set net:max-retries 3;
+        set net:timeout 10;
+        set net:reconnect-interval-base 2;
         open -u entzaerzxg,1JdTs6D9422745 196.40.97.146;
-        mirror --reverse --delete --verbose . /public_html/ChurchWebsite/ --exclude-glob .git* --exclude-glob .github/
+        mirror --reverse --delete --parallel=3 --verbose . /public_html/ChurchWebsite/ --exclude-glob .git* --exclude-glob .github/ --exclude-glob .ht*
         "
