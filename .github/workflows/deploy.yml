@@ -20,5 +20,5 @@ jobs:
         username: "entzaerzxg"
         password: "1JdTs6D9422745"
         server-dir: public_html/ChurchWebsite/
-        protocol: ftp
-        port: 21
+        protocol: sftp
+        port: 22
