@@ -13,13 +13,12 @@ jobs:
     - name: Get latest code
       uses: actions/checkout@v4
 
-    - name: Copy files to xneelo via SFTP
-      uses: appleboy/scp-action@v0.1.7
+    - name: Sync files to xneelo
+      uses: SamKirkland/FTP-Deploy-Action@v4.3.5
       with:
-        host: "196.40.97.146"
+        server: "196.40.97.146"
         username: "entzaerzxg"
         password: "1JdTs6D9422745"
-        port: 22
-        target: "public_html/ChurchWebsite/"
-        source: "."
-        rm: false
+        server-dir: public_html/ChurchWebsite/
+        port: 21
+        protocol: ftp
