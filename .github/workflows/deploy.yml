@@ -13,12 +13,13 @@ jobs:
     - name: Get latest code
       uses: actions/checkout@v4
 
-    - name: Sync files to xneelo
-      uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+    - name: Sync files to xneelo via SFTP
+      uses: easingthemes/ssh-deploy@v5.0.0
       with:
-        server: "196.40.97.146"
-        username: "entzaerzxg"
-        password: "1JdTs6D9422745"
-        server-dir: public_html/ChurchWebsite/
-        protocol: ftps-legacy
-        port: 21
+        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }} # Leave blank if using password
+        REMOTE_HOST: "196.40.97.146"
+        REMOTE_USER: "entzaerzxg"
+        REMOTE_PORT: "22"
+        PASSWORD: "1JdTs6D9422745"
+        TARGET: "public_html/ChurchWebsite/"
+        ARGS: "-rlptgoD --delete"
