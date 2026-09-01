@@ -1,0 +1,7 @@
+# Password protect the entire site with Apache Basic Authentication.
+# Update AuthUserFile below to the absolute filesystem path of the
+# .htpasswd file on your web server if it differs from this default.
+AuthType Basic
+AuthName "Restricted Access"
+AuthUserFile /var/www/html/EveryNationTzaneenAstro/.htpasswd
+Require valid-user
