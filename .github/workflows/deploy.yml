@@ -17,6 +17,6 @@ jobs:
       uses: SamKirkland/FTP-Deploy-Action@v4.3.5
       with:
         server: "196.40.97.146"
-        username: "entzaerzxg"  # Replace with your xneelo FTP login
-        password: ${{ secrets.FTP_PASSWORD }}
+        username: "entzaerzxg"
+        password: "1JdTs6D9422745"
         server-dir: public_html/ChurchWebsite/
