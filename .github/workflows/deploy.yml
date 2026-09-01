@@ -20,6 +20,6 @@ jobs:
         username: "entzaerzxg"
         password: "1JdTs6D9422745"
         server-dir: public_html/ChurchWebsite/
-        protocol: ftp
+        protocol: ftps
         port: 21
-        passive: true
+        security: loose
