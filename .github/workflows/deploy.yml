@@ -13,12 +13,14 @@ jobs:
     - name: Get latest code
       uses: actions/checkout@v4
 
-    - name: Sync files to xneelo
-      uses: SamKirkland/FTP-Deploy-Action@v4.3.5
-      with:
-        server: "196.40.97.146"
-        username: "entzaerzxg"
-        password: "1JdTs6D9422745"
-        server-dir: public_html/ChurchWebsite/
-        port: 21
-        protocol: ftp
+    - name: Install lftp
+      run: sudo apt-get update && sudo apt-get install -y lftp
+
+    - name: Deploy via LFTP
+      run: |
+        lftp -c "
+        set ftp:ssl-allow no;
+        set ftp:passive-mode true;
+        open -u entzaerzxg,1JdTs6D9422745 196.40.97.146;
+        mirror --reverse --delete --verbose . /public_html/ChurchWebsite/ --exclude-glob .git* --exclude-glob .github/
+        "
