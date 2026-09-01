@@ -1,0 +1,7 @@
+# Password protect the entire site using Apache Basic Auth.
+# Update AuthUserFile below to the absolute server path of .htpasswd
+# for your hosting account (e.g. /home/<account>/public_html/.htpasswd).
+AuthType Basic
+AuthName "Restricted Access"
+AuthUserFile /home/account/public_html/.htpasswd
+Require valid-user
