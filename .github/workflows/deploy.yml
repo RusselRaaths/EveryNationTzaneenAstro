@@ -12,10 +12,10 @@ jobs:
       - name: Get latest code
         uses: actions/checkout@v4
 
-      - name: Sync files to xneelo
-        uses: SamKirsch/FTP-Deploy-Action@v4.3.4
-        with:
-          server: ${{ secrets.FTP_SERVER }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          server-dir: public_html/ChurchWebsite/
+        - name: Sync files to xneelo
+      uses: SamKirschner/FTP-Deploy-Action@v4.3.5
+      with:
+        server: ${{ secrets.FTP_SERVER }}
+        username: ${{ secrets.FTP_USERNAME }}
+        password: ${{ secrets.FTP_PASSWORD }}
+        server-dir: public_html/ChurchWebsite/
