@@ -3,7 +3,7 @@ name: Deploy to xneelo
 on:
   push:
     branches:
-      - main # Use 'master' if your main branch is called master
+      - main
 
 jobs:
   web-deploy:
@@ -16,7 +16,7 @@ jobs:
     - name: Sync files to xneelo
       uses: SamKirkland/FTP-Deploy-Action@v4.3.5
       with:
-        server: ${{ secrets.FTP_SERVER }}
+        server: "196.40.97.146"
         username: ${{ secrets.FTP_USERNAME }}
         password: ${{ secrets.FTP_PASSWORD }}
         server-dir: public_html/ChurchWebsite/
