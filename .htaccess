@@ -1,3 +1,4 @@
+# Replace USERNAME below with your xneelo cPanel/hosting account username.
 AuthType Basic
 AuthName "Restricted Access"
 AuthUserFile /home/USERNAME/public_html/.htpasswd
