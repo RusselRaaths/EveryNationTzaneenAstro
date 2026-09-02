@@ -37,6 +37,23 @@ const {
     <link rel="icon" type="image/svg+xml" href={`${base}/favicon.svg`} />
     <meta name="generator" content={Astro.generator} />
 
+    <script is:inline>
+      (function() {
+        const auth = sessionStorage.getItem('preview_auth');
+        if (!auth) {
+          const user = prompt("Username:");
+          const pass = prompt("Password:");
+          if (user === "Willem" && pass === "WillemGENTZN") {
+            sessionStorage.setItem('preview_auth', 'true');
+          } else {
+            alert("Incorrect credentials.");
+            document.body.innerHTML = '<h1 style="text-align:center;margin-top:20vh;font-size:24px;">Access Denied</h1>';
+            window.stop();
+          }
+        }
+      })();
+    </script>
+
     <Seo
       title={title}
       description={description}
