@@ -1,3 +1,18 @@
+<script is:inline>
+  (function() {
+    if (!sessionStorage.getItem('preview_auth')) {
+      const user = prompt("Username:");
+      const pass = prompt("Password:");
+      if (user === "Willem" && pass === "Willem@ENTZN") {
+        sessionStorage.setItem('preview_auth', 'true');
+      } else {
+        alert("Incorrect credentials.");
+        window.location.href = "about:blank";
+      }
+    }
+  })();
+</script>
+
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import HeroSection from "../components/Sections/HeroSection.astro";
@@ -93,24 +108,20 @@ import Button from "../components/UI/Button.astro";
       
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         <div class="card text-center p-8">
-          <!-- Banner image at top for Children's Ministry -->
           <div class="mx-auto mb-4 w-full h-44 flex items-center justify-center overflow-hidden rounded bg-white p-3">
             <img src="/uploads/Every%20Nation%20Tzaneen%20Kids.webp" alt="Children Ministries" class="w-full h-full object-contain" />
           </div>
           <h3 class="text-xl font-bold mb-3">Children's Ministry</h3>
-          <!-- removed staff name as requested -->
           <a href="/ministries/childrens-ministry" class="text-primary-600 font-medium hover:text-primary-700">
             Learn More →
           </a>
         </div>
         
         <div class="card text-center p-8">
-          <!-- Banner image at top for Worship Ministry -->
           <div class="mx-auto mb-4 w-full h-44 flex items-center justify-center overflow-hidden rounded bg-white p-3">
             <img src="/uploads/2025-10-05-worship-evening-00000001.webp" alt="Worship Ministry" class="w-full h-full object-contain" />
           </div>
           <h3 class="text-xl font-bold mb-3">Worship Ministry</h3>
-          <!-- staff name removed per request -->
           <a href="/ministries/worship-ministry" class="text-primary-600 font-medium hover:text-primary-700">
             Learn More →
           </a>
@@ -145,10 +156,6 @@ import Button from "../components/UI/Button.astro";
             Learn More →
           </a>
         </div>
-      </div>
-
-
-      
 
         <div class="card text-center p-8">
           <div class="w-20 h-20 mx-auto mb-4 rounded-full bg-accent-100 flex items-center justify-center">
@@ -164,9 +171,8 @@ import Button from "../components/UI/Button.astro";
             Learn More →
           </a>
         </div>
-      </div>
 
-       <div class="card text-center p-8">
+        <div class="card text-center p-8">
           <div class="w-20 h-20 mx-auto mb-4 rounded-full bg-accent-100 flex items-center justify-center">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-accent-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
