@@ -1,89 +1,222 @@
 ---
-import BaseLayout from "../../layouts/BaseLayout.astro";
-import PageHeader from "../../components/Sections/PageHeader.astro";
-import Button from "../../components/UI/Button.astro";
-import { getCollection } from "astro:content";
-import { formatDate } from "../../utils/dateUtils";
-
-const base = import.meta.env.BASE_URL.replace(/\/$/, "");
-
-// Fetch all events
-const allEvents = await getCollection("events", ({ data }) =>
-  import.meta.env.PROD ? !data.draft : true
-);
-
-// Sort events by date descending
-const events = allEvents.sort(
-  (a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
-);
-
-const headerImages = [
-  `${base}/uploads/events/whatsapp-2026-02-22-22-09-35.webp`,
-  `${base}/uploads/events/whatsapp-2026-02-22-22-09-36.webp`,
-  `${base}/uploads/events/whatsapp-2026-02-22-22-09-360.webp`,
-];
+import BaseLayout from "../layouts/BaseLayout.astro";
+import HeroSection from "../components/Sections/HeroSection.astro";
+import EventList from "../components/Sections/EventList.astro";
+import SermonList from "../components/Sections/SermonList.astro";
+import Button from "../components/UI/Button.astro";
 ---
 
-<BaseLayout
-  title="Events - Every Nation Tzaneen"
-  description="Stay up to date with church events, gatherings, and special occasions at Every Nation Tzaneen."
->
-  <PageHeader
-    title="Events"
-    subtitle="Stay connected with what's happening in our church community"
-    backgroundImages={headerImages}
-  />
+<BaseLayout>
+  <script is:inline>
+    (function() {
+      if (!sessionStorage.getItem('preview_auth')) {
+        const user = prompt("Username:");
+        const pass = prompt("Password:");
+        if (user === "Willem" && pass === "Willem@ENTZN") {
+          sessionStorage.setItem('preview_auth', 'true');
+        } else {
+          alert("Incorrect credentials.");
+          window.location.href = "about:blank";
+        }
+      }
+    })();
+  </script>
 
+  <!-- forced-commit: 2026-01-25T22:50:00Z - small change to trigger CI/deploy -->
+  <HeroSection 
+    title="Welcome to Every Nation Tzaneen"
+    subtitle="A Disciple Making Family"
+    ctaText="Plan Your Visit"
+    ctaLink="/im-new"
+    secondaryCtaText="Watch Sermons"
+    secondaryCtaLink="/sermons"
+  />
+  
+  <!-- Service Times -->
   <section class="py-16 bg-white">
     <div class="container">
-      <div class="max-w-3xl mx-auto text-center mb-12">
-        <h2 class="text-3xl md:text-4xl font-bold mb-4">Upcoming & Recent Events</h2>
-        <p class="text-lg text-gray-600">
-          Join us for special gatherings, ministry opportunities, and community events.
+      <div class="max-w-4xl mx-auto text-center">
+        <h2 class="text-3xl md:text-4xl font-bold mb-6">Join Us This Sunday</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+          <div class="bg-gray-50 p-8 rounded-lg shadow-sm">
+            <h3 class="text-xl font-bold mb-3">Morning Service</h3>
+            <p class="text-2xl font-bold text-primary-600 mb-2">9:15 AM</p>
+            <p class="text-gray-600 mb-4">Traditional service with Praise And Worship</p>
+            <p class="italic text-gray-500">In-person</p>
+          </div>
+          
+          <div class="bg-gray-50 p-8 rounded-lg shadow-sm">
+            <h3 class="text-xl font-bold mb-3">Pre Service Prayer</h3>
+            <p class="text-2xl font-bold text-primary-600 mb-2">08:15 AM - 08:45 AM</p>
+            <p class="text-gray-600 mb-4">Praying For The Service And Community</p>
+            <p class="italic text-gray-500">In-person only</p>
+          </div>
+        </div>
+        
+        <Button href="/im-new" variant="outline">
+          Plan Your Visit
+        </Button>
+      </div>
+    </div>
+  </section>
+  
+  <!-- About Section -->
+  <section class="py-16 bg-gray-50">
+    <div class="container">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+        <div>
+          <img
+            src="/uploads/site-logo.png"
+            alt="Every Nation Tzaneen logo"
+            class="rounded-lg shadow-lg object-contain w-full h-full bg-white p-8"
+          />
+        </div>
+        
+        <div>
+          <h2 class="text-3xl md:text-4xl font-bold mb-6">About Our Church</h2>
+          <p class="text-gray-700 mb-6 text-lg">
+            We exist to honour God by establishing Christ-centred, Spirit-empowered, socially responsible churches and campus ministries in every nation.
+          </p>
+          <p class="text-gray-700 mb-8 text-lg">
+            Whether you're exploring faith for the first time or looking for a church home, we invite you to join us. Our diverse congregation welcomes people of all ages, backgrounds, and walks of life.
+          </p>
+          
+          <Button href="/about-us">
+            Learn More About Us
+          </Button>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Events Section -->
+  <EventList />
+  
+  <!-- Sermons Section -->
+  <SermonList />
+  
+  <!-- Ministries Preview -->
+  <section class="py-16 bg-gray-50">
+    <div class="container">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">Our Ministries</h2>
+        <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+          Discover how you can connect, serve, and grow through our various ministries
         </p>
       </div>
-
+      
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {events.map((event) => (
-          <article class="bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow overflow-hidden border border-gray-100">
-            {event.data.image && (
-              <img
-                src={event.data.image}
-                alt={event.data.title}
-                class="w-full h-48 object-cover"
-              />
-            )}
+        <div class="card text-center p-8">
+          <div class="mx-auto mb-4 w-full h-44 flex items-center justify-center overflow-hidden rounded bg-white p-3">
+            <img src="/uploads/Every%20Nation%20Tzaneen%20Kids.webp" alt="Children Ministries" class="w-full h-full object-contain" />
+          </div>
+          <h3 class="text-xl font-bold mb-3">Children's Ministry</h3>
+          <a href="/ministries/childrens-ministry" class="text-primary-600 font-medium hover:text-primary-700">
+            Learn More →
+          </a>
+        </div>
+        
+        <div class="card text-center p-8">
+          <div class="mx-auto mb-4 w-full h-44 flex items-center justify-center overflow-hidden rounded bg-white p-3">
+            <img src="/uploads/2025-10-05-worship-evening-00000001.webp" alt="Worship Ministry" class="w-full h-full object-contain" />
+          </div>
+          <h3 class="text-xl font-bold mb-3">Worship Ministry</h3>
+          <a href="/ministries/worship-ministry" class="text-primary-600 font-medium hover:text-primary-700">
+            Learn More →
+          </a>
+        </div>
+        
+        <div class="card text-center p-8">
+          <div class="w-20 h-20 mx-auto mb-4 rounded-full bg-accent-100 flex items-center justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-accent-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold mb-3">Evangelism Ministry</h3>
+          <p class="text-gray-700 mb-4">
+            Sharing the gospel and serving our neighbourhood through practical outreach.
+          </p>
+          <a href="/ministries/evangelism-ministry" class="text-primary-600 font-medium hover:text-primary-700">
+            Learn More →
+          </a>
+        </div>
 
-            <div class="p-6">
-              <p class="text-sm font-semibold text-primary-600 mb-2">
-                {formatDate(event.data.date)}
-              </p>
+        <div class="card text-center p-8">
+          <div class="w-20 h-20 mx-auto mb-4 rounded-full bg-accent-100 flex items-center justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-accent-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold mb-3">YTH Ministry</h3>
+          <p class="text-gray-700 mb-4">
+            Equipping young people to follow Jesus through worship, community, and leadership.
+          </p>
+          <a href="/ministries/youth-ministry" class="text-primary-600 font-medium hover:text-primary-700">
+            Learn More →
+          </a>
+        </div>
 
-              <h3 class="text-xl font-bold mb-3">{event.data.title}</h3>
+        <div class="card text-center p-8">
+          <div class="w-20 h-20 mx-auto mb-4 rounded-full bg-accent-100 flex items-center justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-accent-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold mb-3">Prayer Ministry</h3>
+          <p class="text-gray-700 mb-4">
+            A community of intercessors praying for the church, city, and nations.
+          </p>
+          <a href="/ministries/prayer-ministry" class="text-primary-600 font-medium hover:text-primary-700">
+            Learn More →
+          </a>
+        </div>
 
-              {event.data.summary && (
-                <p class="text-gray-600 mb-4">{event.data.summary}</p>
-              )}
-
-              {event.data.location && (
-                <p class="text-sm text-gray-500 mb-4">{event.data.location}</p>
-              )}
-
-              <Button href={`${base}/events/${event.slug}`} variant="outline">
-                Learn More
-              </Button>
-            </div>
-          </article>
-        ))}
+        <div class="card text-center p-8">
+          <div class="w-20 h-20 mx-auto mb-4 rounded-full bg-accent-100 flex items-center justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-accent-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold mb-3">Prophetic Ministry</h3>
+          <p class="text-gray-700 mb-4">
+            Encouraging prophetic insight, prayer, and spiritual growth for the church.
+          </p>
+          <a href="/ministries/prophetic-ministry" class="text-primary-600 font-medium hover:text-primary-700">
+            Learn More →
+          </a>
+        </div>
       </div>
-
-      <div class="mt-16 text-center">
-        <a
-          href={`${base}/contact`}
-          class="inline-flex items-center justify-center px-6 py-3 text-base font-medium text-white bg-primary-600 rounded-lg shadow-sm hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
-        >
-          Ask About Upcoming Events
-        </a>
+      
+      <div class="mt-12 text-center">
+        <Button href="/ministries" variant="outline">
+          View All Ministries
+        </Button>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Call to Action -->
+  <section 
+    class="py-20 bg-cover bg-center text-white"
+    style="background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(/uploads/thank-you-bg.webp)"
+  >
+    <div class="container">
+      <div class="max-w-3xl mx-auto text-center">
+        <h2 class="text-3xl md:text-4xl font-bold mb-6 text-white">Ready to Join Our Community?</h2>
+        <p class="text-xl mb-8">
+          We'd love to welcome you to our church family. Come visit us this Sunday or reach out with any questions.
+        </p>
+        
+        <div class="flex flex-wrap justify-center gap-4">
+          <Button href="/im-new" variant="primary" size="lg">
+            I'm New Here
+          </Button>
+          
+          <Button href="/contact" variant="outline" size="lg" class="bg-white/10 text-white border-white hover:bg-white hover:text-gray-900 backdrop-blur-sm">
+            Contact Us
+          </Button>
+        </div>
       </div>
     </div>
   </section>
