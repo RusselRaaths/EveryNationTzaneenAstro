@@ -1,18 +1,3 @@
-<script is:inline>
-  (function() {
-    if (!sessionStorage.getItem('preview_auth')) {
-      const user = prompt("Username:");
-      const pass = prompt("Password:");
-      if (user === "Willem" && pass === "Willem@ENTZN") {
-        sessionStorage.setItem('preview_auth', 'true');
-      } else {
-        alert("Incorrect credentials.");
-        window.location.href = "about:blank";
-      }
-    }
-  })();
-</script>
-
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import HeroSection from "../components/Sections/HeroSection.astro";
