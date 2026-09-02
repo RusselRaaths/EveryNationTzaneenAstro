@@ -1,9 +1,8 @@
 import { defineConfig } from 'astro/config';
-import sitemap from '@astrojs/sitemap';
-import tailwind from '@astrojs/tailwind';
+import tailwind from '@astrojs/tailwind'; // or whatever integration you use
 
 export default defineConfig({
-  site: 'https://russelraaths.github.io',
-  base: '/EveryNationTzaneenAstro',
-  integrations: [tailwind(), sitemap()],
+  site: 'https://entzaneen.co.za',
+  base: '/ChurchWebsite',
+  integrations: [tailwind()],
 });
