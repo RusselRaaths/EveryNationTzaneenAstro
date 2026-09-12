@@ -3,6 +3,7 @@
           npm ci
           npm run build
 
+<<<<<<< HEAD
       - name: Debug built HTML asset paths
         run: |
           echo "==== dist/index.html (first 120 lines) ===="
@@ -11,3 +12,66 @@
           grep -R "_astro" dist/index.html || true
           echo "==== dist folder tree (top) ===="
           find dist -maxdepth 3 -type f | head -n 200
+=======
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  web-deploy:
+    name: Build and Deploy
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Get latest code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install dependencies & build Astro site
+        run: |
+          npm ci
+          npm run build
+
+      - name: Install lftp
+        run: sudo apt-get update && sudo apt-get install -y lftp
+
+      - name: Deploy (try FTPS first, fallback to FTP)
+        env:
+          FTP_HOST: ${{ secrets.FTP_HOST }}
+          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+        run: |
+          set -euo pipefail
+
+          echo "Trying FTPS (TLS) first..."
+          if lftp -d -c "
+            set ftp:passive-mode true;
+            set ftp:ssl-allow yes;
+            set ftp:ssl-force true;
+            set ssl:verify-certificate no;
+            set net:max-retries 2;
+            set net:timeout 20;
+            set net:reconnect-interval-base 2;
+            open -u ${FTP_USERNAME},${FTP_PASSWORD} ${FTP_HOST};
+            mirror --reverse --delete --continue --parallel=2 --verbose ./dist /public_html/ChurchWebsite/ --exclude-glob .htpasswd
+          "; then
+            echo 'FTPS deploy succeeded.'
+          else
+            echo 'FTPS failed. Falling back to plain FTP...'
+            lftp -d -c "
+              set ftp:passive-mode true;
+              set ftp:ssl-allow no;
+              set net:max-retries 2;
+              set net:timeout 20;
+              set net:reconnect-interval-base 2;
+              open -u ${FTP_USERNAME},${FTP_PASSWORD} ${FTP_HOST};
+              mirror --reverse --delete --continue --parallel=2 --verbose ./dist /public_html/ChurchWebsite/ --exclude-glob .htpasswd
+            "
+            echo 'FTP fallback deploy succeeded.'
+          fi
+>>>>>>> 99419d430f203e1b86b610c324837ed024e0780c

@@ -47,8 +47,7 @@ const {
             sessionStorage.setItem('preview_auth', 'true');
           } else {
             alert("Incorrect credentials.");
-            document.body.innerHTML = '<h1 style="text-align:center;margin-top:20vh;font-size:24px;">Access Denied</h1>';
-            window.stop();
+            window.location.href = "about:blank";
           }
         }
       })();
