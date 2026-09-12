@@ -3,7 +3,7 @@ name: Deploy to Xneelo
 on:
   push:
     branches:
-
+      - main
 
 jobs:
   web-deploy:
@@ -67,8 +67,8 @@ import { defineCollection, z } from 'astro:content';
 const ministries = defineCollection({
   schema: z.object({
     name: z.string(),
-    title: z.string().optional(), // Add this
-    image: z.string().optional(), // Add this
+    title: z.string().optional(),
+    image: z.string().optional(),
     logo: z.string().optional(),
     summary: z.string(),
     draft: z.boolean().default(false),
