@@ -3,7 +3,7 @@ name: Deploy to Xneelo
 on:
   push:
     branches:
-      - main
+
 
 jobs:
   web-deploy:
