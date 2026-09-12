@@ -43,7 +43,7 @@ jobs:
             set net:max-retries 2;
             set net:timeout 20;
             set net:reconnect-interval-base 2;
-            open -u ${FTP_USERNAME}, ;
+            open -u ${FTP_USERNAME}:${FTP_PASSWORD} ${FTP_HOST};
             mirror --reverse --delete --continue --parallel=2 --verbose ./dist /public_html/ChurchWebsite/ --exclude-glob .htpasswd
           "; then
             echo 'FTPS deploy succeeded.'
@@ -55,7 +55,7 @@ jobs:
               set net:max-retries 2;
               set net:timeout 20;
               set net:reconnect-interval-base 2;
-              open -u ${FTP_USERNAME}, ;
+              open -u ${FTP_USERNAME}:${FTP_PASSWORD} ${FTP_HOST};
               mirror --reverse --delete --continue --parallel=2 --verbose ./dist /public_html/ChurchWebsite/ --exclude-glob .htpasswd
             "
             echo 'FTP fallback deploy succeeded.'
