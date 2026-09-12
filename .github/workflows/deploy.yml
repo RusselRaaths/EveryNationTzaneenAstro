@@ -1,18 +1,5 @@
-      - name: Install dependencies & build Astro site
-        run: |
-          npm ci
-          npm run build
+name: Deploy to Xneelo
 
-<<<<<<< HEAD
-      - name: Debug built HTML asset paths
-        run: |
-          echo "==== dist/index.html (first 120 lines) ===="
-          sed -n '1,120p' dist/index.html || true
-          echo "==== grep for _astro asset paths ===="
-          grep -R "_astro" dist/index.html || true
-          echo "==== dist folder tree (top) ===="
-          find dist -maxdepth 3 -type f | head -n 200
-=======
 on:
   push:
     branches:
@@ -74,4 +61,3 @@ jobs:
             "
             echo 'FTP fallback deploy succeeded.'
           fi
->>>>>>> 99419d430f203e1b86b610c324837ed024e0780c
