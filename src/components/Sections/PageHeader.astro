@@ -25,13 +25,12 @@ const withBase = (url?: string) => {
   if (!url) return url;
   if (/^(?:[a-z]+:)?\/\//i.test(url)) return url;
   if (base && (url === base || url.startsWith(`${base}/`))) return url;
-  if (url.startsWith("/")) return `${base}${url}`;
-  return `${base}/${url.replace(/^\.?\//, "")}`;
+  return url.startsWith("/") ? `${base}${url}` : url;
 };
 
+const resolvedBackgroundImage = backgroundImage || "/uploads/page-header-bg.webp";
 const normalizedBackgroundImage =
-  withBase(backgroundImage || "/uploads/page-header-bg.webp") ||
-  `${base}/uploads/page-header-bg.webp`;
+  withBase(resolvedBackgroundImage) || resolvedBackgroundImage;
 const normalizedBackgroundImages = backgroundImages?.map((img) => withBase(img) ?? img);
 
 // If `tile` is provided, compute a grid (cols x rows) that fits the tile count and
