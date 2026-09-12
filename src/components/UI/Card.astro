@@ -14,11 +14,27 @@ export interface Props {
 }
 
 const { title, image, href, className = "", imageLayout = 'top', dataSeries, dataSpeaker, dataDate} = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+const withBase = (url?: string) => {
+  if (!url) return url;
+  if (
+    /^(?:[a-z]+:)?\/\//i.test(url) ||
+    url.startsWith("#") ||
+    url.startsWith("mailto:") ||
+    url.startsWith("tel:")
+  ) {
+    return url;
+  }
+  if (base && (url === base || url.startsWith(`${base}/`))) return url;
+  return url.startsWith("/") ? `${base}${url}` : url;
+};
+const normalizedHref = withBase(href);
+const normalizedImage = image ? { ...image, src: withBase(image.src) ?? image.src } : image;
 const Element = href ? "a" : "div";
 ---
 
 <Element
-  href={href}
+  href={normalizedHref}
   aria-label={href ? title : undefined}
   data-series={dataSeries}
   data-speaker={dataSpeaker}
@@ -35,8 +51,8 @@ const Element = href ? "a" : "div";
       { 'absolute inset-0': imageLayout === 'background' }
     ]}>
       <img
-        src={image.src}
-        alt={image.alt}
+        src={normalizedImage?.src}
+        alt={normalizedImage?.alt}
         class:list={[
           "w-full object-cover object-center transition-transform duration-300 group-hover:scale-105",
           { 'h-full': imageLayout === 'background', 'h-auto': imageLayout === 'top' }

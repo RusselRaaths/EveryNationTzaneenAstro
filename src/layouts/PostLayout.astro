@@ -27,6 +27,15 @@ const {
   type = "sermon",
 } = Astro.props;
 
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+const withBase = (url?: string) => {
+  if (!url) return url;
+  if (/^(?:[a-z]+:)?\/\//i.test(url)) return url;
+  if (base && (url === base || url.startsWith(`${base}/`))) return url;
+  return url.startsWith("/") ? `${base}${url}` : url;
+};
+const normalizedImage = image ? { ...image, url: withBase(image.url) ?? image.url } : image;
+
 const seoType = "article";
 
 let pageTitle = title;
@@ -48,12 +57,12 @@ const formattedDate = date ? formatDate(date) : null;
 <main class="container py-8">
   <div class="mx-auto max-w-3xl">
 
-    {image && (
+    {normalizedImage && (
       <div class="mb-8 overflow-hidden rounded-lg relative w-full pb-[56.25%]">
         <div class="absolute inset-0 flex items-center justify-center bg-gray-50">
           <img
-            src={image.url}
-            alt={image.alt}
+            src={normalizedImage.url}
+            alt={normalizedImage.alt}
             class="max-w-full max-h-full"
             loading="lazy" />
         </div>

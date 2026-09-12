@@ -24,6 +24,18 @@ const {
   ...rest
 } = Astro.props;
 
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+const normalizedHref =
+  href &&
+  !/^(?:[a-z]+:)?\/\//i.test(href) &&
+  !href.startsWith("#") &&
+  !href.startsWith("mailto:") &&
+  !href.startsWith("tel:") &&
+  href.startsWith("/") &&
+  !(base && (href === base || href.startsWith(`${base}/`)))
+    ? `${base}${href}`
+    : href;
+
 const baseStyles = [
   "inline-flex items-center justify-center gap-2",
   "font-sans text-base font-medium",
@@ -83,7 +95,7 @@ const Element = href ? "a" : "button";
 ---
 
 <Element
-  href={href}
+  href={normalizedHref}
   class={classes}
   target={target}
   rel={target === "_blank" ? "noopener noreferrer" : rel}

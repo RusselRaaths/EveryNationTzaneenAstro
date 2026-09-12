@@ -3,6 +3,12 @@ import { getCollection } from "astro:content";
 import Button from "../UI/Button.astro";
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+const withBase = (url?: string) => {
+  if (!url) return url;
+  if (/^(?:[a-z]+:)?\/\//i.test(url)) return url;
+  if (base && (url === base || url.startsWith(`${base}/`))) return url;
+  return url.startsWith("/") ? `${base}${url}` : url;
+};
 
 const allEvents = await getCollection("events");
 const upcomingEvents = allEvents
@@ -24,7 +30,7 @@ const upcomingEvents = allEvents
         <article class="card overflow-hidden">
           {event.data.image && (
             <img
-              src={event.data.image}
+              src={withBase(event.data.image)}
               alt={event.data.title}
               class="w-full h-48 object-cover"
             />

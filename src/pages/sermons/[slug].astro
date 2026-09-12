@@ -6,6 +6,8 @@ import { getCollection } from "astro:content";
 import type { CollectionEntry } from "astro:content";
 import { formatDate } from "../../utils/dateUtils";
 
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+
 // Generate static paths for all sermons
 export async function getStaticPaths() {
   try {
@@ -165,7 +167,7 @@ if (entry.data.series) {
           <h2 class="text-2xl font-bold mb-6">More From This Series</h2>
           <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
             {relatedSermons.map(sermon => (
-              <a href={`/sermons/${sermon.slug}`} class="block bg-gray-50 rounded-lg p-4 hover:bg-gray-100 transition-colors">
+              <a href={`${base}/sermons/${sermon.slug}`} class="block bg-gray-50 rounded-lg p-4 hover:bg-gray-100 transition-colors">
                 <h3 class="font-bold mb-2">{sermon.data.title}</h3>
                 <p class="text-sm text-gray-600 mb-2">{formatDate(sermon.data.date)}</p>
                 <p class="text-primary-600 text-sm font-medium">Listen/Watch →</p>

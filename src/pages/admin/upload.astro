@@ -1,5 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 ---
 
 <BaseLayout title="Admin Uploads" description="Upload sermons and event media"> 
@@ -51,7 +53,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       }
     }
 
-    document.getElementById('sermonForm').addEventListener('submit', e => { e.preventDefault(); postForm(e.currentTarget, '/upload-sermon.php', 'sermonResult'); });
-    document.getElementById('eventForm').addEventListener('submit', e => { e.preventDefault(); postForm(e.currentTarget, '/upload-event.php', 'eventResult'); });
+    document.getElementById('sermonForm').addEventListener('submit', e => { e.preventDefault(); postForm(e.currentTarget, `${base}/upload-sermon.php`, 'sermonResult'); });
+    document.getElementById('eventForm').addEventListener('submit', e => { e.preventDefault(); postForm(e.currentTarget, `${base}/upload-event.php`, 'eventResult'); });
   </script>
 </BaseLayout>

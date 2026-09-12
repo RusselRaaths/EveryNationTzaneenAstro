@@ -5,6 +5,12 @@ import PageHeader from "../../components/Sections/PageHeader.astro";
 import { getCollection } from "astro:content";
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+const withBase = (url?: string) => {
+  if (!url) return url;
+  if (/^(?:[a-z]+:)?\/\//i.test(url)) return url;
+  if (base && (url === base || url.startsWith(`${base}/`))) return url;
+  return url.startsWith("/") ? `${base}${url}` : url;
+};
 
 // Generate static paths for all ministries
 export async function getStaticPaths() {
@@ -26,7 +32,7 @@ const { entry } = Astro.props;
 const { Content } = await entry.render();
 
 const logoUrl =
-  entry.data.logo ||
+  withBase(entry.data.logo) ||
   (entry.slug === "childrens-ministry"
     ? `${base}/uploads/Every%20Nation%20Tzaneen%20Kids.webp`
     : undefined);

@@ -5,6 +5,8 @@ import EventList from "../../components/Sections/EventList.astro";
 import SermonList from "../../components/Sections/SermonList.astro";
 import Button from "../../components/UI/Button.astro";
 import { getCollection } from "astro:content";
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 ---
 
 <BaseLayout>
@@ -67,7 +69,7 @@ import { getCollection } from "astro:content";
       <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
         <div>
           <img
-            src="/uploads/site-logo.png"
+            src={`${base}/uploads/site-logo.png`}
             alt="Every Nation Tzaneen logo"
             class="rounded-lg shadow-lg object-contain w-full h-full bg-white p-8"
           />
@@ -109,20 +111,20 @@ import { getCollection } from "astro:content";
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         <div class="card text-center p-8">
           <div class="mx-auto mb-4 w-full h-44 flex items-center justify-center overflow-hidden rounded bg-white p-3">
-            <img src="/uploads/Every%20Nation%20Tzaneen%20Kids.webp" alt="Children Ministries" class="w-full h-full object-contain" />
+            <img src={`${base}/uploads/Every%20Nation%20Tzaneen%20Kids.webp`} alt="Children Ministries" class="w-full h-full object-contain" />
           </div>
           <h3 class="text-xl font-bold mb-3">Children's Ministry</h3>
-          <a href="/ministries/childrens-ministry" class="text-primary-600 font-medium hover:text-primary-700">
+          <a href={`${base}/ministries/childrens-ministry`} class="text-primary-600 font-medium hover:text-primary-700">
             Learn More →
           </a>
         </div>
         
         <div class="card text-center p-8">
           <div class="mx-auto mb-4 w-full h-44 flex items-center justify-center overflow-hidden rounded bg-white p-3">
-            <img src="/uploads/2025-10-05-worship-evening-00000001.webp" alt="Worship Ministry" class="w-full h-full object-contain" />
+            <img src={`${base}/uploads/2025-10-05-worship-evening-00000001.webp`} alt="Worship Ministry" class="w-full h-full object-contain" />
           </div>
           <h3 class="text-xl font-bold mb-3">Worship Ministry</h3>
-          <a href="/ministries/worship-ministry" class="text-primary-600 font-medium hover:text-primary-700">
+          <a href={`${base}/ministries/worship-ministry`} class="text-primary-600 font-medium hover:text-primary-700">
             Learn More →
           </a>
         </div>
@@ -137,7 +139,7 @@ import { getCollection } from "astro:content";
           <p class="text-gray-700 mb-4">
             Sharing the gospel and serving our neighbourhood through practical outreach.
           </p>
-          <a href="/ministries/evangelism-ministry" class="text-primary-600 font-medium hover:text-primary-700">
+          <a href={`${base}/ministries/evangelism-ministry`} class="text-primary-600 font-medium hover:text-primary-700">
             Learn More →
           </a>
         </div>
@@ -152,7 +154,7 @@ import { getCollection } from "astro:content";
           <p class="text-gray-700 mb-4">
             Equipping young people to follow Jesus through worship, community, and leadership.
           </p>
-          <a href="/ministries/youth-ministry" class="text-primary-600 font-medium hover:text-primary-700">
+          <a href={`${base}/ministries/youth-ministry`} class="text-primary-600 font-medium hover:text-primary-700">
             Learn More →
           </a>
         </div>
@@ -167,7 +169,7 @@ import { getCollection } from "astro:content";
           <p class="text-gray-700 mb-4">
             A community of intercessors praying for the church, city, and nations.
           </p>
-          <a href="/ministries/prayer-ministry" class="text-primary-600 font-medium hover:text-primary-700">
+          <a href={`${base}/ministries/prayer-ministry`} class="text-primary-600 font-medium hover:text-primary-700">
             Learn More →
           </a>
         </div>
@@ -182,7 +184,7 @@ import { getCollection } from "astro:content";
           <p class="text-gray-700 mb-4">
             Encouraging prophetic insight, prayer, and spiritual growth for the church.
           </p>
-          <a href="/ministries/prophetic-ministry" class="text-primary-600 font-medium hover:text-primary-700">
+          <a href={`${base}/ministries/prophetic-ministry`} class="text-primary-600 font-medium hover:text-primary-700">
             Learn More →
           </a>
         </div>
@@ -199,7 +201,7 @@ import { getCollection } from "astro:content";
   <!-- Call to Action -->
   <section 
     class="py-20 bg-cover bg-center text-white"
-    style="background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(/uploads/thank-you-bg.webp)"
+    style={`background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(${base}/uploads/thank-you-bg.webp)`}
   >
     <div class="container">
       <div class="max-w-3xl mx-auto text-center">
