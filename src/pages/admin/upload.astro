@@ -56,19 +56,29 @@ const eventUploadEndpoint = `${base}/upload-event.php`;
       }
     }
 
+    function getEndpoint(form, resultId, label) {
+      const endpoint = form.dataset.endpoint;
+      if (!endpoint) {
+        const resEl = document.getElementById(resultId);
+        if (resEl) resEl.textContent = `Error: Missing ${label} upload endpoint.`;
+        return null;
+      }
+      return endpoint;
+    }
+
     document.getElementById('sermonForm').addEventListener('submit', e => {
       e.preventDefault();
       const form = /** @type {HTMLFormElement} */ (e.currentTarget);
-      const endpoint = form.dataset.endpoint;
-      if (!endpoint) throw new Error('Missing sermon upload endpoint.');
+      const endpoint = getEndpoint(form, 'sermonResult', 'sermon');
+      if (!endpoint) return;
       postForm(form, endpoint, 'sermonResult');
     });
 
     document.getElementById('eventForm').addEventListener('submit', e => {
       e.preventDefault();
       const form = /** @type {HTMLFormElement} */ (e.currentTarget);
-      const endpoint = form.dataset.endpoint;
-      if (!endpoint) throw new Error('Missing event upload endpoint.');
+      const endpoint = getEndpoint(form, 'eventResult', 'event');
+      if (!endpoint) return;
       postForm(form, endpoint, 'eventResult');
     });
   </script>
