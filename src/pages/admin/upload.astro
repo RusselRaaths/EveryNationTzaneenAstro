@@ -1,5 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 ---
 
 <BaseLayout title="Admin Uploads" description="Upload sermons and event media"> 
@@ -36,7 +38,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     </section>
   </div>
 
-  <script type="module">
+  <script type="module" define:vars={{ base }}>
     async function postForm(form, url, resultId) {
       const fd = new FormData(form);
       const resEl = document.getElementById(resultId);
@@ -51,7 +53,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       }
     }
 
-    document.getElementById('sermonForm').addEventListener('submit', e => { e.preventDefault(); postForm(e.currentTarget, new URL('../../upload-sermon.php', window.location.href).toString(), 'sermonResult'); });
-    document.getElementById('eventForm').addEventListener('submit', e => { e.preventDefault(); postForm(e.currentTarget, new URL('../../upload-event.php', window.location.href).toString(), 'eventResult'); });
+    document.getElementById('sermonForm').addEventListener('submit', e => { e.preventDefault(); postForm(e.currentTarget, new URL(`${base}/upload-sermon.php`, window.location.origin).toString(), 'sermonResult'); });
+    document.getElementById('eventForm').addEventListener('submit', e => { e.preventDefault(); postForm(e.currentTarget, new URL(`${base}/upload-event.php`, window.location.origin).toString(), 'eventResult'); });
   </script>
 </BaseLayout>
