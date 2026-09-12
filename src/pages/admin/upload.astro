@@ -51,7 +51,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       }
     }
 
-    document.getElementById('sermonForm').addEventListener('submit', e => { e.preventDefault(); postForm(e.currentTarget, new URL('../../upload-sermon.php', window.location.href).pathname, 'sermonResult'); });
-    document.getElementById('eventForm').addEventListener('submit', e => { e.preventDefault(); postForm(e.currentTarget, new URL('../../upload-event.php', window.location.href).pathname, 'eventResult'); });
+    document.getElementById('sermonForm').addEventListener('submit', e => { e.preventDefault(); postForm(e.currentTarget, new URL('../../upload-sermon.php', window.location.href).toString(), 'sermonResult'); });
+    document.getElementById('eventForm').addEventListener('submit', e => { e.preventDefault(); postForm(e.currentTarget, new URL('../../upload-event.php', window.location.href).toString(), 'eventResult'); });
   </script>
 </BaseLayout>

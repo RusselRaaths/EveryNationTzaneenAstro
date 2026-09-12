@@ -30,9 +30,7 @@ const withBase = (url?: string) => {
 
 const normalizedBackgroundImage = withBase(backgroundImage) ?? backgroundImage;
 const normalizedBackgroundImages = backgroundImages?.map((img) => withBase(img) ?? img);
-const singleBackgroundImage = normalizedBackgroundImage
-  ? `, url('${encodeURI(normalizedBackgroundImage)}')`
-  : "";
+const singleBackgroundImage = `, url('${encodeURI(normalizedBackgroundImage ?? "")}')`;
 
 // If `tile` is provided, compute a grid (cols x rows) that fits the tile count and
 // set background-size so the image repeats to form the grid.
