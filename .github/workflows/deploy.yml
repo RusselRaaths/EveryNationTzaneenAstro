@@ -17,6 +17,10 @@ jobs:
     name: Build and Deploy (Diagnostics)
     runs-on: ubuntu-latest
     timeout-minutes: 25
+    env:
+      FTP_HOST: ${{ secrets.FTP_HOST || vars.FTP_HOST || '' }}
+      FTP_USERNAME: ${{ secrets.FTP_USERNAME || vars.FTP_USERNAME || '' }}
+      FTP_PASSWORD: ${{ secrets.FTP_PASSWORD || vars.FTP_PASSWORD || '' }}
 
     steps:
       - name: Checkout
@@ -60,31 +64,50 @@ jobs:
           sudo apt-get install -y lftp
           lftp --version | head -n 2
 
-      - name: Preflight secret checks (masked)
-        env:
-          FTP_HOST: ${{ secrets.FTP_HOST }}
-          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
-          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+      - name: Preflight deploy credential checks (masked)
+        id: deploy-config
         run: |
           set -euo pipefail
-          [[ -n "${FTP_HOST:-}" ]] || { echo "Missing FTP_HOST"; exit 1; }
-          [[ -n "${FTP_USERNAME:-}" ]] || { echo "Missing FTP_USERNAME"; exit 1; }
-          [[ -n "${FTP_PASSWORD:-}" ]] || { echo "Missing FTP_PASSWORD"; exit 1; }
 
-          echo "::add-mask::${FTP_HOST}"
-          echo "::add-mask::${FTP_USERNAME}"
-          echo "::add-mask::${FTP_PASSWORD}"
+          if [[ -n "${FTP_HOST:-}" ]]; then
+            echo "::add-mask::${FTP_HOST}"
+          fi
+          if [[ -n "${FTP_USERNAME:-}" ]]; then
+            echo "::add-mask::${FTP_USERNAME}"
+          fi
+          if [[ -n "${FTP_PASSWORD:-}" ]]; then
+            echo "::add-mask::${FTP_PASSWORD}"
+          fi
 
-          echo "Secrets present."
-          echo "FTP_HOST length: ${#FTP_HOST}"
-          echo "FTP_USERNAME length: ${#FTP_USERNAME}"
-          echo "FTP_PASSWORD length: ${#FTP_PASSWORD}"
+          missing=()
+          [[ -n "${FTP_HOST:-}" ]] || missing+=("FTP_HOST")
+          [[ -n "${FTP_USERNAME:-}" ]] || missing+=("FTP_USERNAME")
+          [[ -n "${FTP_PASSWORD:-}" ]] || missing+=("FTP_PASSWORD")
+
+          if (( ${#missing[@]} == 0 )); then
+            echo "ready=true" >> "$GITHUB_OUTPUT"
+            echo "Deploy credentials present."
+            echo "FTP_HOST length: ${#FTP_HOST}"
+            echo "FTP_USERNAME length: ${#FTP_USERNAME}"
+            echo "FTP_PASSWORD length: ${#FTP_PASSWORD}"
+            exit 0
+          fi
+
+          echo "ready=false" >> "$GITHUB_OUTPUT"
+          echo "::warning::Skipping deploy because required FTP credentials are not configured: ${missing[*]}"
+          {
+            echo "### Deployment skipped"
+            echo
+            echo "The site build succeeded, but deployment was skipped because the following FTP credentials were missing:"
+            for name in "${missing[@]}"; do
+              echo "- \`${name}\`"
+            done
+            echo
+            echo "Configure these values as GitHub Actions secrets or repository variables to enable deployment."
+          } >> "$GITHUB_STEP_SUMMARY"
 
       - name: Deploy (FTPS first, fallback to FTP) + diagnostics
-        env:
-          FTP_HOST: ${{ secrets.FTP_HOST }}
-          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
-          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+        if: steps.deploy-config.outputs.ready == 'true'
         run: |
           set -Eeuo pipefail
 
