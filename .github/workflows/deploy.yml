@@ -1,4 +1,4 @@
-name: Deploy to Xneelo
+﻿name: Deploy to Xneelo
 
 on:
   push:
@@ -34,7 +34,6 @@ jobs:
           FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
         run: |
           set -euo pipefail
-
           echo "Trying FTPS (TLS) first..."
           if lftp -d -c "
             set ftp:passive-mode true;
@@ -44,7 +43,7 @@ jobs:
             set net:max-retries 2;
             set net:timeout 20;
             set net:reconnect-interval-base 2;
-            open -u ${FTP_USERNAME},${FTP_PASSWORD} ${FTP_HOST};
+            open -u ${FTP_USERNAME}, ;
             mirror --reverse --delete --continue --parallel=2 --verbose ./dist /public_html/ChurchWebsite/ --exclude-glob .htpasswd
           "; then
             echo 'FTPS deploy succeeded.'
@@ -56,7 +55,7 @@ jobs:
               set net:max-retries 2;
               set net:timeout 20;
               set net:reconnect-interval-base 2;
-              open -u ${FTP_USERNAME},${FTP_PASSWORD} ${FTP_HOST};
+              open -u ${FTP_USERNAME}, ;
               mirror --reverse --delete --continue --parallel=2 --verbose ./dist /public_html/ChurchWebsite/ --exclude-glob .htpasswd
             "
             echo 'FTP fallback deploy succeeded.'
