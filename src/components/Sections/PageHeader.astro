@@ -28,9 +28,7 @@ const withBase = (url?: string) => {
   return url.startsWith("/") ? `${base}${url}` : url;
 };
 
-const resolvedBackgroundImage = backgroundImage || "/uploads/page-header-bg.webp";
-const normalizedBackgroundImage =
-  withBase(resolvedBackgroundImage) || resolvedBackgroundImage;
+const normalizedBackgroundImage = withBase(backgroundImage) ?? backgroundImage;
 const normalizedBackgroundImages = backgroundImages?.map((img) => withBase(img) ?? img);
 
 // If `tile` is provided, compute a grid (cols x rows) that fits the tile count and
