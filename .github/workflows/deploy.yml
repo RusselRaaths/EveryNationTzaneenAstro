@@ -53,38 +53,51 @@ jobs:
           echo "dist exists. Top-level contents:"
           ls -la dist | sed -n '1,120p'
 
+      - name: Resolve deploy credentials
+        id: deploy_config
+        env:
+          FTP_HOST: ${{ secrets.FTP_HOST || vars.FTP_HOST }}
+          FTP_USERNAME: ${{ secrets.FTP_USERNAME || vars.FTP_USERNAME }}
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD || vars.FTP_PASSWORD }}
+        run: |
+          set -euo pipefail
+
+          missing=()
+          [[ -n "${FTP_HOST:-}" ]] || missing+=("FTP_HOST")
+          [[ -n "${FTP_USERNAME:-}" ]] || missing+=("FTP_USERNAME")
+          [[ -n "${FTP_PASSWORD:-}" ]] || missing+=("FTP_PASSWORD")
+
+          if (( ${#missing[@]} > 0 )); then
+            echo "should_deploy=false" >> "$GITHUB_OUTPUT"
+            echo "Skipping deployment because required FTP configuration is missing: ${missing[*]}." >> "$GITHUB_STEP_SUMMARY"
+            echo "Missing deploy configuration: ${missing[*]}"
+            exit 0
+          fi
+
+          echo "::add-mask::${FTP_HOST}"
+          echo "::add-mask::${FTP_USERNAME}"
+          echo "::add-mask::${FTP_PASSWORD}"
+
+          echo "should_deploy=true" >> "$GITHUB_OUTPUT"
+          echo "Deploy credentials present."
+          echo "FTP_HOST length: ${#FTP_HOST}"
+          echo "FTP_USERNAME length: ${#FTP_USERNAME}"
+          echo "FTP_PASSWORD length: ${#FTP_PASSWORD}"
+
       - name: Install lftp
+        if: steps.deploy_config.outputs.should_deploy == 'true'
         run: |
           set -euo pipefail
           sudo apt-get update
           sudo apt-get install -y lftp
           lftp --version | head -n 2
 
-      - name: Preflight secret checks (masked)
-        env:
-          FTP_HOST: ${{ secrets.FTP_HOST }}
-          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
-          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
-        run: |
-          set -euo pipefail
-          [[ -n "${FTP_HOST:-}" ]] || { echo "Missing FTP_HOST"; exit 1; }
-          [[ -n "${FTP_USERNAME:-}" ]] || { echo "Missing FTP_USERNAME"; exit 1; }
-          [[ -n "${FTP_PASSWORD:-}" ]] || { echo "Missing FTP_PASSWORD"; exit 1; }
-
-          echo "::add-mask::${FTP_HOST}"
-          echo "::add-mask::${FTP_USERNAME}"
-          echo "::add-mask::${FTP_PASSWORD}"
-
-          echo "Secrets present."
-          echo "FTP_HOST length: ${#FTP_HOST}"
-          echo "FTP_USERNAME length: ${#FTP_USERNAME}"
-          echo "FTP_PASSWORD length: ${#FTP_PASSWORD}"
-
       - name: Deploy (FTPS first, fallback to FTP) + diagnostics
+        if: steps.deploy_config.outputs.should_deploy == 'true'
         env:
-          FTP_HOST: ${{ secrets.FTP_HOST }}
-          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
-          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+          FTP_HOST: ${{ secrets.FTP_HOST || vars.FTP_HOST }}
+          FTP_USERNAME: ${{ secrets.FTP_USERNAME || vars.FTP_USERNAME }}
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD || vars.FTP_PASSWORD }}
         run: |
           set -Eeuo pipefail
 
