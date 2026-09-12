@@ -51,13 +51,15 @@ const ministriesCollection = defineCollection({
   type: 'content',
   schema: z.object({
     name: z.string(),
-    logo: z.string().startsWith('/uploads/ministries/').optional(),
+    title: z.string().optional(),
+    image: z.string().optional(),
+    logo: z.string().optional(),
     summary: z.string(),
-    coordinator: z.string().optional(),
-    contact: z.string().optional(), // Email or text
-    schedule: z.string().optional(),
-    order: z.number().optional(),
     draft: z.boolean().default(false),
+    order: z.number().optional(),
+    coordinator: z.string().optional(),
+    contact: z.string().optional(),
+    schedule: z.string().optional(),
   }),
 });
 
