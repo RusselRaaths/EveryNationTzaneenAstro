@@ -1,150 +1,39 @@
-name: Deploy to Xneelo
+name: Deploy to xneelo
 
 on:
   push:
-    branches: [main]
-  workflow_dispatch:
-
-permissions:
-  contents: read
-
-concurrency:
-  group: deploy-xneelo-${{ github.ref }}
-  cancel-in-progress: true
+    branches:
+      - main
 
 jobs:
   web-deploy:
-    name: Build and Deploy (Diagnostics)
+    name: Build and Deploy
     runs-on: ubuntu-latest
-    timeout-minutes: 25
-
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+    - name: Get latest code
+      uses: actions/checkout@v4
 
-      - name: Setup Node.js (LTS) with npm cache
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: npm
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: 22
 
-      - name: Environment diagnostics
-        run: |
-          set -euo pipefail
-          echo "Runner: $(uname -a)"
-          echo "Node: $(node -v)"
-          echo "npm:  $(npm -v)"
-          echo "Branch ref: ${GITHUB_REF}"
-          echo "Commit: ${GITHUB_SHA}"
+    - name: Install dependencies & build Astro site
+      run: |
+        npm ci
+        npm run build
 
-      - name: Install dependencies
-        run: npm ci
+    - name: Install lftp
+      run: sudo apt-get update && sudo apt-get install -y lftp
 
-      - name: Build Astro site
-        run: npm run build
-
-      - name: Verify build output
-        run: |
-          set -euo pipefail
-          if [[ ! -d dist ]]; then
-            echo "ERROR: dist directory not found."
-            exit 1
-          fi
-          echo "dist exists. Top-level contents:"
-          ls -la dist | sed -n '1,120p'
-
-      - name: Install lftp
-        run: |
-          set -euo pipefail
-          sudo apt-get update
-          sudo apt-get install -y lftp
-          lftp --version | head -n 2
-
-      - name: Preflight secret checks (masked)
-        env:
-          FTP_HOST: ${{ secrets.FTP_HOST }}
-          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
-          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
-        run: |
-          set -euo pipefail
-          [[ -n "${FTP_HOST:-}" ]] || { echo "Missing FTP_HOST"; exit 1; }
-          [[ -n "${FTP_USERNAME:-}" ]] || { echo "Missing FTP_USERNAME"; exit 1; }
-          [[ -n "${FTP_PASSWORD:-}" ]] || { echo "Missing FTP_PASSWORD"; exit 1; }
-
-          echo "::add-mask::${FTP_HOST}"
-          echo "::add-mask::${FTP_USERNAME}"
-          echo "::add-mask::${FTP_PASSWORD}"
-
-          echo "Secrets present."
-          echo "FTP_HOST length: ${#FTP_HOST}"
-          echo "FTP_USERNAME length: ${#FTP_USERNAME}"
-          echo "FTP_PASSWORD length: ${#FTP_PASSWORD}"
-
-      - name: Deploy (FTPS first, fallback to FTP) + diagnostics
-        env:
-          FTP_HOST: ${{ secrets.FTP_HOST }}
-          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
-          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
-        run: |
-          set -Eeuo pipefail
-
-          REMOTE_DIR="/public_html/ChurchWebsite/"
-          LOCAL_DIR="./dist"
-          FTPS_LOG="$(mktemp)"
-          FTP_LOG="$(mktemp)"
-
-          echo "Starting deployment"
-          echo "Remote dir: ${REMOTE_DIR}"
-          echo "Local dir:  ${LOCAL_DIR}"
-
-          run_ftps() {
-            lftp -d -e "
-              set cmd:fail-exit yes;
-              set ftp:passive-mode true;
-              set ftp:ssl-allow yes;
-              set ftp:ssl-force true;
-              set ssl:verify-certificate no;
-              set net:max-retries 2;
-              set net:timeout 20;
-              set net:reconnect-interval-base 2;
-              open -u ${FTP_USERNAME},${FTP_PASSWORD} ${FTP_HOST};
-              cls -la ${REMOTE_DIR};
-              mirror --reverse --delete --continue --parallel=2 --verbose ${LOCAL_DIR} ${REMOTE_DIR} --exclude-glob .htpasswd;
-              bye
-            " 2>&1 | tee "${FTPS_LOG}"
-          }
-
-          run_ftp() {
-            lftp -d -e "
-              set cmd:fail-exit yes;
-              set ftp:passive-mode true;
-              set ftp:ssl-allow no;
-              set net:max-retries 2;
-              set net:timeout 20;
-              set net:reconnect-interval-base 2;
-              open -u ${FTP_USERNAME},${FTP_PASSWORD} ${FTP_HOST};
-              cls -la ${REMOTE_DIR};
-              mirror --reverse --delete --continue --parallel=2 --verbose ${LOCAL_DIR} ${REMOTE_DIR} --exclude-glob .htpasswd;
-              bye
-            " 2>&1 | tee "${FTP_LOG}"
-          }
-
-          echo "Trying FTPS (TLS) first..."
-          if run_ftps; then
-            echo "FTPS deploy succeeded."
-            exit 0
-          fi
-
-          echo "FTPS failed. Last 80 lines:"
-          tail -n 80 "${FTPS_LOG}" || true
-          echo "Falling back to plain FTP..."
-
-          if run_ftp; then
-            echo "FTP fallback deploy succeeded."
-            exit 0
-          fi
-
-          echo "FTP also failed. Last 80 lines:"
-          tail -n 80 "${FTP_LOG}" || true
-          echo "Deployment failed on both FTPS and FTP."
-          exit 1
+    - name: Deploy build output via LFTP
+      run: |
+        lftp -c "
+        set ftp:ssl-allow no;
+        set ftp:passive-mode true;
+        set net:max-retries 2;
+        set net:timeout 10;
+        set net:reconnect-interval-base 2;
+        open -u entzaerzxg,1JdTs6D9422745 196.40.97.146;
+        mirror --reverse --delete --continue --parallel=2 --verbose ./dist /public_html/ChurchWebsite/ --exclude-glob .ht*
+        " || true
