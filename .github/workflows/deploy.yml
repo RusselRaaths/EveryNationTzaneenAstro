@@ -78,3 +78,7 @@ const ministries = defineCollection({
     schedule: z.string().optional(),
   }),
 });
+
+export const collections = {
+  ministries,
+};
