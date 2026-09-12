@@ -1,5 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 ---
 
 <BaseLayout title="Admin Uploads" description="Upload sermons and event media"> 
@@ -36,9 +38,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     </section>
   </div>
 
-  <script type="module">
-    const base = import.meta.env.BASE_URL.replace(/\/$/, '');
-
+  <script type="module" define:vars={{ base }}>
     async function postForm(form, url, resultId) {
       const fd = new FormData(form);
       const resEl = document.getElementById(resultId);
