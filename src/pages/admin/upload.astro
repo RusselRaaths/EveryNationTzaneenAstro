@@ -2,6 +2,9 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+const sermonUploadEndpoint = `${base}/upload-sermon.php`;
+const eventUploadEndpoint = `${base}/upload-event.php`;
+
 ---
 
 <BaseLayout title="Admin Uploads" description="Upload sermons and event media"> 
@@ -10,7 +13,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 
     <section class="mb-8">
       <h2 class="text-xl font-semibold mb-2">Upload Sermon</h2>
-      <form id="sermonForm" class="space-y-2 max-w-lg">
+      <form id="sermonForm" data-endpoint={sermonUploadEndpoint} class="space-y-2 max-w-lg">
         <input name="secret" placeholder="Secret" required class="w-full p-2 border" />
         <input name="title" placeholder="Title" class="w-full p-2 border" />
         <input name="speaker" placeholder="Speaker" class="w-full p-2 border" />
@@ -24,7 +27,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 
     <section>
       <h2 class="text-xl font-semibold mb-2">Upload Event Media</h2>
-      <form id="eventForm" class="space-y-2 max-w-lg">
+      <form id="eventForm" data-endpoint={eventUploadEndpoint} class="space-y-2 max-w-lg">
         <input name="secret" placeholder="Secret" required class="w-full p-2 border" />
         <input name="title" placeholder="Title" class="w-full p-2 border" />
         <input name="date" type="date" class="w-full p-2 border" />
@@ -38,7 +41,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, "");
     </section>
   </div>
 
-  <script type="module" define:vars={{ base }}>
+  <script type="module">
     async function postForm(form, url, resultId) {
       const fd = new FormData(form);
       const resEl = document.getElementById(resultId);
@@ -53,7 +56,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, "");
       }
     }
 
-    document.getElementById('sermonForm').addEventListener('submit', e => { e.preventDefault(); postForm(e.currentTarget, new URL(`${base}/upload-sermon.php`, window.location.origin).toString(), 'sermonResult'); });
-    document.getElementById('eventForm').addEventListener('submit', e => { e.preventDefault(); postForm(e.currentTarget, new URL(`${base}/upload-event.php`, window.location.origin).toString(), 'eventResult'); });
+    document.getElementById('sermonForm').addEventListener('submit', e => { e.preventDefault(); postForm(e.currentTarget, e.currentTarget.dataset.endpoint, 'sermonResult'); });
+    document.getElementById('eventForm').addEventListener('submit', e => { e.preventDefault(); postForm(e.currentTarget, e.currentTarget.dataset.endpoint, 'eventResult'); });
   </script>
 </BaseLayout>
