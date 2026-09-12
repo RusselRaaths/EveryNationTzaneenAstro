@@ -25,7 +25,8 @@ const withBase = (url?: string) => {
   if (!url) return url;
   if (/^(?:[a-z]+:)?\/\//i.test(url)) return url;
   if (base && (url === base || url.startsWith(`${base}/`))) return url;
-  return url.startsWith("/") ? `${base}${url}` : url;
+  if (url.startsWith("/")) return `${base}${url}`;
+  return `${base}/${url.replace(/^\.?\//, "")}`;
 };
 
 const normalizedBackgroundImage =
