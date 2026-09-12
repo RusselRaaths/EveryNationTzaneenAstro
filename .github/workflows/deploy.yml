@@ -61,24 +61,3 @@ jobs:
             "
             echo 'FTP fallback deploy succeeded.'
           fi
-
-import { defineCollection, z } from 'astro:content';
-
-const ministries = defineCollection({
-  schema: z.object({
-    name: z.string(),
-    title: z.string().optional(),
-    image: z.string().optional(),
-    logo: z.string().optional(),
-    summary: z.string(),
-    draft: z.boolean().default(false),
-    order: z.number().optional(),
-    coordinator: z.string().optional(),
-    contact: z.string().optional(),
-    schedule: z.string().optional(),
-  }),
-});
-
-export const collections = {
-  ministries,
-};
