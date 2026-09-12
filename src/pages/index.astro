@@ -185,7 +185,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, "");
   <!-- Call to Action -->
   <section
     class="py-20 bg-cover bg-center text-white"
-    style={`background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(${base}/uploads/thank-you-bg.webp)`}
+    style={`background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('${encodeURI(`${base}/uploads/thank-you-bg.webp`)}')`}
   >
     <div class="container">
       <div class="max-w-3xl mx-auto text-center">
