@@ -47,12 +47,12 @@ const backgroundImages =
 ---
 
 <BaseLayout
-  title={`${entry.data.title} - Ministries - Every Nation Tzaneen`}
+  title={`${entry.data.name} - Ministries - Every Nation Tzaneen`}
   description={entry.data.summary}
-  image={entry.data.image ? { url: entry.data.image, alt: entry.data.title } : undefined}
+  image={(entry.data as any).image ? { url: (entry.data as any).image, alt: entry.data.name } : undefined}
 >
   <PageHeader
-    title={entry.data.title}
+    title={entry.data.name}
     subtitle={entry.data.summary}
     backgroundImage={backgroundImage}
     backgroundImages={backgroundImages}
@@ -67,7 +67,7 @@ const backgroundImages =
       <div class="max-w-4xl mx-auto">
         {logoUrl && (
           <div class="mb-8 flex justify-center">
-            <img src={logoUrl} alt={entry.data.title} class="max-h-28 w-auto object-contain" />
+            <img src={logoUrl} alt={entry.data.name} class="max-h-28 w-auto object-contain" />
           </div>
         )}
 

@@ -18,7 +18,7 @@ const ministries = all
     const ao = a.data.order ?? 999;
     const bo = b.data.order ?? 999;
     if (ao !== bo) return ao - bo;
-    return a.data.title.localeCompare(b.data.title);
+    return a.data.name.localeCompare(b.data.name);
   });
 ---
 
@@ -44,16 +44,16 @@ const ministries = all
             href={`${base}/ministries/${m.slug}`}
             class="block bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow overflow-hidden border border-gray-100"
           >
-            {m.data.image && (
+            {m.data.logo && (
               <img
-                src={m.data.image}
-                alt={m.data.title}
+                src={m.data.logo}
+                alt={m.data.name}
                 class="w-full h-48 object-cover"
               />
             )}
 
             <div class="p-6">
-              <h3 class="text-xl font-bold mb-2">{m.data.title}</h3>
+              <h3 class="text-xl font-bold mb-2">{m.data.name}</h3>
               {m.data.summary && (
                 <p class="text-gray-600">{m.data.summary}</p>
               )}

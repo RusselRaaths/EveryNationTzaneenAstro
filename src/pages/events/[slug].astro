@@ -37,8 +37,9 @@ const isFutureEvent = new Date(entry.data.date) > new Date();
 
 // Determine whether to show the embedded map
 const showMap =
-  typeof entry.data.showMap !== "undefined"
-    ? entry.data.showMap
+  // Cast to any to avoid TypeScript errors when `showMap` is not declared on the entry type
+  typeof (entry.data as any).showMap !== "undefined"
+    ? (entry.data as any).showMap
     : (
         entry.slug === "youth-winter-retreat" ||
         entry.data.title === "Victory Training" ||
@@ -59,13 +60,13 @@ const showMap =
     description={entry.data.summary}
     image={{ url: entry.data.image, alt: entry.data.title }}
     date={entry.data.date}
-    tags={entry.data.tags}
+    tags={(entry.data as any).tags}
     type="event"
   >
     <PageHeader
       title={entry.data.title}
       subtitle={entry.data.summary}
-      backgroundImages={Array.isArray(entry.data.headerImages) ? entry.data.headerImages.map(encodeURI) : undefined}
+      backgroundImages={Array.isArray((entry.data as any).headerImages) ? (entry.data as any).headerImages.map(encodeURI) : undefined}
       backgroundImage={entry.data.image}
       imageFit="cover"
       imagePosition="center"

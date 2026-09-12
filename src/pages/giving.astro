@@ -1,9 +1,17 @@
 ---
-const base = import.meta.env.BASE_URL;
+interface Props {
+  url: string;
+}
+
+const { url } = Astro.props;
+
+const processUrl = (url: string) => {
+  // function body
+};
 ---
 
 <script>
-  window.location.href = base;
+  window.location.href = "{url}";
 </script>
 
-<p>If you are not redirected, <a href={base}>go home</a>.</p>
+<p>If you are not redirected, <a href={url}>go home</a>.</p>

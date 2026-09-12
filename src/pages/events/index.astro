@@ -1,9 +1,10 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro";
-import HeroSection from "../components/Sections/HeroSection.astro";
-import EventList from "../components/Sections/EventList.astro";
-import SermonList from "../components/Sections/SermonList.astro";
-import Button from "../components/UI/Button.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import HeroSection from "../../components/Sections/HeroSection.astro";
+import EventList from "../../components/Sections/EventList.astro";
+import SermonList from "../../components/Sections/SermonList.astro";
+import Button from "../../components/UI/Button.astro";
+import { getCollection } from "astro:content";
 ---
 
 <BaseLayout>
@@ -22,7 +23,6 @@ import Button from "../components/UI/Button.astro";
     })();
   </script>
 
-  <!-- forced-commit: 2026-01-25T22:50:00Z - small change to trigger CI/deploy -->
   <HeroSection 
     title="Welcome to Every Nation Tzaneen"
     subtitle="A Disciple Making Family"
@@ -130,7 +130,7 @@ import Button from "../components/UI/Button.astro";
         <div class="card text-center p-8">
           <div class="w-20 h-20 mx-auto mb-4 rounded-full bg-accent-100 flex items-center justify-center">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-accent-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9-3-9m-9 9a9 9 0 019-9" />
             </svg>
           </div>
           <h3 class="text-xl font-bold mb-3">Evangelism Ministry</h3>
@@ -145,7 +145,7 @@ import Button from "../components/UI/Button.astro";
         <div class="card text-center p-8">
           <div class="w-20 h-20 mx-auto mb-4 rounded-full bg-accent-100 flex items-center justify-center">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-accent-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9-3-9m-9 9a9 9 0 019-9" />
             </svg>
           </div>
           <h3 class="text-xl font-bold mb-3">YTH Ministry</h3>

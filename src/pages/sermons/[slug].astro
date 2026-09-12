@@ -3,6 +3,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import PostLayout from "../../layouts/PostLayout.astro";
 import Button from "../../components/UI/Button.astro";
 import { getCollection } from "astro:content";
+import type { CollectionEntry } from "astro:content";
 import { formatDate } from "../../utils/dateUtils";
 
 // Generate static paths for all sermons
@@ -28,9 +29,8 @@ const { Content } = await entry.render();
 
 // Format the date for display
 const formattedDate = formatDate(entry.data.date);
-
 // Find related sermons from the same series (if available)
-let relatedSermons = [];
+let relatedSermons: CollectionEntry<"sermons">[] = [];
 if (entry.data.series) {
   try {
     const allSermons = await getCollection("sermons", ({ data }) => {
@@ -61,7 +61,7 @@ if (entry.data.series) {
     image={entry.data.image ? { url: entry.data.image, alt: entry.data.title } : undefined}
     date={entry.data.date}
     author={entry.data.speaker}
-    tags={entry.data.tags}
+    tags={(entry.data as any).tags ?? undefined}
     type="sermon"
   >
     <!-- Sermon Details -->

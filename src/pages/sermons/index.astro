@@ -198,7 +198,7 @@ const speakers = [...new Set(sermons.map(sermon => sermon.data.speaker))];
   const resetButton = document.getElementById('reset-filters') as HTMLButtonElement | null;
       const sermonsGrid = document.getElementById('sermons-grid');
       const noResults = document.getElementById('no-results');
-      const sermonCards = document.querySelectorAll('.sermon-card');
+      const sermonCards = document.querySelectorAll<HTMLElement>('.sermon-card');
       
       // Function to filter sermons
       const filterSermons = () => {
@@ -210,7 +210,7 @@ const speakers = [...new Set(sermons.map(sermon => sermon.data.speaker))];
         
         let visibleCount = 0;
         
-        sermonCards.forEach(card => {
+        sermonCards.forEach((card: HTMLElement) => {
           const title = card.querySelector('h3')?.textContent.toLowerCase() || '';
           const summary = card.querySelector('p')?.textContent.toLowerCase() || '';
           const series = card.getAttribute('data-series') || '';
