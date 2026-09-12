@@ -1,43 +1,29 @@
-<script is:inline>
-  (function() {
-    if (!sessionStorage.getItem('preview_auth')) {
-      const user = prompt("Username:");
-      const pass = prompt("Password:");
-      if (user === "Willem" && pass === "Willem@ENTZN") {
-        sessionStorage.setItem('preview_auth', 'true');
-      } else {
-        alert("Incorrect credentials.");
-        window.location.href = "about:blank";
-      }
-    }
-  })();
-</script>
-
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import HeroSection from "../components/Sections/HeroSection.astro";
 import EventList from "../components/Sections/EventList.astro";
 import SermonList from "../components/Sections/SermonList.astro";
 import Button from "../components/UI/Button.astro";
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 ---
 
 <BaseLayout>
-  <!-- forced-commit: 2026-01-25T22:50:00Z - small change to trigger CI/deploy -->
-  <HeroSection 
+  <HeroSection
     title="Welcome to Every Nation Tzaneen"
     subtitle="A Disciple Making Family"
     ctaText="Plan Your Visit"
-    ctaLink="/im-new"
+    ctaLink={`${base}/im-new`}
     secondaryCtaText="Watch Sermons"
-    secondaryCtaLink="/sermons"
+    secondaryCtaLink={`${base}/sermons`}
   />
-  
+
   <!-- Service Times -->
   <section class="py-16 bg-white">
     <div class="container">
       <div class="max-w-4xl mx-auto text-center">
         <h2 class="text-3xl md:text-4xl font-bold mb-6">Join Us This Sunday</h2>
-        
+
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
           <div class="bg-gray-50 p-8 rounded-lg shadow-sm">
             <h3 class="text-xl font-bold mb-3">Morning Service</h3>
@@ -45,7 +31,7 @@ import Button from "../components/UI/Button.astro";
             <p class="text-gray-600 mb-4">Traditional service with Praise And Worship</p>
             <p class="italic text-gray-500">In-person</p>
           </div>
-          
+
           <div class="bg-gray-50 p-8 rounded-lg shadow-sm">
             <h3 class="text-xl font-bold mb-3">Pre Service Prayer</h3>
             <p class="text-2xl font-bold text-primary-600 mb-2">08:15 AM - 08:45 AM</p>
@@ -53,26 +39,26 @@ import Button from "../components/UI/Button.astro";
             <p class="italic text-gray-500">In-person only</p>
           </div>
         </div>
-        
-        <Button href="/im-new" variant="outline">
+
+        <Button href={`${base}/im-new`} variant="outline">
           Plan Your Visit
         </Button>
       </div>
     </div>
   </section>
-  
+
   <!-- About Section -->
   <section class="py-16 bg-gray-50">
     <div class="container">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
         <div>
           <img
-            src="/uploads/site-logo.png"
+            src={`${base}/uploads/site-logo.png`}
             alt="Every Nation Tzaneen logo"
             class="rounded-lg shadow-lg object-contain w-full h-full bg-white p-8"
           />
         </div>
-        
+
         <div>
           <h2 class="text-3xl md:text-4xl font-bold mb-6">About Our Church</h2>
           <p class="text-gray-700 mb-6 text-lg">
@@ -81,21 +67,21 @@ import Button from "../components/UI/Button.astro";
           <p class="text-gray-700 mb-8 text-lg">
             Whether you're exploring faith for the first time or looking for a church home, we invite you to join us. Our diverse congregation welcomes people of all ages, backgrounds, and walks of life.
           </p>
-          
-          <Button href="/about-us">
+
+          <Button href={`${base}/about-us`}>
             Learn More About Us
           </Button>
         </div>
       </div>
     </div>
   </section>
-  
+
   <!-- Events Section -->
   <EventList />
-  
+
   <!-- Sermons Section -->
   <SermonList />
-  
+
   <!-- Ministries Preview -->
   <section class="py-16 bg-gray-50">
     <div class="container">
@@ -105,28 +91,28 @@ import Button from "../components/UI/Button.astro";
           Discover how you can connect, serve, and grow through our various ministries
         </p>
       </div>
-      
+
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         <div class="card text-center p-8">
           <div class="mx-auto mb-4 w-full h-44 flex items-center justify-center overflow-hidden rounded bg-white p-3">
-            <img src="/uploads/Every%20Nation%20Tzaneen%20Kids.webp" alt="Children Ministries" class="w-full h-full object-contain" />
+            <img src={`${base}/uploads/Every%20Nation%20Tzaneen%20Kids.webp`} alt="Children Ministries" class="w-full h-full object-contain" />
           </div>
           <h3 class="text-xl font-bold mb-3">Children's Ministry</h3>
-          <a href="/ministries/childrens-ministry" class="text-primary-600 font-medium hover:text-primary-700">
+          <a href={`${base}/ministries/childrens-ministry`} class="text-primary-600 font-medium hover:text-primary-700">
             Learn More →
           </a>
         </div>
-        
+
         <div class="card text-center p-8">
           <div class="mx-auto mb-4 w-full h-44 flex items-center justify-center overflow-hidden rounded bg-white p-3">
-            <img src="/uploads/2025-10-05-worship-evening-00000001.webp" alt="Worship Ministry" class="w-full h-full object-contain" />
+            <img src={`${base}/uploads/2025-10-05-worship-evening-00000001.webp`} alt="Worship Ministry" class="w-full h-full object-contain" />
           </div>
           <h3 class="text-xl font-bold mb-3">Worship Ministry</h3>
-          <a href="/ministries/worship-ministry" class="text-primary-600 font-medium hover:text-primary-700">
+          <a href={`${base}/ministries/worship-ministry`} class="text-primary-600 font-medium hover:text-primary-700">
             Learn More →
           </a>
         </div>
-        
+
         <div class="card text-center p-8">
           <div class="w-20 h-20 mx-auto mb-4 rounded-full bg-accent-100 flex items-center justify-center">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-accent-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -137,7 +123,7 @@ import Button from "../components/UI/Button.astro";
           <p class="text-gray-700 mb-4">
             Sharing the gospel and serving our neighbourhood through practical outreach.
           </p>
-          <a href="/ministries/evangelism-ministry" class="text-primary-600 font-medium hover:text-primary-700">
+          <a href={`${base}/ministries/evangelism-ministry`} class="text-primary-600 font-medium hover:text-primary-700">
             Learn More →
           </a>
         </div>
@@ -152,7 +138,7 @@ import Button from "../components/UI/Button.astro";
           <p class="text-gray-700 mb-4">
             Equipping young people to follow Jesus through worship, community, and leadership.
           </p>
-          <a href="/ministries/youth-ministry" class="text-primary-600 font-medium hover:text-primary-700">
+          <a href={`${base}/ministries/youth-ministry`} class="text-primary-600 font-medium hover:text-primary-700">
             Learn More →
           </a>
         </div>
@@ -167,7 +153,7 @@ import Button from "../components/UI/Button.astro";
           <p class="text-gray-700 mb-4">
             A community of intercessors praying for the church, city, and nations.
           </p>
-          <a href="/ministries/prayer-ministry" class="text-primary-600 font-medium hover:text-primary-700">
+          <a href={`${base}/ministries/prayer-ministry`} class="text-primary-600 font-medium hover:text-primary-700">
             Learn More →
           </a>
         </div>
@@ -182,24 +168,24 @@ import Button from "../components/UI/Button.astro";
           <p class="text-gray-700 mb-4">
             Encouraging prophetic insight, prayer, and spiritual growth for the church.
           </p>
-          <a href="/ministries/prophetic-ministry" class="text-primary-600 font-medium hover:text-primary-700">
+          <a href={`${base}/ministries/prophetic-ministry`} class="text-primary-600 font-medium hover:text-primary-700">
             Learn More →
           </a>
         </div>
       </div>
-      
+
       <div class="mt-12 text-center">
-        <Button href="/ministries" variant="outline">
+        <Button href={`${base}/ministries`} variant="outline">
           View All Ministries
         </Button>
       </div>
     </div>
   </section>
-  
+
   <!-- Call to Action -->
-  <section 
+  <section
     class="py-20 bg-cover bg-center text-white"
-    style="background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(/uploads/thank-you-bg.webp)"
+    style={`background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(${base}/uploads/thank-you-bg.webp)`}
   >
     <div class="container">
       <div class="max-w-3xl mx-auto text-center">
@@ -207,13 +193,13 @@ import Button from "../components/UI/Button.astro";
         <p class="text-xl mb-8">
           We'd love to welcome you to our church family. Come visit us this Sunday or reach out with any questions.
         </p>
-        
+
         <div class="flex flex-wrap justify-center gap-4">
-          <Button href="/im-new" variant="primary" size="lg">
+          <Button href={`${base}/im-new`} variant="primary" size="lg">
             I'm New Here
           </Button>
-          
-          <Button href="/contact" variant="outline" size="lg" class="bg-white/10 text-white border-white hover:bg-white hover:text-gray-900 backdrop-blur-sm">
+
+          <Button href={`${base}/contact`} variant="outline" size="lg" class="bg-white/10 text-white border-white hover:bg-white hover:text-gray-900 backdrop-blur-sm">
             Contact Us
           </Button>
         </div>

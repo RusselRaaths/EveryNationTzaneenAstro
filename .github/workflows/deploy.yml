@@ -1,39 +1,13 @@
-name: Deploy to xneelo
+      - name: Install dependencies & build Astro site
+        run: |
+          npm ci
+          npm run build
 
-on:
-  push:
-    branches:
-      - main
-
-jobs:
-  web-deploy:
-    name: Build and Deploy
-    runs-on: ubuntu-latest
-    steps:
-    - name: Get latest code
-      uses: actions/checkout@v4
-
-    - name: Setup Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: 20
-
-    - name: Install dependencies & build Astro site
-      run: |
-        npm ci
-        npm run build
-
-    - name: Install lftp
-      run: sudo apt-get update && sudo apt-get install -y lftp
-
-    - name: Deploy build output via LFTP
-      run: |
-        lftp -c "
-        set ftp:ssl-allow no;
-        set ftp:passive-mode true;
-        set net:max-retries 2;
-        set net:timeout 10;
-        set net:reconnect-interval-base 2;
-        open -u entzaerzxg,1JdTs6D9422745 196.40.97.146;
-        mirror --reverse --delete --continue --parallel=2 --verbose ./dist /public_html/ChurchWebsite/ --exclude-glob .ht*
-        " || true
+      - name: Debug built HTML asset paths
+        run: |
+          echo "==== dist/index.html (first 120 lines) ===="
+          sed -n '1,120p' dist/index.html || true
+          echo "==== grep for _astro asset paths ===="
+          grep -R "_astro" dist/index.html || true
+          echo "==== dist folder tree (top) ===="
+          find dist -maxdepth 3 -type f | head -n 200
