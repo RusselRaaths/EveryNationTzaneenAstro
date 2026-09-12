@@ -28,9 +28,10 @@ const withBase = (url?: string) => {
   return url.startsWith("/") ? `${base}${url}` : url;
 };
 
-const normalizedBackgroundImage = withBase(backgroundImage) ?? backgroundImage;
+const normalizedBackgroundImage =
+  withBase(backgroundImage || "/uploads/page-header-bg.webp") ||
+  `${base}/uploads/page-header-bg.webp`;
 const normalizedBackgroundImages = backgroundImages?.map((img) => withBase(img) ?? img);
-const singleBackgroundImage = `, url('${encodeURI(normalizedBackgroundImage ?? "")}')`;
 
 // If `tile` is provided, compute a grid (cols x rows) that fits the tile count and
 // set background-size so the image repeats to form the grid.
@@ -67,7 +68,7 @@ if (repeatX) {
     </div>
   ) : (
     /* single background image fallback (original behavior) */
-    <div class="absolute inset-0 bg-center" style={`background-size: ${backgroundSize}; background-position: ${imagePosition}; background-repeat: ${backgroundRepeat}; background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6))${singleBackgroundImage}`} />
+    <div class="absolute inset-0 bg-center" style={`background-size: ${backgroundSize}; background-position: ${imagePosition}; background-repeat: ${backgroundRepeat}; background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('${encodeURI(normalizedBackgroundImage)}')`} />
   )}
   <div class="container">
     <div class="max-w-3xl mx-auto text-center text-white">
